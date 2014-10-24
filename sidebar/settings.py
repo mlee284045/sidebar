@@ -49,7 +49,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'lms.urls'
+ROOT_URLCONF = 'sidebar.urls'
 
 WSGI_APPLICATION = 'lms.wsgi.application'
 
