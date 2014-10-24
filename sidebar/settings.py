@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'sidebar',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,7 +53,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'sidebar.urls'
 
-WSGI_APPLICATION = 'lms.wsgi.application'
+WSGI_APPLICATION = 'sidebar.wsgi.application'
 
 
 # Database
