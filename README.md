@@ -1,4 +1,4 @@
-Sidebar
+Sidebar - Project
 =======================
 
 RocketU group project to collaborate on and built to given specs.
