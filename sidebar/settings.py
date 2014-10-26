@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'slides',
     'debug_toolbar',
+    # 'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,6 +95,8 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, "static", *MEDIA_URL.strip("/").split("/
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+
 
 try:
     from local_settings import *
