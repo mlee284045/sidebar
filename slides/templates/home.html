@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+<div class="reveal">
+
+
+    <h1>Welcome to Rocket U</h1>
+    <a href="{% url 'login' %}">Login</a>
+    <div class="col-6">
+            <h1>New to class? <text style="font-size: 14px;">Sign up below</text></h1>
+            <form style="margin-bottom:20px" enctype="multipart/form-data" method="post" action="{% url 'main_menu' %}">
+                {% csrf_token %}
+
+                <table width= "100%" border="0" cellspacing="5" cellpadding="5" style="margin-left: 0px">
+                    {% for field in form %}
+                        <tr><td style="padding: 5px;" width="100" align="right" valign="top">{{ field.label_tag }}</td>
+                            <td align="left" valign="top"><span style="padding-left: 10px;">{{ field }}</span></td></tr>
+                    {% endfor %}
+                </table>
+
+                <input id="signUp" class="btn btn-default" type="submit" value="Sign Up" style="margin-left:130px; margin-top:-10px">
+            </form>
+        </div>
+</div>
