@@ -3,7 +3,7 @@
 
 <div class="reveal">
 
-
+ {% block slides %}
     <h1>Welcome to Rocket U</h1>
     <a href="{% url 'login' %}">Login</a>
     <div class="col-6">
@@ -20,5 +20,7 @@
 
                 <input id="signUp" class="btn btn-default" type="submit" value="Sign Up" style="margin-left:130px; margin-top:-10px">
             </form>
-        </div>
+      </div>
+
+ {% endblock  %}
 </div>
