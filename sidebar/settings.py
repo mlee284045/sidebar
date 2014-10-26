@@ -82,7 +82,7 @@ USE_TZ = True
 
 
 AUTH_USER_MODEL='slides.Person'
-LOGIN_REDIRECT_URL = 'main_menu/'
+LOGIN_REDIRECT_URL = 'index/'
 LOGIN_URL = 'login'
 
 # Static files (CSS, JavaScript, Images)
