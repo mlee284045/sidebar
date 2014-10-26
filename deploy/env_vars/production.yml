@@ -1,11 +1,11 @@
 ---
 
-production_application_name: "xkcd"
-production_project_name: "comics"
+production_application_name: "slides"
+production_project_name: "sidebar"
 workers: 2
-db_name: "comics"
-db_user: "comics"
-db_password: "klevr"
-nginx_server_name: "ec2-54-68-225-53.us-west-2.compute.amazonaws.com"
-django_settings_file: comics.settings
-github_user: "MiguelABarbosa"
+db_name: "sidebar"
+db_user: "sidebar"
+db_password: "blabla"
+nginx_server_name: "ec2-54-186-86-201.us-west-2.compute.amazonaws.com"
+django_settings_file: sidebar.settings
+github_user: "mlee284045"
