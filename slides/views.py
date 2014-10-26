@@ -1,3 +1,27 @@
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from slides.forms import EmailUserCreationForm
 
-# Create your views here.
+
+def home(request):
+        if request.method == 'POST':
+            form = EmailUserCreationForm(request.POST)
+            if form.is_valid():
+                username = request.POST['username']
+                password = request.POST['password1']
+                form.save()
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    if user.is_active:
+                        login(request, user)
+                        return redirect("schedule")
+        else:
+            form = EmailUserCreationForm()
+
+        return render(request, "home.html", {'form': form})
+
+
+@login_required()
+def main_menu(request):
+    return render(request, 'main_menu.html')

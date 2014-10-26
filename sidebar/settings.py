@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'slides',
     'debug_toolbar',
+    'storages'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -79,21 +80,20 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+AUTH_USER_MODEL='slides.Person'
+LOGIN_REDIRECT_URL = 'main_menu/'
+LOGIN_URL = 'login'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..'))
-
-STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "static", *MEDIA_URL.strip("/").split("/"))
 
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
 
 try:
     from local_settings import *
