@@ -1,6 +1,5 @@
 __author__ = 'miguelbarbosa'
 
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from models import Person
@@ -24,3 +23,7 @@ class EmailUserCreationForm(UserCreationForm):
             self.error_messages['duplicate_username'],
             code='duplicate_username',
         )
+
+
+class SearchForm(forms.Form):
+    search_text = forms.CharField(label='Search', max_length=200)
