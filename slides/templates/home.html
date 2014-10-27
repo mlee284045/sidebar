@@ -1,13 +1,27 @@
-{#{% extends 'base.html' %}#}
+{% extends 'base.html' %}
 {% load staticfiles %}
 
-<div class="reveal">
+{% block running_title %}
 
+    Welcome to RocketU
 
-    <h1>Welcome to Rocket U</h1>
+{% endblock running_title %}
+
+{% block title %}
+
+    {% block presentation_title %}
+
+        Welcome to RocketU
+
+    {% endblock presentation_title %}
     <a href="{% url 'login' %}">Login</a>
-    <div class="col-6">
-            <h1>New to class? <text style="font-size: 14px;">Sign up below</text></h1>
+
+{% endblock title %}
+
+
+
+{% block slides%}
+            <h4>New to class? Sign up below</h4>
             <form style="margin-bottom:20px" enctype="multipart/form-data" method="post" action="{% url 'index' %}">
                 {% csrf_token %}
 
@@ -20,5 +34,4 @@
 
                 <input id="signUp" class="btn btn-default" type="submit" value="Sign Up" style="margin-left:130px; margin-top:-10px">
             </form>
-        </div>
-</div>
+{% endblock %}
