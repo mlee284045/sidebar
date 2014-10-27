@@ -11,7 +11,7 @@
         <img src="{{ result.creator.profile_picture.url }}" style="height:200px; width:180px">
         <li>{{ result.date }}</li>
         <li>{{ result.text2 }}</li>
-        <li>{{ result.slide }}</li>
+        <li><a href="{{ result.slide }}">{{ result.slide }}</a></li>
     {% endfor %}
 
 
