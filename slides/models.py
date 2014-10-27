@@ -16,7 +16,7 @@ class Person(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile/pictures', blank=True, null=True)
 
     def __unicode__(self):
-        return unicode("{} {}".format(self.first_name, self.last_name))
+        return unicode("{} {}, {}".format(self.first_name, self.last_name, self.user_type))
 
 
 class Resource(models.Model):
@@ -26,4 +26,4 @@ class Resource(models.Model):
     slide = models.URLField(blank=True)
 
     def __unicode__(self):
-        return unicode(self.slide)
+        return unicode("Resource created by {} on {}".format(self.creator, self.date))

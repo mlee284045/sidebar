@@ -31,8 +31,8 @@ def search_page(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
-            search_text = form.cleaned_data['search_text']
-            search_results = SearchQuerySet().filter(content=search_text)
+            search_text = form.cleaned_data['search_text']  # strip out value from search form
+            search_results = SearchQuerySet().filter(content=search_text)  # process woosh query using search+text
             return render(request, "search_results.html",  {'search_results': search_results})
 
     else:
