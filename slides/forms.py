@@ -26,7 +26,18 @@ class EmailUserCreationForm(UserCreationForm):
 
 class ResourceForm(forms.Form):
     text = forms.CharField(label="text area content")
-    date = forms.DateField(required=True)
+
+
+    def save(self):
+        text = self.cleaned_data["text"]
+        try:
+            Resource.objects.get(text=text)
+        except Resource.DoesNotExist:
+            return text
+        raise forms.ValidationError(
+            self.error_messages['duplicate_text'],
+            code='duplicate_text',
+        )
 
 
 

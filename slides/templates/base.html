@@ -51,7 +51,7 @@
     </script>
     <script src="{% static "js/less-1.7.0.min.js" %}"></script>
     <script src="{% static "js/jquery-1.11.1.js" %}"></script>
-{#    <script src="{% static "js/sidebar.js" %}"></script>#}
+    <script src="{% static "js/sidebar.js" %}"></script>
     <script src="{% static "external/jquery/jquery.js" %}"></script>
     <script src="{% static "js/jquery-ui.js" %}"></script>
 
@@ -70,6 +70,7 @@
                 <div class="col-5">
                     <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
                 </div>
+
             </div>
                 {% block title_slide %}
                     <section class="titleSlide" data-background="#168eae">
@@ -79,41 +80,37 @@
                 {% endblock %}
                 {% block slides %}
                 {% endblock %}
+
             <div class="footer">
             </div>
         </div>
     </div>
-    <div class="col-2">
+
+    <div class="col-2" id="sidebar-col-2">
         {% block sidebar %}
             <section>
-                <div id="accordion">
-                    <p>Week 1 Day 2</p>
-{#                    <a href="http://openbookproject.net/pybiblio/practice/wilson/guessinggame.php">guessing game</a>#}
-                    <div>Lorem ipsum dolor sit amet.</div>
-                    <p>Second</p>
-                    <div>Phasellus mattis tincidunt nibh.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                </div>
+            <button type="button" id="resource">Add a Resource</button>
+            <div id="accordion"></div>
+            <div class="form-holder"></div>
             </section>
-{#            Add Resource code here:#}
         {% endblock sidebar %}
     </div>
 </div>
+
+        <script type="text/javascript">
+             $("#resource").on('click', function() {
+                 $.ajax({
+                     url: '/add_resource/',
+                     type: 'GET',
+                     success: function (data) {
+                        $(".form-holder").html(data);
+                     },
+                     error: function (error) {
+
+                     }
+                 });
+             });
+        </script>
 
     <script src="{% static "js/head.min.js" %}"></script>
     <script src="{% static "js/reveal.js" %}"></script>
@@ -152,6 +149,7 @@
     </script>
     <script>
         $(document).ready(function(){
+
             $("#accordion").accordion({ active: 0 },{ heightStyle: "fill" });
             // Hover states on the static widgets
             $( "#dialog-link, #icons li" ).hover(
@@ -162,9 +160,17 @@
                         $( this ).removeClass( "ui-state-hover" );
                     }
             );
+
          });
+
+
     </script>
     <script src="{% static "js/slides.js" %}"></script>
+    <style type="text/css">
+        #sidebar-col-2 {z-index: 100000;}
+
+    </style>
+
 
 </body>
 </html>

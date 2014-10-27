@@ -1,8 +1,9 @@
+import json
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from slides.forms import EmailUserCreationForm, ResourceForm
 from slides.models import Resource, Person
 
@@ -41,7 +42,12 @@ def profile(request):
     return render(request, 'profile.html')
 
 
+
 def add_resource(request):
-    data = {"resource_form": ResourceForm()}
-    return render(request, "add_resource.html", data)
+    if request.method == 'POST':
+        form = ResourceForm(data=request.POST)
+        form.save()
+    else:
+        form = ResourceForm()
+    return render(request, "add_resource.html", {'form': form})
 
