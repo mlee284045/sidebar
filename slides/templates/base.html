@@ -17,7 +17,20 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <link rel="stylesheet" href="{% static 'css/reveal.css' %}">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="{% static "css/zenburn.css" %}">
+
+    <!-- For sidebar jquery ui -->
+    <link rel="stylesheet" href="{% static "css/jquery-ui.theme.css" %}">
+    <link rel="stylesheet" href="{% static "css/jquery-ui.structure.css" %}">
+    <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
+    <link rel="stylesheet" href="{% static "css/sidebar.css" %}">
+
+    <link rel="stylesheet/less" type="text/css" media="all" href="{% static "less/style.less" %}" />
 
     <!-- If the query includes 'print-pdf', include the PDF print sheet -->
     <script>
@@ -30,24 +43,25 @@
         }
     </script>
 
-    <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="{% static "css/zenburn.css" %}">
-
-    <link rel="stylesheet/less" type="text/css" media="all" href="{% static "less/style.less" %}" />
+{#    <link rel="stylesheet/less" type="text/css" media="all" href="{% static "less/style.less" %}" />#}
     <script>
         less = {
             logLevel: 0
         }
     </script>
     <script src="{% static "js/less-1.7.0.min.js" %}"></script>
-
     <script src="{% static "js/jquery-1.11.1.js" %}"></script>
+{#    <script src="{% static "js/sidebar.js" %}"></script>#}
+    <script src="{% static "external/jquery/jquery.js" %}"></script>
+    <script src="{% static "js/jquery-ui.js" %}"></script>
+
+
 </head>
 
 <body class="{% block body_css %}{% endblock body_css %}">
 <div class="reveal">
     <!-- Any section element inside of this container is displayed as a slide -->
-    <div class="col-9">
+    <div class="col-10">
         <div class="slides">
             <div id="runningTitle">
                 <div class="col-7">
@@ -69,12 +83,34 @@
             </div>
         </div>
     </div>
-
-    <div class="col-3">
+    <div class="col-2">
         {% block sidebar %}
             <section>
-
+                <div id="accordion">
+                    <p>Week 1 Day 2</p>
+{#                    <a href="http://openbookproject.net/pybiblio/practice/wilson/guessinggame.php">guessing game</a>#}
+                    <div>Lorem ipsum dolor sit amet.</div>
+                    <p>Second</p>
+                    <div>Phasellus mattis tincidunt nibh.</div>
+                    <p>Third</p>
+                    <div>Nam dui erat.</div>
+                    <p>Third</p>
+                    <div>Nam dui erat.</div>
+                    <p>Third</p>
+                    <div>Nam dui erat.</div>
+                    <p>Third</p>
+                    <div>Nam dui erat.</div>
+                    <p>Third</p>
+                    <div>Nam dui erat.</div>
+                    <p>Third</p>
+                    <div>Nam dui erat.</div>
+                    <p>Third</p>
+                    <div>Nam dui erat.</div>
+                    <p>Third</p>
+                    <div>Nam dui erat.</div>
+                </div>
             </section>
+{#            Add Resource code here:#}
         {% endblock sidebar %}
     </div>
 </div>
@@ -114,7 +150,20 @@
         });
 
     </script>
-
+    <script>
+        $(document).ready(function(){
+            $("#accordion").accordion({ active: 0 },{ heightStyle: "fill" });
+            // Hover states on the static widgets
+            $( "#dialog-link, #icons li" ).hover(
+                    function() {
+                        $( this ).addClass( "ui-state-hover" );
+                    },
+                    function() {
+                        $( this ).removeClass( "ui-state-hover" );
+                    }
+            );
+         });
+    </script>
     <script src="{% static "js/slides.js" %}"></script>
 
 </body>
