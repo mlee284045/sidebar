@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from slides.forms import EmailUserCreationForm
 
 
-def home(request):
+def slides_home(request):
         if request.method == 'POST':
             form = EmailUserCreationForm(request.POST)
             if form.is_valid():
@@ -22,6 +22,8 @@ def home(request):
         return render(request, "home.html", {'form': form})
 
 
-@login_required()
 def main_menu(request):
     return render(request, 'main_menu.html')
+
+def test(request):
+    return render(request, 'test.html')

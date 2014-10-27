@@ -45,9 +45,9 @@
 </head>
 
 <body class="{% block body_css %}{% endblock body_css %}">
-    <div class="reveal">
-
-        <!-- Any section element inside of this container is displayed as a slide -->
+<div class="reveal">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="col-9">
         <div class="slides">
             <div id="runningTitle">
                 <div class="col-7">
@@ -57,7 +57,6 @@
                     <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
                 </div>
             </div>
-
             {% block title_slide %}
                 <section class="titleSlide" data-background="#168eae">
                     <h1>{% block presentation_title%}{% endblock %}</h1>
@@ -66,12 +65,19 @@
             {% endblock %}
             {% block slides %}
             {% endblock %}
-
             <div class="footer">
             </div>
         </div>
-
     </div>
+
+    <div class="col-3">
+        {% block sidebar %}
+            <section>
+
+            </section>
+        {% endblock sidebar %}
+    </div>
+</div>
 
     <script src="{% static "js/head.min.js" %}"></script>
     <script src="{% static "js/reveal.js" %}"></script>
