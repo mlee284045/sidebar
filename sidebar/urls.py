@@ -7,7 +7,7 @@ from sidebar import settings
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^$', 'slides.views.home', name='home'),
+    url(r'^$', 'slides.views.slides_home', name='slides_home'),
     url("^main_menu/$", 'slides.views.main_menu', name="main_menu"),
 
 
