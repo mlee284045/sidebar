@@ -22,9 +22,8 @@ def slides_home(request):
         return render(request, "home.html", {'form': form})
 
 
+def main_menu(request):
+    return render(request, 'main_menu.html')
 
-def index(request):
-    return render(request, 'index.html')
-
-def search_page(request):
-    return render(request, 'search_page.html')
+def test(request):
+    return render(request, 'test.html')
