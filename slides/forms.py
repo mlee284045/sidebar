@@ -1,6 +1,7 @@
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import ModelForm
 from models import Person, Resource
 
 
@@ -24,11 +25,15 @@ class EmailUserCreationForm(UserCreationForm):
         )
 
 class ResourceForm(forms.Form):
-    class Meta:
-        model = Resource
-
-    text = forms.TextInput
+    text = forms.CharField(label="text area content")
     date = forms.DateField(required=True)
+
+
+
+
+
+
+
 
 
 

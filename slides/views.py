@@ -41,35 +41,7 @@ def profile(request):
     return render(request, 'profile.html')
 
 
-# def add_resource(request):
-#     data = {"resource_form": ResourceForm()}
-#     if request.method == 'POST':
-#         form = ResourceForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect("resources")
-#
-#         else:
-#             data = {"comment_form": ResourceForm(request.POST)}
-#             return render(request, "add_ressource.html", data)
-#
-#     else:
-#         return render(request, "add_ressource.html", data)
-#
-# def resource_view(request):
-#     if request.method == 'POST':
-#         form = ResourceForm(request.POST)
-#         if form.is_valid():
-#             date = request.POST['date']
-#             print date
-#             resources = Resource.objects.filter(date=date)
-#             students = []
-#             for resource in resources:
-#                 user = resource.user.username
-#                 if user not in students:
-#                     students.append(user)
-#             return render(request, "teacher_home.html", {'students': students, "date": date})
-#     else:
-#         form = ResourceForm()
-#
-#     return render(request, "resource_view.html", {'form': form})
+def add_resource(request):
+    data = {"resource_form": ResourceForm()}
+    return render(request, "add_resource.html", data)
+
