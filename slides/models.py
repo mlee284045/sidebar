@@ -1,21 +1,26 @@
+import datetime
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
 
 
-student = "0"
-instructor = "1"
-
-role_choices = (
-    (student, 'student'),
-    (instructor, 'instructor'),
-)
-
-
 class Person(AbstractUser):
-    photo = models.ImageField(upload_to='profile/pictures', blank=True, null=True)
-    role = models.CharField(choices=role_choices, null=True, blank=True, max_length=1)
+    Student = 0
+    Instructor = 1
+    Type = (
+        (Student, 'Student'),
+        (Instructor, 'Instructor'),
+    )
+    user_type = models.PositiveSmallIntegerField(choices=Type, null=True, blank=True)
+    profile_picture = models.ImageField(upload_to='profile/pictures', blank=True, null=True)
 
     def __unicode__(self):
         return unicode(self.username)
+
+
+class Resource(models.Model):
+    creator = models.ForeignKey(Person, related_name='resources')
+    date = models.DateField(default=datetime.date.today())
+    text = models.TextField(max_length=200)
+    slide = models.URLField(blank=True)
