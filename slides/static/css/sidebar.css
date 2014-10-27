@@ -1,0 +1,8 @@
+#accordion {
+    position: relative;
+    z-index: 2;
+}
+.slides {
+    position: relative;
+    z-index: 1;
+}

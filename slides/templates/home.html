@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{#{% extends 'base.html' %}#}
 {% load staticfiles %}
 
 {% block running_title %}
@@ -15,7 +15,6 @@
 
     {% endblock presentation_title %}
     <a href="{% url 'login' %}">Login</a>
-
 {% endblock title %}
 
 
@@ -35,5 +34,3 @@
                 <input id="signUp" class="btn btn-default" type="submit" value="Sign Up" style="margin-left:130px; margin-top:-10px">
             </form>
 {% endblock %}
-
-
