@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'whoosh',
+    'haystack_static_pages',
     'haystack',
     'slides',
     'debug_toolbar',
@@ -84,6 +85,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID = 1
 
 AUTH_USER_MODEL='slides.Person'
 LOGIN_REDIRECT_URL = 'index'
@@ -107,6 +109,33 @@ HAYSTACK_CONNECTIONS = {
         'PATH': os.path.join(os.path.dirname(__file__), 'whoosh/'),
     },
 }
+
+
+HAYSTACK_STATIC_PAGES = (
+    'http://127.0.0.1:8000/week1/1/',
+    'http://127.0.0.1:8000/week1/2/',
+    'http://127.0.0.1:8000/week1/3/',
+    'http://127.0.0.1:8000/week1/4_am/',
+    'http://127.0.0.1:8000/week1/4_pm/',
+    'http://127.0.0.1:8000/week2/1_am/',
+    'http://127.0.0.1:8000/week2/1_pm/',
+    'http://127.0.0.1:8000/week2/2_am/',
+    'http://127.0.0.1:8000/week2/2_pm/',
+    'http://127.0.0.1:8000/week2/3_am/',
+    'http://127.0.0.1:8000/week2/3_pm/',
+    'http://127.0.0.1:8000/week2/4_am/',
+    'http://127.0.0.1:8000/week2/4_pm/',
+    'http://127.0.0.1:8000/week2/5_am/',
+    'http://127.0.0.1:8000/week2/5_pm/',
+    'http://127.0.0.1:8000/start_project_cheatsheet/',
+    'http://127.0.0.1:8000/week3/1_am/',
+    'http://127.0.0.1:8000/week3/1_pm/',
+    'http://127.0.0.1:8000/week3/2_am/',
+    'http://127.0.0.1:8000/week3/2_pm/',
+    'http://127.0.0.1:8000/week3/3_am/',
+    'http://127.0.0.1:8000/week3/3_pm/',
+    'http://127.0.0.1:8000/week3/lab/',
+)
 
 try:
     from local_settings import *

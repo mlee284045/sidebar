@@ -6,13 +6,22 @@
 
     <h1>Search Results</h1>
 
-    {% for result in search_results %}
+    <h3> From Slides</h3>
+    {% for result in slides_results %}
+        <li>{{ result.title }}</li>
+        <li><a href="{{ result.url }}">{{ result.url }}</a></li>
+    {% endfor %}
+
+
+    <h3> From Resources</h3>
+    {% for result in resource_results %}
         <li>{{ result.creator }}</li>
-        <img src="{{ result.creator.profile_picture.url }}" style="height:200px; width:180px">
         <li>{{ result.date }}</li>
         <li>{{ result.text2 }}</li>
         <li><a href="{{ result.slide }}">{{ result.slide }}</a></li>
     {% endfor %}
+
+
 
 
 </div>

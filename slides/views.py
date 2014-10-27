@@ -1,8 +1,12 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+import haystack_static_pages
+from haystack_static_pages.models import StaticPage
+import re
 from slides.forms import EmailUserCreationForm, SearchForm
 from haystack.query import SearchQuerySet
+from slides.models import Resource
 
 
 def slides_home(request):
@@ -33,7 +37,26 @@ def search_page(request):
         if form.is_valid():
             search_text = form.cleaned_data['search_text']  # strip out value from search form
             search_results = SearchQuerySet().filter(content=search_text)  # process woosh query using search+text
-            return render(request, "search_results.html",  {'search_results': search_results})
+            slides_results = []
+            resource_results = []
+            for result in search_results:
+
+                if re.search(r"haystack_static_pages.staticpage", result.id):
+                    slides_results.append(result)
+
+
+                elif re.search(r"slides.resource", result.id):
+                    resource_results.append(result)
+
+            print slides_results
+            print resource_results
+
+            data = {'slides_results': slides_results,
+                    'resource_results': resource_results
+
+            }
+
+            return render(request, "search_results.html",  data)
 
     else:
         form = SearchForm()
