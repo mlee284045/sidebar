@@ -71,14 +71,14 @@
                     <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
                 </div>
             </div>
-            {% block title_slide %}
-                <section class="titleSlide" data-background="#168eae">
-                    <h1>{% block presentation_title%}{% endblock %}</h1>
-                    <a id="yetiLogo" href="http://www.yetihq.com/"><img src="{% static "img/yeti-power.png" %}"></a>
-                </section>
-            {% endblock %}
-            {% block slides %}
-            {% endblock %}
+                {% block title_slide %}
+                    <section class="titleSlide" data-background="#168eae">
+                        <h1>{% block presentation_title%}{% endblock %}</h1>
+                        <a id="yetiLogo" href="http://www.yetihq.com/"><img src="{% static "img/yeti-power.png" %}"></a>
+                    </section>
+                {% endblock %}
+                {% block slides %}
+                {% endblock %}
             <div class="footer">
             </div>
         </div>
