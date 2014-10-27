@@ -7,6 +7,7 @@ import re
 from slides.forms import EmailUserCreationForm, SearchForm
 from haystack.query import SearchQuerySet
 from slides.models import Resource
+from bs4 import BeautifulSoup
 
 
 def slides_home(request):
@@ -42,19 +43,15 @@ def search_page(request):
             for result in search_results:
 
                 if re.search(r"haystack_static_pages.staticpage", result.id):
-                    slides_results.append(result)
+                    soup = BeautifulSoup(result.content)
 
+                    slide_title = soup.find('h2').get_text().strip()
+                    slides_results.append([result, slide_title])
 
                 elif re.search(r"slides.resource", result.id):
                     resource_results.append(result)
-
             print slides_results
-            print resource_results
-
-            data = {'slides_results': slides_results,
-                    'resource_results': resource_results
-
-            }
+            data = {'slides_results': slides_results, 'resource_results': resource_results}
 
             return render(request, "search_results.html",  data)
 

@@ -8,17 +8,22 @@
 
     <h3> From Slides</h3>
     {% for result in slides_results %}
-        <li>{{ result.title }}</li>
-        <li><a href="{{ result.url }}">{{ result.url }}</a></li>
+
+        <li>Week:</li>
+        <li>Slide: </li>
+        <li>Content:</li>
+        <br>
+
     {% endfor %}
 
 
     <h3> From Resources</h3>
     {% for result in resource_results %}
-        <li>{{ result.creator }}</li>
-        <li>{{ result.date }}</li>
-        <li>{{ result.text2 }}</li>
-        <li><a href="{{ result.slide }}">{{ result.slide }}</a></li>
+        <li>Created by: {{ result.creator }}</li>
+        <li>On: {{ result.date }}</li>
+        <li>Your Search: {{ result.text2 }}</li>
+        <li>Link: <a href="{{ result.slide }}">{{ result.slide }}</a></li>
+        <br>
     {% endfor %}
 
 

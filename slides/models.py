@@ -16,7 +16,7 @@ class Person(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile/pictures', blank=True, null=True)
 
     def __unicode__(self):
-        return unicode("{} {}, {}".format(self.first_name, self.last_name, self.user_type))
+        return unicode("{} {}".format(self.first_name, self.last_name))
 
 
 class Resource(models.Model):
