@@ -8,6 +8,7 @@
 
     {% for result in search_results %}
         <li>{{ result.creator }}</li>
+        <img src="{{ result.creator.profile_picture.url }}" style="height:200px; width:180px">
         <li>{{ result.date }}</li>
         <li>{{ result.text2 }}</li>
         <li>{{ result.slide }}</li>

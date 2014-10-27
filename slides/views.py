@@ -26,9 +26,6 @@ def slides_home(request):
 def index(request):
     return render(request, 'index.html')
 
-
-
-
 def search_page(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
