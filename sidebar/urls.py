@@ -8,8 +8,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^$', 'slides.views.slides_home', name='slides_home'),
-    url("^main_menu/$", 'slides.views.main_menu', name="main_menu"),
-    url("^test/$", 'slides.views.test', name="test"),
+    url("^index/$", 'slides.views.index', name="index"),
+    url("^search_page/$", 'slides.views.search_page', name="search_page"),
+    url("^search_results/$", 'slides.views.search_results', name="search_results"),
+    url("^profile/$", 'slides.views.profile', name="profile"),
 
 
     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),

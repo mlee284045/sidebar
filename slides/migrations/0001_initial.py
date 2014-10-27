@@ -2,7 +2,9 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import datetime
 import django.utils.timezone
+from django.conf import settings
 import django.core.validators
 
 
@@ -27,8 +29,8 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('photo', models.ImageField(null=True, upload_to=b'profile/pictures', blank=True)),
-                ('role', models.CharField(blank=True, max_length=1, null=True, choices=[(b'0', b'student'), (b'1', b'instructor')])),
+                ('user_type', models.PositiveSmallIntegerField(blank=True, null=True, choices=[(0, b'Student'), (1, b'Instructor')])),
+                ('profile_picture', models.ImageField(null=True, upload_to=b'profile/pictures', blank=True)),
                 ('groups', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Group', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of his/her group.', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Permission', blank=True, help_text='Specific permissions for this user.', verbose_name='user permissions')),
             ],
@@ -36,6 +38,19 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'verbose_name': 'user',
                 'verbose_name_plural': 'users',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Resource',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateField(default=datetime.date(2014, 10, 27))),
+                ('text', models.TextField(max_length=200)),
+                ('slide', models.URLField(blank=True)),
+                ('creator', models.ForeignKey(related_name='resources', to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
             },
             bases=(models.Model,),
         ),

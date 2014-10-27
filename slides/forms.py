@@ -11,7 +11,7 @@ class EmailUserCreationForm(UserCreationForm):
 
     class Meta:
         model = Person
-        fields = ("first_name", "last_name", "username", "email", "role","photo","password1", "password2")
+        fields = ("first_name", "last_name", "username", "email", "user_type", "profile_picture", "password1", "password2")
 
     def clean_username(self):
 
