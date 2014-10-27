@@ -1,9 +1,7 @@
-__author__ = 'miguelbarbosa'
-
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from models import Person
+from models import Person, Resource
 
 
 class EmailUserCreationForm(UserCreationForm):
@@ -24,3 +22,14 @@ class EmailUserCreationForm(UserCreationForm):
             self.error_messages['duplicate_username'],
             code='duplicate_username',
         )
+
+class ResourceForm(forms.Form):
+    class Meta:
+        model = Resource
+
+    text = forms.TextInput
+    date = forms.DateField(required=True)
+
+
+
+
