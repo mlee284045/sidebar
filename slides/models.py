@@ -27,3 +27,15 @@ class Resource(models.Model):
 
     def __unicode__(self):
         return unicode("Resource created by {} on {}".format(self.creator, self.date))
+
+
+class StaticPage(models.Model):
+    pres_title = models.CharField(max_length=255)
+    url = models.URLField(max_length=255)
+    content = models.TextField()
+
+    def __unicode__(self):
+        return "{}".format(self.pres_title)
+
+    def get_absolute_url(self):
+        return self.url

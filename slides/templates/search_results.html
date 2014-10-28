@@ -7,11 +7,12 @@
     <h1>Search Results</h1>
 
     <h3> From Slides</h3>
-    {% for result in slides_results %}
+    {% for slide in slides_results %}
 
-        <li>Week:</li>
-        <li>Slide: </li>
-        <li>Content:</li>
+        <li>Day: {{ slide.result.title }}</li>
+        <li>Day Url: {{ slide.result.url }}</li>
+        <li>Slide: {{ slide.title }}</li>
+        <li>Content: {{ slide.content }}</li>
         <br>
 
     {% endfor %}

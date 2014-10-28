@@ -1,16 +1,13 @@
 import urllib2
-
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
-from django.utils import translation
 from django.utils.html import escape
 from optparse import make_option
 
-from BeautifulSoup import BeautifulSoup
-
-from haystack_static_pages.models import StaticPage
+from bs4 import BeautifulSoup
+from slides.models import StaticPage
 
 
 class Command(BaseCommand):
@@ -22,7 +19,7 @@ class Command(BaseCommand):
     )
     help = 'Setup static pages defined in HAYSTACK_STATIC_PAGES for indexing by Haystack'
     cmd = 'crawl_static_pages [-p PORT] [-l LANG]'
-    
+
     def handle(self, *args, **options):
         if args:
             raise CommandError('Usage is: %s' % cmd)
@@ -37,20 +34,16 @@ class Command(BaseCommand):
 
         count = 0
 
-        self.language = options.get('language')
 
-        if self.language:
-            translation.activate(self.language)
-        
-        for url in settings.HAYSTACK_STATIC_PAGES:
+        for url in settings.STATIC_PAGES:
             if not url.startswith('http://'):
                 if self.port:
                     url = 'http://%s:%r%s' % (Site.objects.get_current().domain, self.port, reverse(url))
                 else:
                     url = 'http://%s%s' % (Site.objects.get_current().domain, reverse(url))
-            
+
             print 'Analyzing %s...' % url
-            
+
             try:
                 page = StaticPage.objects.get(url=url)
                 print '%s already exists in the index, updating...' % url
@@ -58,24 +51,18 @@ class Command(BaseCommand):
                 print '%s is new, adding...' % url
                 page = StaticPage(url=url)
                 pass
-            
+
             try:
                 html = urllib2.urlopen(url)
             except urllib2.URLError:
                 print "Error while reading '%s'" % url
                 continue
-            
+
             soup = BeautifulSoup(html)
             try:
-                page.title = escape(soup.head.title.string)
+                page.title = escape(soup.body.div.div.section.h1.string)
             except AttributeError:
                 page.title = 'Untitled'
-            meta = soup.find('meta', attrs={'name': 'description'})
-            if meta:
-                page.description = meta.get('content', '')
-            else:
-                page.description = ''
-            page.language = soup.html.get('lang', 'en')
             page.content = soup.prettify()
             page.save()
             count += 1

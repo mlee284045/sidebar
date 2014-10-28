@@ -111,7 +111,7 @@ HAYSTACK_CONNECTIONS = {
 }
 
 
-HAYSTACK_STATIC_PAGES = (
+STATIC_PAGES = (
     'http://127.0.0.1:8000/week1/1/',
     'http://127.0.0.1:8000/week1/2/',
     'http://127.0.0.1:8000/week1/3/',

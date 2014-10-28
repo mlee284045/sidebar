@@ -46,10 +46,12 @@ def search_page(request):
                     soup = BeautifulSoup(result.content)
 
                     slide_title = soup.find('h2').get_text().strip()
-                    slides_results.append([result, slide_title])
+                    slide_content = soup.find_all(text=re.compile(search_text))
+                    slides_results.append({'result': result, 'title': slide_title, 'content': slide_content})
 
                 elif re.search(r"slides.resource", result.id):
                     resource_results.append(result)
+                    print result.creator
             print slides_results
             data = {'slides_results': slides_results, 'resource_results': resource_results}
 
