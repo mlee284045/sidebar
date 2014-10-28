@@ -15,7 +15,7 @@ class Person(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile/pictures', blank=True, null=True)
 
     def __unicode__(self):
-        return unicode(self.username)
+        return unicode("{} {}".format(self.first_name, self.last_name))
 
 
 # class User(AbstractUser):
@@ -27,7 +27,7 @@ class Person(AbstractUser):
 
 
 class Document(models.Model):
-    file = models.ImageField(upload_to='media/document', blank=True, null=True)
+    file = models.FileField(upload_to='media/document', blank=True, null=True)
 
     def __unicode__(self):
         return self.pk
@@ -37,6 +37,25 @@ class Resource(models.Model):
     date = models.DateField(default=datetime.date.today())
     text = models.TextField(max_length=200)
     slide = models.URLField(blank=True)
+
+    # user = models.ForeignKey(User, related_name="resources")
+    # documents = models.ForeignKey(Document, related_name="resources", blank=True, null=True)
+
+    def __unicode__(self):
+        return unicode("Resource created by {} on {}".format(self.creator, self.date))
+
+
+class StaticPage(models.Model):
+    pres_title = models.CharField(max_length=255)
+    url = models.URLField(max_length=255)
+    content = models.TextField()
+
+    def __unicode__(self):
+        return "{}".format(self.pres_title)
+
+    def get_absolute_url(self):
+        return self.url
+
     # user = models.ForeignKey(User, related_name="resources")
     # documents = models.ForeignKey(Document, related_name="resources", blank=True, null=True)
 

@@ -1,4 +1,3 @@
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
@@ -24,9 +23,14 @@ class EmailUserCreationForm(UserCreationForm):
             code='duplicate_username',
         )
 
+
+class SearchForm(forms.Form):
+    search_text = forms.CharField(label='Search', max_length=200)
+
+
 class ResourceForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
-    slide = forms.URLField(label="slide")
+    # slide = forms.URLField(label="slide")
 
 
     # def save(self):
@@ -39,14 +43,5 @@ class ResourceForm(forms.Form):
     #         self.error_messages['duplicate_text'],
     #         code='duplicate_text',
     #     )
-
-
-
-
-
-
-
-
-
 
 
