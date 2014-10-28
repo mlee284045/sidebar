@@ -19,7 +19,7 @@ class Person(AbstractUser):
 
 
 # class User(AbstractUser):
-#     profile_picture = models.ImageField(upload_to='profile/pictures', blank=True, null=True)
+#     profile_picture = models.FileField(upload_to='profile/pictures', blank=True, null=True)
 #     name = models.CharField(max_length=50)
 #
 #     def __unicode__(self):
