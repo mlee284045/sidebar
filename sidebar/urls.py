@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url("^profile/$", 'slides.views.profile', name="profile"),
     url("^add_resource/$", 'slides.views.add_resource', name="add_resource"),
     url("^save_resource/$", 'slides.views.save_resource', name="save_resource"),
-
+    url("^sidebar/$", 'slides.views.sidebar', name="sidebar"),
 
     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^password_reset/$', 'django.contrib.auth.views.password_reset', name='password_reset'),

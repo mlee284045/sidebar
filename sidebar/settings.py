@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'whoosh',
-    'haystack_static_pages',
     'haystack',
     'slides',
     'debug_toolbar',

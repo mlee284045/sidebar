@@ -1,7 +1,12 @@
-<form method="post" role="form" action="." id="register-form">
+<form method="post" role="form" action=".">
     {% csrf_token %}
-{#    {{ form.as_p }}#}
-    <input type="button" value="Submit" id="submitz">
+    {#    {{ form.as_p }}#}
+
+    <p>Add a resource</p>
+    <input type="button" value="Cancel" id="cancel" class="cancel_button">
+    <input type="text" id="register-form" placeholder="Text area content" class="resource_form"><br>
+    {#    <textarea = placeholder="Text area content"#}
+    <input type="button" value="Save" id="submitz" class="save_button">
 </form>
 
 

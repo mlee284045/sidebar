@@ -19,7 +19,7 @@ class Person(AbstractUser):
 
 
 # class User(AbstractUser):
-#     profile_picture = models.ImageField(upload_to='profile/pictures', blank=True, null=True)
+#     profile_picture = models.FileField(upload_to='profile/pictures', blank=True, null=True)
 #     name = models.CharField(max_length=50)
 #
 #     def __unicode__(self):
@@ -37,9 +37,6 @@ class Resource(models.Model):
     date = models.DateField(default=datetime.date.today())
     text = models.TextField(max_length=200)
     slide = models.URLField(blank=True)
-
-    # user = models.ForeignKey(User, related_name="resources")
-    # documents = models.ForeignKey(Document, related_name="resources", blank=True, null=True)
 
     def __unicode__(self):
         return unicode("Resource created by {} on {}".format(self.creator, self.date))

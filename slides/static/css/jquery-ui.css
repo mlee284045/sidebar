@@ -93,7 +93,7 @@
 	margin: 2px 0 0 0;
 	padding: .5em .5em .5em .7em;
 	min-height: 0; /* support: IE7 */
-	font-size: 100%;
+	font-size: 72%;
 }
 .ui-accordion .ui-accordion-icons {
 	padding-left: 2.2em;
@@ -111,6 +111,7 @@
 	padding: 1em 2.2em;
 	border-top: 0;
 	overflow: auto;
+    font-size: 65%;
 }
 
 /* Component containers
