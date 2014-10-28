@@ -43,15 +43,14 @@
         }
     </script>
 
-{#    <link rel="stylesheet/less" type="text/css" media="all" href="{% static "less/style.less" %}" />#}
     <script>
         less = {
             logLevel: 0
         }
     </script>
+
     <script src="{% static "js/less-1.7.0.min.js" %}"></script>
     <script src="{% static "js/jquery-1.11.1.js" %}"></script>
-{#    <script src="{% static "js/sidebar.js" %}"></script>#}
     <script src="{% static "external/jquery/jquery.js" %}"></script>
     <script src="{% static "js/jquery-ui.js" %}"></script>
 
@@ -86,8 +85,9 @@
     <div class="col-3">
         {% block sidebar %}
             <section>
-                <div id="accordion">
-                </div>
+                <h6 id="resourceTitle">Resources</h6>
+                <button type="button" id="resource">Add+</button>
+                <div id="accordion"></div>
             </section>
         {% endblock sidebar %}
     </div>
@@ -97,11 +97,10 @@
     <script src="{% static "js/reveal.js" %}"></script>
 
     <script>
-
         // Full list of configuration options available here:
         // https://github.com/hakimel/reveal.js#configuration
         Reveal.initialize({
-            width: 900,
+            width: 1000,
             height: 750,
             controls: true,
             progress: true,
@@ -128,6 +127,7 @@
         });
 
     </script>
+
     <script>
         $(document).ready(function(){
             //AJAX call to retrieve all resources along with creators
@@ -135,15 +135,25 @@
                 url: '/base/',
                 type: 'GET',
                 success: function(data) {
-                    console.log(data);
+
+                    //set the default active accordion header
+                    var currentSlide = 0;
 
                     //loop the object and extract data for the accordion
                     for( var i=0; i<data.length; i++){
-                        $("#accordion").append('<p>' + data[i].slide + '</p><div><p>' + data[i].creator + '<br>' + data[i].text + '<br>' + data[i].date + '</p></div>');
-
+                        if( window.location == data[i].slide){
+                            currentSlide = i;
+                        }
+                        $("#accordion").append('<p><a href="' + data[i].slide + '">' + data[i].slide + '</a></p><div>' + data[i].creator + '<br>' + data[i].text + '<br>' + data[i].date + '</div>');
                     }
+                    $("#accordion").accordion({header: 'p'});
+                    $("#accordion p a").click(function () {
+                       window.location = $(this).attr('href');
+                        return false;
+                    });
                     //initialize the accordion
-                    $("#accordion").accordion({ active: 0 },{ heightStyle: "fill" });
+                    $("#accordion").accordion({ active: currentSlide },{ heightStyle: "content" });
+
                     // Hover states on the static widgets
                     $( "#dialog-link, #icons li" ).hover(
                             function() {
