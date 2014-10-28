@@ -48,14 +48,10 @@ class Resource(models.Model):
 class StaticPage(models.Model):
     pres_title = models.CharField(max_length=255)
     url = models.URLField(max_length=255)
-    content = models.TextField()
+    text = models.TextField()
 
     def __unicode__(self):
         return "{}".format(self.pres_title)
 
     def get_absolute_url(self):
         return self.url
-
-    # user = models.ForeignKey(User, related_name="resources")
-    # documents = models.ForeignKey(Document, related_name="resources", blank=True, null=True)
-

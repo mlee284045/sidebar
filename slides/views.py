@@ -45,12 +45,12 @@ def search_page(request):
             search_results = SearchQuerySet().filter(content=search_text)  # process woosh query using search+text
             slides_results = []
             resource_results = []
-            for result in search_results:
 
+            for result in search_results:
                 if re.search(r"haystack_static_pages.staticpage", result.id):
                     soup = BeautifulSoup(result.content)
-
                     slide_title = soup.find('h2').get_text().strip()
+                    slide = soup.find('h2').parent().get_text()
                     slide_content = soup.find_all(text=re.compile(search_text))
                     slides_results.append({'result': result, 'title': slide_title, 'content': slide_content})
 
@@ -91,7 +91,7 @@ def add_resource(request):
 @csrf_exempt
 def save_resource(request):
     if request.method == 'POST':
-        form = ResourceForm()
+        # form = ResourceForm()
         print "Receiving Resource"
         print request.body
         data = json.loads(request.body)
