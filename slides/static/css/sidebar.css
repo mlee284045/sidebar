@@ -6,3 +6,19 @@
     position: relative;
     z-index: 1;
 }
+.resource_form{
+    height:40em;
+    width:15em;
+    background:white;
+}
+
+.save_button{
+    width:15em;
+    height: 7em;
+    color: black;
+    background-color: buttonface;
+}
+
+.reveal p{
+    color: blue;
+}

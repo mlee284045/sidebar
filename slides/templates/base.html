@@ -89,7 +89,8 @@
     <div class="col-2" id="sidebar-col-2">
         {% block sidebar %}
             <section>
-            <button type="button" id="resource">Add a Resource</button>
+{#            Add resource button#}
+            <button type="button" id="add_resource">Add +</button>
             <div id="accordion"></div>
             <div class="form-holder"></div>
             </section>
@@ -135,54 +136,6 @@
         });
 
     </script>
-{#    <script>#}
-{#        $(document).ready(function(){#}
-{##}
-{#            $("#accordion").accordion({ active: 0 },{ heightStyle: "fill" });#}
-{#            // Hover states on the static widgets#}
-{#            $( "#dialog-link, #icons li" ).hover(#}
-{#                    function() {#}
-{#                        $( this ).addClass( "ui-state-hover" );#}
-{#                    },#}
-{#                    function() {#}
-{#                        $( this ).removeClass( "ui-state-hover" );#}
-{#                    }#}
-{#            );#}
-{##}
-{#         });#}
-{##}
-{#    $("#resource").on('click', function() {#}
-{#        $.ajax({#}
-{#            url: '/add_resource/',#}
-{#            type: 'GET',#}
-{#            success: function (data) {#}
-{#                $(".form-holder").html(data);#}
-{#                console.log(data);#}
-{##}
-{#                $("#submitz").on('click', function() {#}
-{#                    console.log('working');#}
-{#                    console.log($("#id_text").val());#}
-{#                    alert($("#id_slide").val());#}
-{##}
-{#                    $.ajax({#}
-{#                        url: '/save_resource/',#}
-{#                        type: 'POST',#}
-{#                        dataType:'json',#}
-{#                        data: $("#id_text").val(),#}
-{#                        success: function (data) {#}
-{#                            alert('yes');#}
-{#                            $(".form-holder").html(data);#}
-{#                            console.log(data)#}
-{#                        },#}
-{#                        error: function (error) {console.log(error)}#}
-{#                    });#}
-{#                });#}
-{##}
-{#            }#}
-{#        });#}
-{#    });#}
-{##}
-{#</script>#}
 
     <script src="{% static "js/slides.js" %}"></script>
     <style type="text/css">

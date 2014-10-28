@@ -9,13 +9,10 @@ $(document).ready(function() {
                 console.log(res);
                 $(".form-holder").html(res);
                 $("#submitz").on('click', function (e) {
-                    console.log('working');
                     console.log($("#id_text").val());
                     alert($("#id_slide").val());
-
                     saveForm();
                 });
-
             },
             error: function (e) {
                 console.log(e)
@@ -29,7 +26,7 @@ $(document).ready(function() {
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify({
-                'text': $("#id_text").val(),
+                'text': $("#register-form").val(),
                 'slide': window.location.href,
             }),
             success: function (res) {
@@ -43,7 +40,7 @@ $(document).ready(function() {
         });
     }
 
-    $("#resource").on('click', function () {
+    $("#add_resource").on('click', function () {
         getForm();
     });
 });

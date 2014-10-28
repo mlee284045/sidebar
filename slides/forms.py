@@ -29,19 +29,7 @@ class SearchForm(forms.Form):
 
 
 class ResourceForm(forms.Form):
-    text = forms.CharField(widget=forms.Textarea)
-    # slide = forms.URLField(label="slide")
-
-
-    # def save(self):
-    #     text = self.cleaned_data["text"]
-    #     try:
-    #         Resource.objects.get(text=text)
-    #     except Resource.DoesNotExist:
-    #         return text
-    #     raise forms.ValidationError(
-    #         self.error_messages['duplicate_text'],
-    #         code='duplicate_text',
-    #     )
+    text = forms.CharField()
+#     # slide = forms.URLField(label="slide")
 
 

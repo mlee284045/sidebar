@@ -1,4 +1,5 @@
 import json
+# from BeautifulSoup import BeautifulSoup
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
@@ -11,7 +12,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from slides.forms import EmailUserCreationForm, ResourceForm
 from slides.models import Resource, Person
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 import re
 
 
@@ -81,8 +82,8 @@ def profile(request):
 def add_resource(request):
     if request.method == 'GET':
         print "Sending Form"
-        form = ResourceForm()
-        return render(request, "add_resource.html", {'form': form})
+        # form = ResourceForm()
+        return render(request, "add_resource.html")
     else:
         form = ResourceForm()
         return HttpResponse(json.dumps(form), content_type='application.json')
@@ -91,7 +92,7 @@ def add_resource(request):
 @csrf_exempt
 def save_resource(request):
     if request.method == 'POST':
-        form = ResourceForm()
+        # form = ResourceForm()
         print "Receiving Resource"
         print request.body
         data = json.loads(request.body)
