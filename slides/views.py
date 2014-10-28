@@ -1,13 +1,18 @@
+import json
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-import haystack_static_pages
-from haystack_static_pages.models import StaticPage
-import re
+
 from slides.forms import EmailUserCreationForm, SearchForm
 from haystack.query import SearchQuerySet
-from slides.models import Resource
+
+from django.core import serializers
+from django.http import HttpResponse
+from django.shortcuts import render, redirect, render_to_response
+from django.views.decorators.csrf import csrf_exempt
+from slides.forms import EmailUserCreationForm, ResourceForm
+from slides.models import Resource, Person
 from bs4 import BeautifulSoup
+import re
 
 
 def slides_home(request):
@@ -70,3 +75,30 @@ def search_results(request):
 
 def profile(request):
     return render(request, 'profile.html')
+
+
+@csrf_exempt
+def add_resource(request):
+    if request.method == 'GET':
+        print "Sending Form"
+        form = ResourceForm()
+        return render(request, "add_resource.html", {'form': form})
+    else:
+        form = ResourceForm()
+        return render(request, "add_resource.html", {'form': form})
+
+
+def save_resource(request):
+    if request.method == 'POST':
+        form = ResourceForm()
+        print "Receiving Resource"
+        data = json.loads(request.body)
+        print data
+
+        resources = Resource.objects.create(
+            creator=data['creator'],
+            date=data['date'],
+            text=data['text'],
+            slide=data['slide'],
+        )
+

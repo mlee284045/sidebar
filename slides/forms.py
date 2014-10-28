@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 __author__ = 'miguelbarbosa'
+=======
+>>>>>>> 44ab50a8571da4788da23cbac47285ec815bcbe1
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from models import Person
+from django.forms import ModelForm
+from models import Person, Resource
 
 
 class EmailUserCreationForm(UserCreationForm):
@@ -27,3 +31,22 @@ class EmailUserCreationForm(UserCreationForm):
 
 class SearchForm(forms.Form):
     search_text = forms.CharField(label='Search', max_length=200)
+
+
+class ResourceForm(forms.Form):
+    text = forms.CharField(widget=forms.Textarea)
+    slide = forms.URLField(label="slide")
+
+
+    # def save(self):
+    #     text = self.cleaned_data["text"]
+    #     try:
+    #         Resource.objects.get(text=text)
+    #     except Resource.DoesNotExist:
+    #         return text
+    #     raise forms.ValidationError(
+    #         self.error_messages['duplicate_text'],
+    #         code='duplicate_text',
+    #     )
+
+
