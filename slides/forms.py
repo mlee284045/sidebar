@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-__author__ = 'miguelbarbosa'
-=======
->>>>>>> 44ab50a8571da4788da23cbac47285ec815bcbe1
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
@@ -35,7 +30,7 @@ class SearchForm(forms.Form):
 
 class ResourceForm(forms.Form):
     text = forms.CharField(widget=forms.Textarea)
-    slide = forms.URLField(label="slide")
+    # slide = forms.URLField(label="slide")
 
 
     # def save(self):

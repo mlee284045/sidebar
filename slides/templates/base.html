@@ -101,6 +101,7 @@
 
     <script src="{% static "js/head.min.js" %}"></script>
     <script src="{% static "js/reveal.js" %}"></script>
+    <script src="{% static "js/resources.js" %}"></script>
 
     <script>
 
@@ -134,35 +135,35 @@
         });
 
     </script>
-    <script>
-        $(document).ready(function(){
-
-            $("#accordion").accordion({ active: 0 },{ heightStyle: "fill" });
-            // Hover states on the static widgets
-            $( "#dialog-link, #icons li" ).hover(
-                    function() {
-                        $( this ).addClass( "ui-state-hover" );
-                    },
-                    function() {
-                        $( this ).removeClass( "ui-state-hover" );
-                    }
-            );
-
-         });
-
-    $("#resource").on('click', function() {
-        $.ajax({
-            url: '/add_resource/',
-            type: 'GET',
-            success: function (data) {
-                $(".form-holder").html(data);
-                console.log(data);
-
-                $("#submitz").on('click', function() {
-                    console.log('working');
-                    console.log($("#id_text").val());
-                    alert($("#id_slide").val());
-
+{#    <script>#}
+{#        $(document).ready(function(){#}
+{##}
+{#            $("#accordion").accordion({ active: 0 },{ heightStyle: "fill" });#}
+{#            // Hover states on the static widgets#}
+{#            $( "#dialog-link, #icons li" ).hover(#}
+{#                    function() {#}
+{#                        $( this ).addClass( "ui-state-hover" );#}
+{#                    },#}
+{#                    function() {#}
+{#                        $( this ).removeClass( "ui-state-hover" );#}
+{#                    }#}
+{#            );#}
+{##}
+{#         });#}
+{##}
+{#    $("#resource").on('click', function() {#}
+{#        $.ajax({#}
+{#            url: '/add_resource/',#}
+{#            type: 'GET',#}
+{#            success: function (data) {#}
+{#                $(".form-holder").html(data);#}
+{#                console.log(data);#}
+{##}
+{#                $("#submitz").on('click', function() {#}
+{#                    console.log('working');#}
+{#                    console.log($("#id_text").val());#}
+{#                    alert($("#id_slide").val());#}
+{##}
 {#                    $.ajax({#}
 {#                        url: '/save_resource/',#}
 {#                        type: 'POST',#}
@@ -175,13 +176,13 @@
 {#                        },#}
 {#                        error: function (error) {console.log(error)}#}
 {#                    });#}
-                });
-
-            }
-        });
-    });
-
-</script>
+{#                });#}
+{##}
+{#            }#}
+{#        });#}
+{#    });#}
+{##}
+{#</script>#}
 
     <script src="{% static "js/slides.js" %}"></script>
     <style type="text/css">

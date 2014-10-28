@@ -85,20 +85,22 @@ def add_resource(request):
         return render(request, "add_resource.html", {'form': form})
     else:
         form = ResourceForm()
-        return render(request, "add_resource.html", {'form': form})
+        return HttpResponse(json.dumps(form), content_type='application.json')
 
 
+@csrf_exempt
 def save_resource(request):
     if request.method == 'POST':
         form = ResourceForm()
         print "Receiving Resource"
+        print request.body
         data = json.loads(request.body)
         print data
 
         resources = Resource.objects.create(
-            creator=data['creator'],
-            date=data['date'],
+            creator=request.user,
             text=data['text'],
             slide=data['slide'],
         )
+        return HttpResponse("success")
 
