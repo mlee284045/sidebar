@@ -1,10 +1,33 @@
-{% extends 'base.html' %}
+
 {% load staticfiles %}
 
-<div class="reveal">
 
- {% block slides %}
+<div>
+
     <h1>Search Results</h1>
 
- {% endblock  %}
+    <h3> From Slides</h3>
+    {% for slide in slides_results %}
+
+        <li>Day: {{ slide.result.title }}</li>
+        <li>Day Url: {{ slide.result.url }}</li>
+        <li>Slide: {{ slide.title }}</li>
+        <li>Content: {{ slide.content }}</li>
+        <br>
+
+    {% endfor %}
+
+
+    <h3> From Resources</h3>
+    {% for result in resource_results %}
+        <li>Created by: {{ result.creator }}</li>
+        <li>On: {{ result.date }}</li>
+        <li>Your Search: {{ result.text2 }}</li>
+        <li>Link: <a href="{{ result.slide }}">{{ result.slide }}</a></li>
+        <br>
+    {% endfor %}
+
+
+
+
 </div>
