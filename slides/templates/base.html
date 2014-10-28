@@ -61,7 +61,7 @@
 <body class="{% block body_css %}{% endblock body_css %}">
 <div class="reveal">
     <!-- Any section element inside of this container is displayed as a slide -->
-    <div class="col-10">
+    <div class="col-9">
         <div class="slides">
             <div id="runningTitle">
                 <div class="col-7">
@@ -83,34 +83,12 @@
             </div>
         </div>
     </div>
-    <div class="col-2">
+    <div class="col-3">
         {% block sidebar %}
             <section>
                 <div id="accordion">
-                    <p>Week 1 Day 2</p>
-{#                    <a href="http://openbookproject.net/pybiblio/practice/wilson/guessinggame.php">guessing game</a>#}
-                    <div>Lorem ipsum dolor sit amet.</div>
-                    <p>Second</p>
-                    <div>Phasellus mattis tincidunt nibh.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
-                    <p>Third</p>
-                    <div>Nam dui erat.</div>
                 </div>
             </section>
-{#            Add Resource code here:#}
         {% endblock sidebar %}
     </div>
 </div>
@@ -123,7 +101,7 @@
         // Full list of configuration options available here:
         // https://github.com/hakimel/reveal.js#configuration
         Reveal.initialize({
-            width: 1170,
+            width: 900,
             height: 750,
             controls: true,
             progress: true,
@@ -152,18 +130,34 @@
     </script>
     <script>
         $(document).ready(function(){
-            $("#accordion").accordion({ active: 0 },{ heightStyle: "fill" });
-            // Hover states on the static widgets
-            $( "#dialog-link, #icons li" ).hover(
-                    function() {
-                        $( this ).addClass( "ui-state-hover" );
-                    },
-                    function() {
-                        $( this ).removeClass( "ui-state-hover" );
+            //AJAX call to retrieve all resources along with creators
+            $.ajax({
+                url: '/base/',
+                type: 'GET',
+                success: function(data) {
+                    console.log(data);
+
+                    //loop the object and extract data for the accordion
+                    for( var i=0; i<data.length; i++){
+                        $("#accordion").append('<p>' + data[i].slide + '</p><div><p>' + data[i].creator + '<br>' + data[i].text + '<br>' + data[i].date + '</p></div>');
+
                     }
-            );
-         });
+                    //initialize the accordion
+                    $("#accordion").accordion({ active: 0 },{ heightStyle: "fill" });
+                    // Hover states on the static widgets
+                    $( "#dialog-link, #icons li" ).hover(
+                            function() {
+                                $( this ).addClass( "ui-state-hover" );
+                            },
+                            function() {
+                                $( this ).removeClass( "ui-state-hover" );
+                            }
+                    );
+                }
+            });
+        });
     </script>
+
     <script src="{% static "js/slides.js" %}"></script>
 
 </body>

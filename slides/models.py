@@ -24,3 +24,6 @@ class Resource(models.Model):
     date = models.DateField(default=datetime.date.today())
     text = models.TextField(max_length=200)
     slide = models.URLField(blank=True)
+
+    def __unicode__(self):
+        return u"{}".format(self.creator.username)
