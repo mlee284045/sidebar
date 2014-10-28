@@ -13,7 +13,7 @@ from django.shortcuts import render, redirect, render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from slides.forms import EmailUserCreationForm, ResourceForm
 from slides.models import Resource, Person
-# from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 import re
 
 
