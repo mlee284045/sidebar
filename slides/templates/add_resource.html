@@ -1,13 +1,7 @@
-{% extends "base.html" %}
-{% load staticfiles %}
-
-<div class="reveal">
-{% block sidebar %}
-
-    <form method="post" role="form" action="." id="register-form" style="margin-right: 800px">
+    <form method="post" role="form" action="." id="register-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" id="submitz">
     </form>
-{% endblock %}
-</div>
+
+

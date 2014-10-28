@@ -97,20 +97,7 @@
     </div>
 </div>
 
-        <script type="text/javascript">
-             $("#resource").on('click', function() {
-                 $.ajax({
-                     url: '/add_resource/',
-                     type: 'GET',
-                     success: function (data) {
-                        $(".form-holder").html(data);
-                     },
-                     error: function (error) {
 
-                     }
-                 });
-             });
-        </script>
 
     <script src="{% static "js/head.min.js" %}"></script>
     <script src="{% static "js/reveal.js" %}"></script>
@@ -163,8 +150,39 @@
 
          });
 
+    $("#resource").on('click', function() {
+        $.ajax({
+            url: '/add_resource/',
+            type: 'GET',
+            success: function (data) {
+                $(".form-holder").html(data);
+                console.log(data);
 
-    </script>
+                $("#submitz").on('click', function() {
+                    console.log('working');
+                    console.log($("#id_text").val());
+                    alert($("#id_slide").val());
+
+{#                    $.ajax({#}
+{#                        url: '/save_resource/',#}
+{#                        type: 'POST',#}
+{#                        dataType:'json',#}
+{#                        data: $("#id_text").val(),#}
+{#                        success: function (data) {#}
+{#                            alert('yes');#}
+{#                            $(".form-holder").html(data);#}
+{#                            console.log(data)#}
+{#                        },#}
+{#                        error: function (error) {console.log(error)}#}
+{#                    });#}
+                });
+
+            }
+        });
+    });
+
+</script>
+
     <script src="{% static "js/slides.js" %}"></script>
     <style type="text/css">
         #sidebar-col-2 {z-index: 100000;}
