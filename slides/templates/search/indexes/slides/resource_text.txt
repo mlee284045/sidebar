@@ -1,4 +1,5 @@
-{{object.creator}}
-{{object.date}}
-{{object.text}}
-{{object.slide}}
+{{ object.creator }}
+{{ object.date }}
+{{ object.text }}
+{{ object.slide }}
+{{ object.file }}
