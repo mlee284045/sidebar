@@ -90,16 +90,16 @@ def sidebar(request):
                 'creator': str(j.creator),
                 'date': str(j.date),
                 'slide': j.slide,
-                'text': j.text
+                'text': j.text,
+                'title': j.title,
             })
 
     return HttpResponse(json.dumps(collection),content_type='application.json')
 
 @csrf_exempt
 def add_resource(request):
+
     if request.method == 'GET':
-        print "Sending Form"
-        # form = ResourceForm()
         return render(request, "add_resource.html")
     else:
         form = ResourceForm()
@@ -108,16 +108,15 @@ def add_resource(request):
 
 @csrf_exempt
 def save_resource(request):
+
     if request.method == 'POST':
-        # form = ResourceForm()
-        print "Receiving Resource"
-        print request.body
+
         data = json.loads(request.body)
-        print data
 
         resources = Resource.objects.create(
             creator=request.user,
             text=data['text'],
             slide=data['slide'],
+            title=data['title'],
         )
         return HttpResponse("success")
