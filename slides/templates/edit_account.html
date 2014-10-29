@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title_slide %}
+{% endblock %}
+
+{% block running_title %}
+     Edit Account
+{% endblock %}
+{% block slides %}
+
+    <div>
+
+            <table>
+                <tr>
+                     <img src="../../static/media/profile/pictures/nivea.jpeg" style="border-radius:80px; height:100px; width:100px;" />
+                </tr>
+                <tr>
+                     <a href="">upload a new profile photo</a>
+                </tr>
+
+                <tr>
+                    <td>Real Name:</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                </tr>
+                 <tr>
+                    <td>Email:</td>
+                     <td>{{ user.email }}</td>
+                 </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td>
+                         <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Confirm Password:</td>
+                    <td>
+                          <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            </form>
+
+                    </td>
+                </tr>
+
+            </table>
+    </div>
+
+{% endblock %}
