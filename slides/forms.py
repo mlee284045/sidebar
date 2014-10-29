@@ -8,7 +8,7 @@ class EmailUserCreationForm(UserCreationForm):
 
     class Meta:
         model = Person
-        fields = ("first_name", "last_name", "username", "email", "user_type", "profile_picture", "password1", "password2")
+        fields = ("first_name", "last_name", "email", "user_type", "profile_picture", "password1", "password2")
 
     def clean_username(self):
 
@@ -18,13 +18,13 @@ class EmailUserCreationForm(UserCreationForm):
         except Person.DoesNotExist:
             return username
         raise forms.ValidationError(
-            self.error_messages['duplicate_username'],
+            # self.error_messages['duplicate_username'],
             code='duplicate_username',
         )
 
 
 class SearchForm(forms.Form):
-    search_text = forms.CharField(label='', initial='Search', max_length=2000)
+    search_text = forms.CharField(label='', max_length=2000)
 
 class SearchResults(forms.Form):
     search_text = forms.CharField(label='',initial='Search', max_length=200)
