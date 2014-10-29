@@ -18,19 +18,12 @@ class Person(AbstractUser):
         return unicode("{} {}".format(self.first_name, self.last_name))
 
 
-# class User(AbstractUser):
-#     profile_picture = models.FileField(upload_to='profile/pictures', blank=True, null=True)
-#     name = models.CharField(max_length=50)
-#
-#     def __unicode__(self):
-#         return self.name
-
-
 class Document(models.Model):
     file = models.FileField(upload_to='media/document', blank=True, null=True)
 
     def __unicode__(self):
         return self.pk
+
 
 class Resource(models.Model):
     creator = models.ForeignKey(Person, related_name='resources')
@@ -42,8 +35,9 @@ class Resource(models.Model):
         return unicode("Resource created by {} on {}".format(self.creator, self.date))
 
 
-class StaticPage(models.Model):
+class Slide(models.Model):
     pres_title = models.CharField(max_length=255)
+    slide_title = models.CharField(max_length=255)
     url = models.URLField(max_length=255)
     text = models.TextField()
 

@@ -1,4 +1,4 @@
-{#{% extends 'base.html' %}#}
+{% extends 'base.html' %}
 {% load staticfiles %}
 
 {% block title_slide %}
@@ -24,6 +24,7 @@
 
 {% block slides%}
     <section>
+        <hr>
         <h4>New to class? Sign up below</h4>
         <form style="margin-bottom:20px" enctype="multipart/form-data" method="post" action="{% url 'index' %}">
             {% csrf_token %}
