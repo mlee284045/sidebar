@@ -35,7 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'whoosh',
@@ -86,7 +86,7 @@ USE_TZ = True
 
 SITE_ID = 1
 
-AUTH_USER_MODEL='slides.Person'
+AUTH_USER_MODEL = 'slides.Person'
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 

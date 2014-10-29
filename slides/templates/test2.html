@@ -32,6 +32,7 @@
 
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="{% static "css/zenburn.css" %}">
+
     <link rel="stylesheet/less" type="text/css" media="all" href="{% static "less/style.less" %}" />
     <script>
         less = {
@@ -46,42 +47,39 @@
 <body class="{% block body_css %}{% endblock body_css %}">
 <div class="reveal">
     <!-- Any section element inside of this container is displayed as a slide -->
-
-        <div class="slides" style="width:1170px; height:750px; zoom:0.4788;">
+    <div class="col-12">
+        <div class="slides">
             <div id="runningTitle">
                 <div class="col-7">
-                    <a href="#"> Lectures & Materials</a>
+                    <a href="#">{% block running_title %}Lectures & Materials{% endblock %}</a>
+                    <h3>All Weeks<text style="font-size: 14px;"></text> </h3><hr>
                 </div>
                 <div class="col-5">
-                    <a href="/" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
+                    <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
+                    <a href="{% url "search_page" %}"><img src="{% static 'img/search.png' %}" alt="MD Logo"/></a>
                 </div>
             </div>
 
-            <section class="present" style="display:block;">
-                <h2>All weeks
-                <a href="{% url "search_page" %}" id="SearchImg"><img class="pull-right" src="{% static 'img/search.png' %}" /></a>
-                </h2>
+                {% block title_slide %}
+                {% endblock %}
 
-                <div class="col-6">
-                            <dl><a href="{% url 'week1' %}">Week 1</a></dl>
-                            <dl><a href="{% url 'week2' %}">Week 2</a></dl>
-                            <dl><a href="{% url 'week3' %}">Week 3</a></dl>
-                            <dl>Week 4</dl>
-                            <dl>Week 5</dl>
-                            <dl>Week 6</dl>
-                     </div>
-                <div class="col-5 col-offset-1">
+                {% block slides %}
+                    <dt>Week 3</dt>
+                                <dd>
+                                    <ul>
+                                        <li><a href="{% url "week3_day1_am" %}">Basic Django App: edit, delete</a></li>
+                                        <li><a href="{% url "week3_day1_pm" %}">Django Forms</a></li>
+                                        <li><a href="{% url "week3_day2_am" %}">Django Templating: Logic, Filters, and Tags</a></li>
+                                        <li><a href="{% url "week3_day2_pm" %}">Django Templating: Inheritance and Static Files</a></li>
+                                        <li><a href="{% url "week3_day3_am" %}">Users: Built-In Django Auth</a></li>
+                                        <li><a href="{% url "week3_day3_pm" %}">Users: Customizing and Relationships</a></li>
+                                        <li><a href="{% url "week3_lab" %}">Lab: Django App</a></li>
+                                    </ul>
+                                </dd>
 
-                            <dl>Week 7</dl>
-                            <dl>Week 8</dl>
-                            <dl>Week 9</dl>
-                            <dl>Week 10</dl>
-                            <dl>Week 11</dl>
-                            <dl>Week 12</dl>
-                        </div>
 
-                </section>
-{#                {% endblock %}#}
+
+                {% endblock %}
             <div class="footer">
             </div>
 

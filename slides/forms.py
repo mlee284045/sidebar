@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm
-from models import Person, Resource
+from models import Person
 
 
 class EmailUserCreationForm(UserCreationForm):
@@ -25,11 +24,19 @@ class EmailUserCreationForm(UserCreationForm):
 
 
 class SearchForm(forms.Form):
-    search_text = forms.CharField(label='Search', max_length=200)
+    search_text = forms.CharField(label='', initial='Search', max_length=2000)
 
+class SearchResults(forms.Form):
+    search_text = forms.CharField(label='',initial='Search', max_length=200)
+
+class PasswordForm(forms.Form):
+    search_text = forms.CharField(label='', initial='************', max_length=200)
 
 class ResourceForm(forms.Form):
     text = forms.CharField()
+    file = forms.FileField
 #     # slide = forms.URLField(label="slide")
+
+
 
 

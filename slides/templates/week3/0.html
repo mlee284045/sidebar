@@ -44,49 +44,39 @@
     <script src="{% static "js/jquery-1.11.1.js" %}"></script>
 </head>
 
-<body>
+<body class="{% block body_css %}{% endblock body_css %}">
 <div class="reveal">
-
     <!-- Any section element inside of this container is displayed as a slide -->
-    <div class="slides" style="width:1170px; height:750px; zoom:0.4788;">
-        <div id="runningTitle">
-            <div class="col-7"><a href="#"> Lectures & Materials</a></div>
-            <div class="col-5">
-                <a href="/" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
+    <div class="col-12">
+        <div class="slides">
+            <div id="runningTitle">
+                <div class="col-7">
+                    <a href="#">{% block running_title %}Lectures & Materials{% endblock %}</a>
+
+                </div>
+                <div class="col-5">
+                    <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
+
+                </div>
             </div>
+            <section>
+                <h2>Week 3</h2>
+                <dl><a href="{% url "week3_day1_am" %}">Basic Django App: edit, delete</a></dl>
+                <dl><a href="{% url "week3_day1_pm" %}">Django Forms</a></dl>
+                <dl><a href="{% url "week3_day2_am" %}">Django Templating: Logic, Filters, and Tags</a></dl>
+                <dl><a href="{% url "week3_day2_pm" %}">Django Templating: Inheritance and Static Files</a></dl>
+                <dl><a href="{% url "week3_day3_am" %}">Users: Built-In Django Auth</a></dl>
+                <dl><a href="{% url "week3_day3_pm" %}">Users: Customizing and Relationships</a></dl>
+                <dl><a href="{% url "week3_lab" %}">Lab: Django App</a></dl>
+            </section>
+
+            <div class="footer">
+            </div>
+
         </div>
+    </div>
 
-        <section class="present" style="display:block;">
-            <h2>
-
-
-                 <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_table }}
-
-                    <input type="submit" value=""  class="pull-right"
-                           style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
-                                   width: 30px; height: 30px; margin-top:15px ">
-
-                    </form>
-
-                  <style>
-                    #id_search_text{
-                        width:1000px;
-                        height:50px;
-                        border:none;
-                        font-size:40px;
-                    }
-
-
-                </style>
-
-            </h2>
-
-</section>
-<div class="footer">
 </div>
-
 
 <script src="{% static "js/head.min.js" %}"></script>
 <script src="{% static "js/reveal.js" %}"></script>
@@ -125,7 +115,6 @@
 </script>
 
 <script src="{% static "js/slides.js" %}"></script>
-</div>
-    </div>
+
 </body>
 </html>

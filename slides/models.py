@@ -12,18 +12,10 @@ class Person(AbstractUser):
         (Instructor, 'Instructor'),
     )
     user_type = models.PositiveSmallIntegerField(choices=Type, null=True, blank=True)
-    profile_picture = models.ImageField(upload_to='profile/pictures', blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='media/profile/pictures', blank=True, null=True)
 
     def __unicode__(self):
         return unicode("{} {}".format(self.first_name, self.last_name))
-
-
-# class User(AbstractUser):
-#     profile_picture = models.FileField(upload_to='profile/pictures', blank=True, null=True)
-#     name = models.CharField(max_length=50)
-#
-#     def __unicode__(self):
-#         return self.name
 
 
 class Resource(models.Model):
@@ -37,9 +29,13 @@ class Resource(models.Model):
     def __unicode__(self):
         return unicode("Resource created by {} on {} title {}".format(self.creator, self.date, self.title))
 
+    def get_text(self):
+        return self.text
 
-class StaticPage(models.Model):
+
+class Slide(models.Model):
     pres_title = models.CharField(max_length=255)
+    slide_title = models.CharField(max_length=255)
     url = models.URLField(max_length=255)
     text = models.TextField()
 

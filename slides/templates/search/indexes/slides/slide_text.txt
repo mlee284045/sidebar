@@ -1,0 +1,4 @@
+{{ object.pres_title }}
+{{ object.slide_title }}
+{{ object.text }}
+{{ object.url }}
