@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title_slide %}
+{% endblock %}
+
+{% block running_title %}
+     Edit Account
+{% endblock %}
+
+
+
+
+{% block slides %}
+
+    <div>
+
+            <table>                  
+                <tr>
+                     <img src="{% static 'img/pikachu.jpg' %}" alt="MD Logo" style="border-radius:80px; height:100px; width:100px;" />
+                </tr>
+                <tr>
+                     <a href="">upload a new profile photo</a>
+                </tr>
+
+                <tr>
+                    <td>Real Name:  </td>
+                    <td>{{ person.first_name }} {{ person.last_name }}</td>
+                </tr>
+                 <tr>
+                    <td>Email:</td>
+                     <td>{{ person.email }}</td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td>{{ person.password }}</td>
+                </tr>
+                <tr>
+                    <td>Confirm Password:</td>
+                    <td>{{ person.password }}</td>
+                </tr>
+            </table>
+    </div>
+
+{% endblock %}
