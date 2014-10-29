@@ -5,8 +5,8 @@
     <h3> From Slides</h3>
     {% for slide in slides_results %}
 
-        <li>Day: <a href="{{ slide.result.url }}">{{ slide.result.title }}</a></li>
-        <li>Day Url: {{ slide.result.url }}</li>
+        <li>Day: {{ slide.result.pres_title }}</li>
+        <li>Day Url: <a href="{{ slide.result.url }}">{{ slide.result.url }}</a></li>
         <li>Slide: {{ slide.title }}</li>
         <li>Content: {{ slide.content }}</li>
         <br>
@@ -14,11 +14,12 @@
 
 
     <h3> From Resources</h3>
-    {% for result in resource_results %}
-        <li>Created by: {{ result.result.creator }}</li>
-        <li>On: {{ result.result.date }}</li>
-        <li>Your Search: {{ result.result.text2 }}</li>
-        <li>Link: <a href="{{ result.result.slide }}">{{ result.result.slide }}</a></li>
+    {% for resource in resource_results %}
+        <li>Created by: {{ resource.creator }} <img src="{{ resource.creator.profile_picture.url }}">{{ resource.creator.profile_picture.url }}</li>
+        <li>On: {{ resource.date }}</li>
+        <li>Your Search: {{ resource.content }}</li>
+        <li>Your File: {{ resource.file }}</li>
+        <li>Link: <a href="{{ resource.slide }}">{{ resource.slide }}</a></li>
         <br>
     {% endfor %}
 

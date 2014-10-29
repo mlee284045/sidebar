@@ -45,10 +45,24 @@ class Migration(migrations.Migration):
             name='Resource',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('date', models.DateField(default=datetime.date(2014, 10, 27))),
+                ('date', models.DateField(default=datetime.date(2014, 10, 29))),
                 ('text', models.TextField(max_length=200)),
                 ('slide', models.URLField(blank=True)),
+                ('file', models.FileField(null=True, upload_to=b'media/document', blank=True)),
                 ('creator', models.ForeignKey(related_name='resources', to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Slide',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('pres_title', models.CharField(max_length=255)),
+                ('slide_title', models.CharField(max_length=255)),
+                ('url', models.URLField(max_length=255)),
+                ('text', models.TextField()),
             ],
             options={
             },

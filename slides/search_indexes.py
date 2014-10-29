@@ -6,11 +6,11 @@ class ResourceIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(
         document=True,
         use_template=True,
-        model_attr='text'
     )
     creator = indexes.CharField(model_attr='creator')
     date = indexes.CharField(model_attr='date')
     slide = indexes.CharField(model_attr='slide')
+    content = indexes.CharField(model_attr='text')
 
     def get_model(self):
         return Resource
@@ -24,10 +24,12 @@ class SlideIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(
         document=True,
         use_template=True,
-        model_attr='text',
     )
-    title = indexes.CharField(model_attr='pres_title')
+    pres_title = indexes.CharField(model_attr='pres_title')
+    slide_title = indexes.CharField(model_attr='slide_title')
     url = indexes.CharField(model_attr='url')
+    content = indexes.CharField(model_attr='text')
+
 
     def get_model(self):
         return Slide

@@ -4,36 +4,49 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 
 from bs4 import BeautifulSoup
-from slides.models import  Slide
+from slides.models import Slide
 
 
-def crawl_static_pages():
+def crawl_static_pages(urls):
+    """ Function crawls static pages of each url that is given as a list parameter
+        In order to use it in the shell, import django.conf.settings and call the
+        function with the parameter settings.STATIC_PAGES"""
+
     count = 0
 
-    for url in settings.STATIC_PAGES:
+    for url in urls:
+        slide_count = 0
         soup = get_page_soup(url)
-
-    try:
-        main_title = soup.find('h1').get_text(strip=True)
-    except AttributeError:
-        main_title = 'Untitled'
-
-    section = soup.find('section')
-
-    while section:
-        
-        slide_title = section.find('h2')
-        slide, created = Slide.objects.get_or_create(slide_title=slide_title)
-        if created:
-            pass
-        slide.pres_title = main_title.get_text(strip=True)
-
-        page.text = soup.prettify()
-        page.save()
-    count += 1
+        try:
+            main_title = soup.find('h1').get_text(strip=True)
+        except AttributeError:
+            main_title = 'Untitled'
+        section = soup.find('section')
+        while next_section(section):
+            slide_count += 1
+            if check_secondary(next_section(section)):
+                sub_slide = 0
+                sub_section = section.find('section')
+                while next_section(sub_section):
+                    sub_slide += 1
+                    slide_url = get_slide_url(url, slide_count, sub_slide)
+                    title = get_slide_title(sub_section)
+                    text = get_slide_text(sub_section)
+                    create_slide(main_title, title, slide_url, text)
+                    count += 1
+                    sub_section = next_section(sub_section)
+                section = next_section(section)
+            else:
+                slide_url = get_slide_url(url, slide_count)
+                title = get_slide_title(next_section(section))
+                text = get_slide_text(next_section(section))
+                create_slide(main_title, title, slide_url, text)
+                count += 1
+                section = next_section(section)
 
     print 'Crawled %d static pages' % count
     return main_title
+
 
 def get_page_soup(url):
     if not url.startswith('http://'):
@@ -47,29 +60,49 @@ def get_page_soup(url):
 
 
 def next_section(section):
-    return section.next_sibling.next_sibling
+    try:
+        next_section = section.next_sibling.next_sibling
+    except AttributeError:
+        print 'No more sections'
+        next_section = False
+    return next_section
 
 
 def get_slide_title(section):
-    return section.find('h2').get_text(' ', strip=True)
+    try:
+        title = section.find('h2').get_text(' ', strip=True)
+    except AttributeError:
+        print 'No such title'
+        title = ""
+    return title
+
 
 def check_secondary(section):
-    return section.find('section')
-
+    if section:
+        return section
+    else:
+        try:
+            section.find('section')
+        except AttributeError:
+            print 'no such subsection'
+            return False
+    return True
 
 
 def get_slide_text(section):
     stripped = []
-
-    for text in section.h2.find_next_siblings():
-        text_list = text.get_text(strip=True).split('\n')
-        for item in text_list:
-            stripped.append(item.strip())
+    try:
+        for text in section.h2.find_next_siblings():
+            text_list = text.get_text(strip=True).split('\n')
+            for item in text_list:
+                stripped.append(item.strip())
+    except AttributeError:
+        print 'No further sections'
     return " ".join(stripped)
 
 
 def get_slide_url(url, count, subcount=""):
-    return '{}{}/{}'.format(url, count, subcount)
+    return '{}#/{}/{}'.format(url, count, subcount)
 
 
 def create_slide(pres_title, slide_title, url, text):

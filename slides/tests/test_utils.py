@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from django.test import TestCase
 from slides.models import Slide
 from slides.utils import crawl_static_pages, get_page_soup, next_section, create_slide, get_slide_title, \
-    get_slide_url, get_slide_text
+    get_slide_url, get_slide_text, check_secondary
 
 
 class UtilTestCase(TestCase):
@@ -11,6 +11,9 @@ class UtilTestCase(TestCase):
         <div>
             <section>
                 <h1>Big Testing Title</h1>
+                <section>
+                    <h2>testing nested section<h2>
+                </section>
             </section>
             <section>
                 <h2>Small Testing Title</h2>
@@ -47,7 +50,7 @@ class UtilTestCase(TestCase):
 
     def test_next_section(self):
         self.assertIn(self.next.find('h2'), self.next)
-        self.assertEqual(self.next, self.soup.find_all('section')[1])
+        self.assertEqual(self.next, self.soup.find_all('section')[2])
 
 
     def test_create_slide(self):
@@ -67,6 +70,11 @@ class UtilTestCase(TestCase):
         self.assertEqual(slide, get_slide)
 
 
+    def test_check_secondary(self):
+        self.assertTrue(check_secondary(self.section))
+        self.assertFalse(check_secondary(self.next))
+
+
     def test_get_slide_title(self):
         title = get_slide_title(self.next)
         self.assertIsInstance(title, unicode)
@@ -82,3 +90,10 @@ class UtilTestCase(TestCase):
     def test_get_slide_text(self):
         text = get_slide_text(self.next)
         self.assertIn('Aenean tincidunt eros', text)
+
+    def test_crawl_static_pages(self):
+        # Needs further testing but this seems like it is working
+        # empty_result = crawl_static_pages([])
+        good_result = crawl_static_pages([self.url])
+        # self.assertEqual(empty_result, "")
+        self.assertEqual(good_result, 'Object-Oriented Python II: Methods')
