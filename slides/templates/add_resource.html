@@ -1,13 +1,13 @@
-<form method="post" role="form" action=".">
-    {% csrf_token %}
-    {#    {{ form.as_p }}#}
+{% load staticfiles %}
+<script src="{% static "js/resources.js" %}"></script>
 
-    <p>Add a resource</p>
-    <input type="button" value="Cancel" id="cancel" class="cancel_button">
+<form method="post" role="form" action=".">
+
+    {% csrf_token %}
+
+    <p id="addResourcePageTitle">Add a resource</p>
+    <button type="button" id="cancel">Cancel</button>
     <input type="text" id="register-form" placeholder="Text area content" class="resource_form"><br>
-    <input type="file" name="document" id="document-form"><br>
-    {#    <textarea = placeholder="Text area content"#}
     <input type="button" value="Save" id="submitz" class="save_button">
 </form>
-
 

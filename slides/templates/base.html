@@ -85,21 +85,19 @@
             </div>
         </div>
     </div>
-    <div class="col-3" id="sidebar-col-2">
+    <div class="col-3" id="sidebar-col-2" style="z-index: 10000 !important;">
         {% block sidebar %}
             <section>
-{#            Add resource button#}
-{#                change id=resource -> add_resource#}
-                <h6 id="resourceTitle">Resources</h6>
-            <button type="button" id="add_resource">Add +</button>
-            <div id="accordion"></div>
-            <div class="form-holder"></div>
+            <div id="displayResource"><h6 id="resourceTitle">Resources</h6>
+                <button type="button" id="add_resource">Add +</button>
+                <div id="accordion"></div>
+            </div>
+
+            <div class="form-holder" id="form-holder"></div>
             </section>
         {% endblock sidebar %}
     </div>
 </div>
-
-
 
     <script src="{% static "js/head.min.js" %}"></script>
     <script src="{% static "js/reveal.js" %}"></script>
@@ -137,52 +135,7 @@
 
     </script>
 
-    <script>
-        $(document).ready(function(){
-            //AJAX call to retrieve all resources along with creators
-            $.ajax({
-                url: '/base/',
-                type: 'GET',
-                success: function(data) {
-
-                    //set the default active accordion header
-                    var currentSlide = 0;
-
-                    //loop the object and extract data for the accordion
-                    for( var i=0; i<data.length; i++){
-                        if( window.location == data[i].slide){
-                            currentSlide = i;
-                        }
-                        $("#accordion").append('<p><a href="' + data[i].slide + '">' + data[i].slide + '</a></p><div>' + data[i].creator + '<br>' + data[i].text + '<br>' + data[i].date + '</div>');
-                    }
-                    $("#accordion").accordion({header: 'p'});
-                    $("#accordion p a").click(function () {
-                       window.location = $(this).attr('href');
-                        return false;
-                    });
-                    //initialize the accordion
-                    $("#accordion").accordion({ active: currentSlide },{ heightStyle: "content" });
-
-                    // Hover states on the static widgets
-                    $( "#dialog-link, #icons li" ).hover(
-                            function() {
-                                $( this ).addClass( "ui-state-hover" );
-                            },
-                            function() {
-                                $( this ).removeClass( "ui-state-hover" );
-                            }
-                    );
-                }
-            });
-        });
-    </script>
-
     <script src="{% static "js/slides.js" %}"></script>
-    <style type="text/css">
-        #sidebar-col-2 {z-index: 100000;}
-
-    </style>
-
 
 </body>
 </html>

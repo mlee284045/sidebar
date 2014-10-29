@@ -23,10 +23,11 @@ class Resource(models.Model):
     date = models.DateField(default=datetime.date.today())
     text = models.TextField(max_length=200)
     slide = models.URLField(blank=True)
+    title = models.TextField(max_length=100)
     file = models.FileField(upload_to='media/document', blank=True, null=True)
 
     def __unicode__(self):
-        return unicode("Resource created by {} on {}".format(self.creator, self.date))
+        return unicode("Resource created by {} on {} title {}".format(self.creator, self.date, self.title))
 
     def get_text(self):
         return self.text
