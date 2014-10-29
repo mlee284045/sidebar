@@ -27,7 +27,8 @@ $(document).ready(function() {
             dataType: 'json',
             data: JSON.stringify({
                 'text': $("#register-form").val(),
-                'slide': window.location.href,
+                'file': $("#document-form").val(),
+                'slide': window.location.href
             }),
             success: function (res) {
                 alert('yes');

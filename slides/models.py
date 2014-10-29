@@ -26,17 +26,18 @@ class Person(AbstractUser):
 #         return self.name
 
 
-class Document(models.Model):
-    file = models.FileField(upload_to='media/document', blank=True, null=True)
-
-    def __unicode__(self):
-        return self.pk
+# class Document(models.Model):
+#     file = models.FileField(upload_to='media/document', blank=True, null=True)
+#
+#     def __unicode__(self):
+#         return self.pk
 
 class Resource(models.Model):
     creator = models.ForeignKey(Person, related_name='resources')
     date = models.DateField(default=datetime.date.today())
     text = models.TextField(max_length=200)
     slide = models.URLField(blank=True)
+    file = models.FileField(upload_to='document', blank=True, null=True)
 
     def __unicode__(self):
         return unicode("Resource created by {} on {}".format(self.creator, self.date))

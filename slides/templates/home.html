@@ -1,42 +1,27 @@
-{#{% extends 'base.html' %}#}
+{% extends 'base.html' %}
 {% load staticfiles %}
 
 {% block title_slide %}
-{% endblock title_slide %}
+{% endblock %}
 
 {% block running_title %}
+Welcome to RocketU
+{% endblock %}
 
-    Welcome to RocketU
-
-{% endblock running_title %}
-
-{% block title %}
-
-    {% block presentation_title %}
-
-        Welcome to RocketU
-
-    {% endblock presentation_title %}
-    <a href="{% url 'login' %}">Login</a>
-{% endblock title %}
-
-
-
-{% block slides%}
+{% block slides %}
     <section>
-        <h4>New to class? Sign up below</h4>
-        <form style="margin-bottom:20px" enctype="multipart/form-data" method="post" action="{% url 'index' %}">
-            {% csrf_token %}
+        <div>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
 
-            <table width= "100%" border="0" cellspacing="5" cellpadding="5" style="margin-left: 0px">
-                {% for field in form %}
-                    <tr><td style="padding: 5px;" width="100" align="right" valign="top">{{ field.label_tag }}</td>
-                        <td align="left" valign="top"><span style="padding-left: 10px;">{{ field }}</span></td></tr>
-                {% endfor %}
-            </table>
+        <p>New to class? Sign up below</p>
+        <form method="post" action=".">
+            {%  csrf_token %}
+            {{ form.as_p }}
 
-            <input id="signUp" class="btn btn-default" type="submit" value="Sign Up" style="margin-left:130px; margin-top:-10px">
+            <input type="submit" value="Submit">
         </form>
     </section>
-{% endblock %}
+{% endblock slides %}
+
 

@@ -1,33 +1,28 @@
 {#{% extends 'base.html' %}#}
+{% load staticfiles %}
+
+{% block title_slide %}
+{% endblock %}
+
+{% block running_title %}
+     Login
+{% endblock %}
 
 
+{% block slides %}
 
-       {% block content %}
-    <div class="container">
-
-
-<div class="col-log-5">
     <div>
 
-            <h1>Login in <text style="font-size: 14px;"></text> </h1><hr >
+{#            <h1>Login in <text style="font-size: 14px;"></text> </h1><hr >#}
 
-            <form method="post" style="margin-bottom:20px" enctype="multipart/form-data">
+    <form method="post" action=".">
+        {%  csrf_token %}
+        {{ form.as_p }}
 
-                {% csrf_token %}
+        <input type="submit" value="Log in">
+        </form>
 
 
-                <table width="100%" border="0" cellspacing="5" cellpadding="5" style="margin-left: 0px">
-                {% for field in form %}
-
-                       <tr><td style="padding: 5px;" width="100" align="right" valign="top">{{ field.label_tag }}</td>
-                       <td align="left" valign="top"><span style="padding-left: 10px;">{{ field }}</span></td></tr>
-                {% endfor %}
-                </table>
-            <div>   <a href="{% url 'password_reset' %}" style="margin-left: 6px;">Forgot your password?</a><br /><br /><br /><input class="btn btn-primary btn-lg" id="test" type="submit" value="Log in" style="margin-left:70px; margin-top:-10px"></div>
-            </form>
     </div>
-</div>
 
-           </div>
-       {% endblock content %}
-
+{% endblock %}
