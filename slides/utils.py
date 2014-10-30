@@ -27,12 +27,13 @@ def crawl_static_pages(urls):
             if check_secondary(next_section(section)):
                 sub_slide = 0
                 sub_section = section.find('section')
-                while next_section(sub_section):
+                while sub_section:
                     sub_slide += 1
                     slide_url = get_slide_url(url, slide_count, sub_slide)
                     title = get_slide_title(sub_section)
                     text = get_slide_text(sub_section)
-                    create_slide(main_title, title, slide_url, text)
+                    content = sub_section
+                    create_slide(main_title, title, slide_url, text, content)
                     count += 1
                     sub_section = next_section(sub_section)
                 section = next_section(section)
@@ -40,7 +41,8 @@ def crawl_static_pages(urls):
                 slide_url = get_slide_url(url, slide_count)
                 title = get_slide_title(next_section(section))
                 text = get_slide_text(next_section(section))
-                create_slide(main_title, title, slide_url, text)
+                content = next_section(section)
+                create_slide(main_title, title, slide_url, text, content)
                 count += 1
                 section = next_section(section)
 
@@ -105,12 +107,13 @@ def get_slide_url(url, count, subcount=""):
     return '{}#/{}/{}'.format(url, count, subcount)
 
 
-def create_slide(pres_title, slide_title, url, text):
-    slide, created = Slide.objects.get_or_create(
+def create_slide(pres_title, slide_title, url, text, content):
+    slide, created = Slide.objects.update_or_create(
         pres_title=pres_title,
         slide_title=slide_title,
         url=url,
-        text=text
+        text=text,
+        content=content
     )
     if created:
         pass

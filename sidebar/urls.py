@@ -2,10 +2,46 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
+from haystack import routers
+# from rest_framework import serializers, viewsets, routers
 from sidebar import settings
+from slides.models import Slide, Resource
+
+
+# class ResouceSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Resource
+#         fields = ('creator', 'date', 'text', 'slide', 'file', 'title')
+#
+#
+# class ResourceViewSet(viewsets.ModelViewSet):
+#     queryset = Resource.objects.all()
+#     serializer_class = ResouceSerializer
+#
+#
+# router = routers.DefaultRouter()
+# router.register(r'users', ResourceViewSet)
+#
+#
+# # api for slides
+#
+# class SlideSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Slide
+#         fields = ('pres_title', 'slide_title', 'url', 'text')
+#
+# class SlideViewSet(viewsets.ModelViewSet):
+#     queryset = Slide.objects.all()
+#     serializer_class = ResouceSerializer
+#
+# router = routers.DefaultRouter()
+# router.register(r'users', SlideViewSet)
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
+
+    # url(r'^api-login/', include(router.urls)),
+    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url(r'^$', 'slides.views.slides_home', name='slides_home'),
     url("^index/$", 'slides.views.index', name="index"),

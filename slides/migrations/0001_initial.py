@@ -29,8 +29,7 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('user_type', models.PositiveSmallIntegerField(blank=True, null=True, choices=[(0, b'Student'), (1, b'Instructor')])),
-                ('profile_picture', models.ImageField(null=True, upload_to=b'media/profile/pictures', blank=True)),
+                ('profile_picture', models.ImageField(null=True, upload_to=b'profile', blank=True)),
                 ('groups', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Group', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of his/her group.', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Permission', blank=True, help_text='Specific permissions for this user.', verbose_name='user permissions')),
             ],
@@ -45,11 +44,10 @@ class Migration(migrations.Migration):
             name='Resource',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('date', models.DateField(default=datetime.date(2014, 10, 29))),
+                ('date', models.DateField(default=datetime.date(2014, 10, 30))),
                 ('text', models.TextField(max_length=200)),
                 ('slide', models.URLField(blank=True)),
-                ('title', models.TextField(max_length=100)),
-                ('file', models.FileField(null=True, upload_to=b'media/document', blank=True)),
+                ('file', models.FileField(null=True, upload_to=b'document', blank=True)),
                 ('creator', models.ForeignKey(related_name='resources', to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -64,6 +62,7 @@ class Migration(migrations.Migration):
                 ('slide_title', models.CharField(max_length=255)),
                 ('url', models.URLField(max_length=255)),
                 ('text', models.TextField()),
+                ('content', models.TextField()),
             ],
             options={
             },

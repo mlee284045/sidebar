@@ -1,28 +1,87 @@
-{#{% extends 'base.html' %}#}
-{% load staticfiles %}
+{% load i18n future staticfiles %}
 
-{% block title_slide %}
-{% endblock %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+    <title>{% block meta_title %}{% endblock %}</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-{% block running_title %}
-     Login
-{% endblock %}
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+        });
+    </script>
+    <meta name="author" content="Yeti LLC">
 
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-{% block slides %}
+    <link rel="stylesheet" href="{% static "css/reveal.min.css" %}">
 
-    <div>
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = '/static/css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        }
+    </script>
 
-{#            <h1>Login in <text style="font-size: 14px;"></text> </h1><hr >#}
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="{% static "css/zenburn.css" %}">
+    <link rel="stylesheet" href="{% static "css/project.css" %}">
 
-    <form method="post" action=".">
-        {%  csrf_token %}
-        {{ form.as_p }}
+    <link rel="stylesheet/less" type="text/css" media="all" href="{% static "less/style.less" %}" />
+    <script>
+        less = {
+            logLevel: 0
+        }
+    </script>
+    <script src="{% static "js/less-1.7.0.min.js" %}"></script>
 
-        <input type="submit" value="Log in">
-        </form>
+    <script src="{% static "js/jquery-1.11.1.js" %}"></script>
 
+</head>
+<body style="background-color: #168eae">
 
-    </div>
+<div class="col-5">
+    <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
+</div>
+<div class="row">
+    <section>
+        <div class="col-xs-4 col-xs-offset-4" style="margin-top: 200px;">
+            <form method="post" action="." role="form" class="form-horizontal">
+                {% csrf_token %}
+                {% for field in form %}
+                     <div class="form-group">
+                         <div class="label-control">{{ field.label_tag }}</div>
+                         <div class="label-control"></div>
+                         {{ field }}
+                     </div>
+                {% endfor %}
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                <input type="submit" value="Log in" style="margin-top: 20px; width: 140px;" class="btn btn-md btn-info"></div></div>
+            </form>
+        </div>
+    <a id="yetiLogo" href="http://www.yetihq.com/"><img src="{% static "img/yeti-power.png" %}"></a>
 
-{% endblock %}
+    </section>
+</div>
+    <script type="text/javascript">
+        $("input").addClass("input-sm form-control");
+    </script>
+</body>
+</html>

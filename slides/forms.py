@@ -5,10 +5,11 @@ from models import Person
 
 class EmailUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    profile_picture = forms.ImageField(required=False)
 
     class Meta:
         model = Person
-        fields = ("first_name", "last_name", "username", "email", "user_type", "profile_picture", "password1", "password2")
+        fields = ("first_name", "last_name", "username", "email", "profile_picture", "password1", "password2")
 
     def clean_username(self):
 
@@ -23,14 +24,16 @@ class EmailUserCreationForm(UserCreationForm):
         )
 
 
+
 class SearchForm(forms.Form):
-    search_text = forms.CharField(label='', initial='Search', max_length=2000)
+    search_text = forms.CharField(label='', initial='Search', max_length=200)
 
 class SearchResults(forms.Form):
-    search_text = forms.CharField(label='',initial='Search', max_length=200)
+    search_text = forms.CharField(label='', initial='Search', max_length=200)
 
 class PasswordForm(forms.Form):
     search_text = forms.CharField(label='', initial='************', max_length=200)
+
 
 class ResourceForm(forms.Form):
     text = forms.CharField()

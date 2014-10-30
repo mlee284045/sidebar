@@ -12,6 +12,7 @@ $(document).ready(function() {
     // Needs a url and view that takes the title information passed and returns all the info
     pres_title = JSON.stringify(pres_title);
 
+
     var slide_url;
 
     $.ajax({
@@ -22,10 +23,9 @@ $(document).ready(function() {
         success: function (data) {
 
             console.log(data);
-            for (var i=0; i<data.length; i++){
+            for (var i=0; i<data.length; i++) {
                 $("#side_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].slide_title + '</a></td></tr>'
-                + '<tr><td><span class="resource"' + data[i].creator + '</span></td></tr>');
-
+                    + '<tr><td><span class="resource"' + data[i].creator + '</span></td></tr>');
             }
         },
         error: function (e) {
@@ -37,13 +37,14 @@ $(document).ready(function() {
         $.ajax({
             url: '/save_resource/',
             type: 'POST',
-            dataType: 'json',
+            dataType: 'jsonp',
             data: JSON.stringify({
                 'text': $("#register-form").val(),
                 'slide': window.location.href,
                 'title': slide_title
             }),
             success: function (res) {
+                console.log(res);
                 $(".form-holder").html(res);
             },
             error: function (error) {
@@ -74,6 +75,7 @@ $(document).ready(function() {
             }
         });
     }
+
 
 
     //Add Resource form hide as default
