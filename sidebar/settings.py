@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'haystack',
     'slides',
     'debug_toolbar',
-    # 'rest_framework',
+    'rest_framework',
 )
 
 
@@ -61,19 +61,6 @@ ROOT_URLCONF = 'sidebar.urls'
 WSGI_APPLICATION = 'sidebar.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -90,8 +77,7 @@ AUTH_USER_MODEL = 'slides.Person'
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
