@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'haystack',
     'slides',
     'debug_toolbar',
-    # 'rest_framework',
+    'rest_framework',
 )
 
 
