@@ -92,8 +92,7 @@ $(document).ready(function() {
         $(this).parent().hide();
 ////        location.reload();
         $('#displayResource').show();
-////        $('#displayResource').load();
-//        location.reload();
+
 ////        $('#displayResource').load(document.URL);
 //
     });

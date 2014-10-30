@@ -130,25 +130,25 @@ def edit_account(request):
 
     return render(request, 'edit_account.html', data)
 
-@csrf_exempt
-def sidebar(request):
-
-    collection = []
-
-    everyone = Person.objects.all()
-
-    for i in range(len(everyone)):
-        tmp_people_obj = everyone[i]
-        for j in tmp_people_obj.resources.all():
-            collection.append({
-                'creator': str(j.creator),
-                'date': str(j.date),
-                'slide': j.slide,
-                'text': j.text,
-                'title': j.title,
-            })
-
-    return HttpResponse(json.dumps(collection),content_type='application.json')
+# @csrf_exempt
+# def sidebar(request):
+#
+#     collection = []
+#
+#     everyone = Person.objects.all()
+#
+#     for i in range(len(everyone)):
+#         tmp_people_obj = everyone[i]
+#         for j in tmp_people_obj.resources.all():
+#             collection.append({
+#                 'creator': str(j.creator),
+#                 'date': str(j.date),
+#                 'slide': j.slide,
+#                 'text': j.text,
+#                 'title': j.title,
+#             })
+#
+#     return HttpResponse(json.dumps(collection),content_type='application.json')
 
 @csrf_exempt
 def get_resource_info(request):
