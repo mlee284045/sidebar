@@ -23,7 +23,8 @@ $(document).ready(function() {
 
             console.log(data);
             for (var i=0; i<data.length; i++){
-                $("#side_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].slide_title + '</a></td></tr>' );
+                $("#side_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].slide_title + '</a></td></tr>'
+                + '<tr><td><span class="resource"' + data[i].creator + '</span></td></tr>');
 
             }
         },

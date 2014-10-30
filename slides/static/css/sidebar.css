@@ -89,20 +89,30 @@
     vertical-align: middle;
 
 }
-
-#side_table  {
+#resource_table{
+    height: 200px;
     font-family: "Proxima Nova"
     position: relative;
     border-left: 1px solid #d3d3d3 ;
     width: 100%;
-    font-size: 22px;
-
-}
-tr td {
+    font-size: 18px;
     text-align: center;
     vertical-align: middle;
-    height: 30px;
+    height: 25px;
 }
+/*#side_table  {*/
+    /*font-family: "Proxima Nova"*/
+    /*position: relative;*/
+    /*border-left: 1px solid #d3d3d3 ;*/
+    /*width: 100%;*/
+    /*font-size: 18px;*/
+
+/*}*/
+/*tr td {*/
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+    /*height: 25px;*/
+/*}*/
 a {
     display: block;
 }
