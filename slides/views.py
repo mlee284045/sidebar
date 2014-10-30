@@ -16,7 +16,9 @@ def slides_home(request):
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password1']
-            form.save()
+            user = form.save()
+            user.profile_picture = '/static/img/pikachu.jpg'
+            user.save()
             user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
@@ -34,8 +36,10 @@ def index(request):
 
 def search_page(request):
     if request.method == 'POST':
+        print"yes"
         form = SearchForm(request.POST)
         if form.is_valid():
+            print "yes222222"
             search_text = form.cleaned_data['search_text']  # strip out value from search form
             search_results = SearchQuerySet().filter(content=search_text)  # process woosh query using search+text
             print search_results
@@ -103,13 +107,10 @@ def search_results(request):
             return render(request, "search_results.html",  data)
 
     else:
-        form = SearchForm()
+        form = SearchResults()
     data = {'form': form}
     return render(request, 'search_results.html', data)
 
-
-# def profile(request):
-#     return render(request, 'profile.html')
 
 
 def edit_account(request):
@@ -147,7 +148,6 @@ def edit_account(request):
 def get_resource_info(request):
 
     collection = []
-
     if request.method == 'POST':
         data = json.loads(request.body)
         print data

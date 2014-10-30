@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -35,14 +35,13 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    # 'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'whoosh',
     'haystack',
     'slides',
     'debug_toolbar',
-    'storages',
 )
 
 
@@ -92,9 +91,9 @@ LOGIN_URL = 'login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..'))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+
 
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'

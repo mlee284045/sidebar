@@ -50,13 +50,13 @@
             <div id="runningTitle">
                 <div class="col-7">
                     <a href="#">{% block running_title %}Lectures & Materials{% endblock %}</a>
+
                         <form method="post">
                             {% csrf_token %}
                             {{ form.as_table }}
                             <input type="submit" value=""
                                    style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
                                            width: 30px; height: 30px">
-
                         </form>
                                  <style>
                                         #id_search_text{
@@ -65,13 +65,7 @@
                                             border:none;
                                             font-size:40px;
                                         }
-
-
                                     </style>
-
-
-
-                        <hr>
                 </div>
                 <div class="col-5">
                     <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
