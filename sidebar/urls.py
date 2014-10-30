@@ -14,7 +14,11 @@ urlpatterns = patterns('',
     url("^edit_account/$", 'slides.views.edit_account', name="edit_account"),
     url("^add_resource/$", 'slides.views.add_resource', name="add_resource"),
     url("^save_resource/$", 'slides.views.save_resource', name="save_resource"),
-    url("^get_slide_info/\s*(?P<prestitle>\w+)/$", 'slides.views.get_slide_info', name="get_slide_info"),
+    # url("^get_slide_info/Welcome!/$", 'slides.views.get_slide_info', name="get_slide_info"),
+    url("^get_slide_info/$", 'slides.views.get_slide_info', name="get_slide_info"),
+    url("^get_resource_info/$", 'slides.views.get_resource_info', name="get_resource_info"),
+    url("^sidebar/$", 'slides.views.sidebar', name="sidebar"),
+
 
     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
     url(r'^password_reset/$', 'django.contrib.auth.views.password_reset', name='password_reset'),

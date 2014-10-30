@@ -1,58 +1,36 @@
 
 $(document).ready(function() {
-    // ===============================================
-    // Take a look at what is going on here and let me know what you think
+
     function getPresTitle(){
         //get current presentation title to send to database query
         var pres_title = $('.titleSlide h1').text();
-        console.log(pres_title.trim());
 
         return pres_title.trim();
 
     }
+    var pres_title = getPresTitle();
     // Needs a url and view that takes the title information passed and returns all the info
-    $.ajax({
+    pres_title = JSON.stringify(pres_title);
 
-        url: '/get_slide_info/' + getPresTitle() + '/',
-        type: 'GET',
-        success: function (res) {
-            console.log('working');
-            console.log(res)
-            for (var i=0; i<res.length; i++){
-                $("#side_table").append('<tr><td>' + res[i].slide_title + '</td></td>' );
+    var slide_url;
+
+    $.ajax({
+        url: '/get_slide_info/',
+        type: 'POST',
+        dataType: 'json',
+        data: pres_title,
+        success: function (data) {
+
+            console.log(data);
+            for (var i=0; i<data.length; i++){
+                $("#side_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].slide_title + '</a></td></tr>' );
+
             }
         },
         error: function (e) {
-            console.log('broken');
-            console.log(e)
+            console.log(e);
         }
     });
-    // =================================================
-
-    function getForm() {
-
-        var slideTitle;
-
-        $.ajax({
-            url: '/add_resource/',
-            type: 'GET',
-            success: function (res) {
-                $(".form-holder").html(res);
-                $("#submitz").on('click', function (e) {
-                    $(this).parent().hide();
-//                    $('#displayResource').show();
-                    slideTitle = getSlideTitle();
-                    saveForm(slideTitle);
-//                    $('#displayResource').load();
-                    location.reload();
-
-                });
-            },
-            error: function (e) {
-                console.log(e)
-            }
-        });
-    }
 
     function saveForm(slide_title) {
         $.ajax({
@@ -73,6 +51,30 @@ $(document).ready(function() {
         });
     }
 
+    function getForm() {
+
+        var slideTitle;
+
+        $.ajax({
+            url: '/add_resource/',
+            type: 'GET',
+            success: function (res) {
+                $(".form-holder").html(res);
+                $("#submitz").on('click', function (e) {
+                    $(this).parent().hide();
+                    slideTitle = getSlideTitle();
+                    saveForm(slideTitle);
+                    location.reload();
+
+                });
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        });
+    }
+
+
     //Add Resource form hide as default
     $('#form_holder').hide();
 
@@ -80,33 +82,39 @@ $(document).ready(function() {
     //then shows accordion
     $('#add_resource').on('click', function(){
         getForm();
-//        $('#displayResource').hide();
+        $('#displayResource').hide();
         $('#form_holder').show();
     });
 
 //    //clicking cancel hides Add Resource
 //    //and shows accordion
-//    $('#cancel').on('click',function () {
-//        $(this).parent().hide();
+    $('#cancel').on('click',function () {
+        $(this).parent().hide();
 ////        location.reload();
-//        $('#displayResource').show();
+        $('#displayResource').show();
 ////        $('#displayResource').load();
 //        location.reload();
 ////        $('#displayResource').load(document.URL);
 //
-//    });
+    });
+
 
 });
 
 
-function loadAccordion(){
-        $.ajax({
-        url: '/sidebar/',
-        type: 'GET',
-        success: function (data) {
-            for (var i=0; i<data.length; i++){
-                $("#side_table").append('<tr><td>' + data[i].title + '</td></td>' );
-            }
+//function loadAccordion(){
+//        $.ajax({
+//        url: '/sidebar/',
+//        type: 'GET',
+//        success: function (data) {
+//            for (var i=0; i<data.length; i++){
+//                $("#side_table").append('<tr><td>' + data[i].title + '</td><td>' + data[i].url + '</td></tr>');
+//                $("#side_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].title + '</a></td></tr>');
+
+//                        <td valign="bottom"><div class="button"><a href="#link text</a></div></td>
+//                $("#side_table").append('<td><a href="' + data[i].url + '">' + data[i].title +'</a></td>');
+
+//            }
             //set the default active accordion header
 //            var currentSlide = 0;
 //
@@ -138,9 +146,9 @@ function loadAccordion(){
 //                    $(this).removeClass("ui-state-hover");
 //                }
 //            );
-        }
-    });
-}
+//        }
+//    });
+//}
 
 function getSlideTitle(){
 
