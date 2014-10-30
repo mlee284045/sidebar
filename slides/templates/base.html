@@ -17,7 +17,20 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <link rel="stylesheet" href="{% static 'css/reveal.css' %}">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="{% static "css/zenburn.css" %}">
+
+    <!-- For sidebar jquery ui -->
+    <link rel="stylesheet" href="{% static "css/jquery-ui.theme.css" %}">
+    <link rel="stylesheet" href="{% static "css/jquery-ui.structure.css" %}">
+    <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
+    <link rel="stylesheet" href="{% static "css/sidebar.css" %}">
+
+    <link rel="stylesheet/less" type="text/css" media="all" href="{% static "less/style.less" %}" />
 
     <!-- If the query includes 'print-pdf', include the PDF print sheet -->
     <script>
@@ -30,18 +43,19 @@
         }
     </script>
 
-    <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="{% static "css/zenburn.css" %}">
-
-    <link rel="stylesheet/less" type="text/css" media="all" href="{% static "less/style.less" %}" />
     <script>
         less = {
             logLevel: 0
         }
     </script>
-    <script src="{% static "js/less-1.7.0.min.js" %}"></script>
 
+    <script src="{% static "js/less-1.7.0.min.js" %}"></script>
     <script src="{% static "js/jquery-1.11.1.js" %}"></script>
+    <script src="{% static "js/sidebar.js" %}"></script>
+    <script src="{% static "external/jquery/jquery.js" %}"></script>
+    <script src="{% static "js/jquery-ui.js" %}"></script>
+
+
 </head>
 
 <body class="{% block body_css %}{% endblock body_css %}">
@@ -56,6 +70,7 @@
                 <div class="col-5">
                     <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
                 </div>
+
             </div>
                 {% block title_slide %}
                     <section class="titleSlide" data-background="#168eae">
@@ -65,15 +80,34 @@
                 {% endblock %}
                 {% block slides %}
                 {% endblock %}
+
             <div class="footer">
             </div>
         </div>
     </div>
-
-    <div class="col-3">
+    <div class="col-3" id="sidebar-col-2" style="z-index: 10000 !important;">
         {% block sidebar %}
             <section>
+            <div id="displayResource">
+{#                <h6 id="resourceTitle">Resources</h6>#}
+{#                <button type="button" id="add_resource">Add +</button>#}
+{#                <div id="accordion"></div>#}
+                <div id="side_table_header">
+                    <table id="side_header">
+{#                       <tr><th>Resources </th>#}
+{#                           <th><button type="button" id="add_resource">Add +</button></th>#}
+{#                       </tr>#}
+{#                        <tr><td style="align-content: center; vertical-align: middle">Resources</td><td><button type="button" id="add_resource">Add +</button></td></tr>#}
+                        <tr><td style="border-left: 1px solid #d3d3d3">Resources</td><td><button type="button" id="add_resource">Add +</button></td></tr>
 
+                    </table>
+                </div>
+                <div id="side_table">
+                    <table id="resource_table">
+                    </table>
+                </div>
+        </div>
+            <div class="form-holder" id="form-holder"></div>
             </section>
         {% endblock sidebar %}
     </div>
@@ -81,13 +115,13 @@
 
     <script src="{% static "js/head.min.js" %}"></script>
     <script src="{% static "js/reveal.js" %}"></script>
+    <script src="{% static "js/resources.js" %}"></script>
 
     <script>
-
         // Full list of configuration options available here:
         // https://github.com/hakimel/reveal.js#configuration
         Reveal.initialize({
-            width: 1170,
+            width: 1000,
             height: 750,
             controls: true,
             progress: true,

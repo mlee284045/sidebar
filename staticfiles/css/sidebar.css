@@ -1,0 +1,38 @@
+#accordion {
+    position: relative;
+    z-index: 2;
+}
+
+.slides {
+    position: relative;
+    z-index: 1;
+}
+
+#add_resource {
+    position: absolute;
+    right: 12%;
+    top: 4%;
+    width: 70px;
+    height: 30px;
+    z-index: 10;
+}
+
+#resourceTitle {
+    position: relative;
+    margin-top: 5%;
+    left: 13%;
+    z-index: 3;
+}
+.resource_form{
+    height:40em;
+    width:15em;
+    background:white;
+}
+
+.save_button{
+    width:15em;
+    height: 7em;
+    color: black;
+    background-color: buttonface;
+}
+
