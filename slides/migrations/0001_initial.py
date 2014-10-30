@@ -48,6 +48,7 @@ class Migration(migrations.Migration):
                 ('date', models.DateField(default=datetime.date(2014, 10, 29))),
                 ('text', models.TextField(max_length=200)),
                 ('slide', models.URLField(blank=True)),
+                ('title', models.TextField(max_length=100)),
                 ('file', models.FileField(null=True, upload_to=b'media/document', blank=True)),
                 ('creator', models.ForeignKey(related_name='resources', to=settings.AUTH_USER_MODEL)),
             ],

@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
 from slides.forms import EmailUserCreationForm, SearchForm, ResourceForm, SearchResults, PasswordForm
 from haystack.query import SearchQuerySet
-from slides.models import Resource, Person
+from slides.models import Resource, Person, Slide
 from bs4 import BeautifulSoup
 import re
 
@@ -123,7 +123,7 @@ def edit_account(request):
 
     return render(request, 'edit_account.html', data)
 
-
+@csrf_exempt
 def sidebar(request):
 
     collection = []
@@ -140,6 +140,56 @@ def sidebar(request):
                 'text': j.text,
                 'title': j.title,
             })
+
+    return HttpResponse(json.dumps(collection),content_type='application.json')
+
+@csrf_exempt
+def get_resource_info(request):
+
+    collection = []
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print data
+        # slide_resource = Resource.objects.filter(slide=data)
+        slide_resource = Resource.objects.filter(slide=data)
+        print slide_resource
+        for resource in slide_resource:
+            collection.append({
+                'creator': resource.creator,
+                'date': resource.date,
+                'slide': resource.slide,
+                'text': resource.text,
+                'title': resource.title,
+            })
+
+    return HttpResponse(json.dumps(collection),content_type='application.json')
+
+@csrf_exempt
+def get_slide_info(request):
+
+    collection = []
+
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        all_slides = Slide.objects.filter(pres_title=data)
+
+        for slide in all_slides:
+
+                slide_resources = Resource.objects.filter(slide=slide.url)
+
+                temp_slide = {'pres_title': slide.pres_title, 'slide_title': slide.slide_title,'url': slide.url,'text': slide.text, 'resource':[]}
+
+
+                for slide_resource in slide_resources:
+                    temp_slide.resource.append({
+                        'resource_creator': slide_resource.creator,
+                        'resource_date': slide_resource.date,
+                        'resource_text': slide_resource.text,
+                        'resource_title': slide_resource.title,
+                    })
+                collection.append(temp_slide)
 
     return HttpResponse(json.dumps(collection),content_type='application.json')
 
