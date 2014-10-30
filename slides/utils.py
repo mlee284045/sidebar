@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 from slides.models import Slide
 
 
+
+
 def crawl_static_pages(urls):
     """ Function crawls static pages of each url that is given as a list parameter
         In order to use it in the shell, import django.conf.settings and call the
@@ -105,12 +107,13 @@ def get_slide_url(url, count, subcount=""):
     return '{}#/{}/{}'.format(url, count, subcount)
 
 
-def create_slide(pres_title, slide_title, url, text):
-    slide, created = Slide.objects.get_or_create(
+def create_slide(pres_title, slide_title, url, text, content):
+    slide, created = Slide.objects.update_or_create(
         pres_title=pres_title,
         slide_title=slide_title,
         url=url,
-        text=text
+        text=text,
+        content=content
     )
     if created:
         pass

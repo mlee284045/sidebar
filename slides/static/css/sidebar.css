@@ -58,7 +58,7 @@
 
 #register-form{
     position: absolute;
-    height: 85%;
+    height: 65%;
     width: 99%;
     margin-top: 3%;
 
@@ -76,6 +76,7 @@
 }
 
 ::-webkit-input-placeholder {
-    text-align: center;
+
+    /*text-align: center;*/
     /*vertical-align: top;*/
 }

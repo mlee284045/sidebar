@@ -46,33 +46,26 @@ def search_page(request):
 
                 if re.search(r"slides.slide", result.id):  # if its a static page
                     print '='*10, result, '='*10
-                    # soup = BeautifulSoup(result.content)
-                    # print result.text, result.pres_title, result.slide_title
-                    # print result.url
-                    # slide_title = soup.find('h2').get_text().strip()  # grab slide title
-                    # slide_content = soup.find_all(text=re.compile(search_text))
-                    slides_results.append({'result': result, 'title': result.slide_title, 'content': result.content, 'pres_title': result.pres_title})
+                    slides_results.append({
+                        'result': result,
+                        'title': result.slide_title,
+                        'content': result.content,
+                        'pres_title': result.pres_title
+                    })
 
                 elif re.search(r"slides.resource", result.id):  # if its a resource
-                    first_name = re.search(r"(\w+) (\w+)", result.creator).group(1)
-                    last_name = re.search(r"(\w+) (\w+)", result.creator).group(2)
-                    print first_name
-                    print "="*10
                     first = result.creator.split()[0]
                     last = result.creator.split()[1]
-                    # print result.text
-                    # print result.text
-                    #print result.creator.first_name
-                    #first_name = re.search(r" ", result.creator)  # grab first name
-                    print first_name
-                    #last_name = re.search(r" ", result.creator)  # grab last name
-                    print last_name
+
                     person = Person.objects.get(first_name=first, last_name=last)  # find all the people
-                    print '='*80
-                    print person
-                    print person.Type
-                    print person.profile_picture.url
-                    resource_results.append({'date': result.date, 'slide': result.slide, 'file': result.file, 'creator': person, 'content': result.content})  # append resource result to results list
+
+                    resource_results.append({
+                        'date': result.date,
+                        'slide': result.slide,
+                        'file': result.file,
+                        'creator': person,
+                        'content': result.content
+                    })  # append resource result to results list
             data = {'slides_results': slides_results, 'resource_results': resource_results}
             return render(request, "search_results.html",  data)
     else:
@@ -87,11 +80,11 @@ def search_results(request):
         form = SearchResults(request.POST)
         if form.is_valid():
             search_text = form.cleaned_data['search_text']  # strip out value from search form
-            search_results = SearchQuerySet().filter(content=search_text)  # process woosh query using search+text
+            search_results = SearchQuerySet().filter(content=search_text)  # process whoosh query using search+text
             slides_results = []     # empty list for slide results
             resource_results = []   # empty list for resource results
             for result in search_results:   # loop over results
-                if re.search(r"haystack_static_pages.staticpage", result.id):  # if its a static page
+                if re.search(r"slides.slide", result.id):  # if its a static page
                     soup = BeautifulSoup(result.content)
                     slide_title = soup.find('h2').get_text().strip()  # grab slide title
                     slide_content = soup.find_all(text=re.compile(search_text))
@@ -126,7 +119,7 @@ def edit_account(request):
         return render(request, "search_results.html", data)
     else:
         form = PasswordForm()
-    data = {'form': form}
+    data = {'form': form, 'image': request.user.profile_picture}
 
     return render(request, 'edit_account.html', data)
 
@@ -164,7 +157,6 @@ def add_resource(request):
 def save_resource(request):
 
     if request.method == 'POST':
-
         data = json.loads(request.body)
 
         resources = Resource.objects.create(
@@ -173,4 +165,5 @@ def save_resource(request):
             slide=data['slide'],
             title=data['title'],
         )
+        print resources
         return HttpResponse("success")

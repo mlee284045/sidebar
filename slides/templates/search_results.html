@@ -100,7 +100,7 @@
                         <div id="from_resources" >
 
                             {% for resource in resource_results %}
-                                <li>Created by: {{ resource.creator }} <img src="{{ resource.creator.profile_picture.url }}">{{ resource.creator.profile_picture.url }}</li>
+                                <li>Created by: {{ resource.creator }}</li>
                                 <li>On: {{ resource.date }}</li>
                                 <li>Your Search: {{ resource.content }}</li>
                                 <li>Your File: {{ resource.file }}</li>

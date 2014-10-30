@@ -13,10 +13,14 @@
 
             <table>
                 <tr>
-                     <img src="../../static/media/profile/pictures/nivea.jpeg" style="border-radius:80px; height:100px; width:100px;" />
+                     <img src="/static{{ image.url }}" style="border-radius:80px; height:100px; width:100px;" />
                 </tr>
                 <tr>
-                     <a href="">upload a new profile photo</a>
+                    <a href="#">upload a new profile photo</a>
+                    <p>{{ image }}</p>
+                    <p>{{ image.url }}</p>
+                    <p>{{ user }}</p>
+
                 </tr>
 
                 <tr>

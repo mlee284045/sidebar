@@ -5,6 +5,7 @@ from models import Person
 
 class EmailUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    profile_picture = forms.ImageField()
 
     class Meta:
         model = Person
@@ -27,7 +28,7 @@ class SearchForm(forms.Form):
     search_text = forms.CharField(label='', initial='Search', max_length=2000)
 
 class SearchResults(forms.Form):
-    search_text = forms.CharField(label='',initial='Search', max_length=200)
+    search_text = forms.CharField(label='', initial='Search', max_length=200)
 
 class PasswordForm(forms.Form):
     search_text = forms.CharField(label='', initial='************', max_length=200)

@@ -1,17 +1,13 @@
 
 $(document).ready(function() {
 
-    function getSlideTitle(){
-
+    function getSlideTitles(){
         var element = $('.present').find('h2');
-
         return element[0].firstChild.nodeValue;
     }
 
     function getForm() {
-
         var slideTitle;
-
         $.ajax({
             url: '/add_resource/',
             type: 'GET',
@@ -20,7 +16,7 @@ $(document).ready(function() {
                 $("#submitz").on('click', function (e) {
                     $(this).parent().hide();
                     $('#displayResource').show();
-                    slideTitle = getSlideTitle();
+                    slideTitle = getSlideTitles();
                     saveForm(slideTitle);
                     location.reload();
                 });
@@ -35,13 +31,14 @@ $(document).ready(function() {
         $.ajax({
             url: '/save_resource/',
             type: 'POST',
-            dataType: 'json',
+            dataType: 'jsonp',
             data: JSON.stringify({
                 'text': $("#register-form").val(),
                 'slide': window.location.href,
                 'title': slide_title
             }),
             success: function (res) {
+                console.log(res);
                 $(".form-holder").html(res);
             },
             error: function (error) {
@@ -99,6 +96,9 @@ $(document).ready(function() {
                     $(this).removeClass("ui-state-hover");
                 }
             );
+        },
+        error: function (e) {
+            console.log(e)
         }
     });
 
