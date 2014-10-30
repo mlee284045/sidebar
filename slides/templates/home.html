@@ -57,19 +57,29 @@
                     <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
                 </div>
             </div>
-                <section>
-        <div>
-            <a href="{% url 'login' %}">Login</a>
-        </div>
 
-        <p>New to class? Sign up below</p>
-        <form method="post" action=".">
-            {%  csrf_token %}
-            {{ form.as_table }}
+            <section>
 
-            <input type="submit" value="Submit">
-        </form>
-    </section>
+                <div class="col-xs-4 col-xs-offset-4" style="margin-top: 100px; position: relative;">
+                    <a href="{% url 'login' %}">Login</a>
+
+
+                    <div class="new" style="color:grey;">New to class? Sign up below</div>
+                    <form method="post" action=".">
+                        {%  csrf_token %}
+                        {{ form.as_p }}
+
+                        <div class="row">#}
+                            <input type="submit" value="Submit" style="margin-top: 20px; width: 140px;" class="btn btn-md btn-info">
+                        </div>
+                    </form>
+
+
+                </div>
+            </section>
+                <script type="text/javascript">
+        $("input").addClass("input-sm form-control");
+    </script>
             <div class="footer">
             </div>
 
@@ -118,19 +128,7 @@
 
 </body>
 </html>
-    <section>
-        <div>
-            <a href="{% url 'login' %}">Login</a>
-        </div>
 
-        <p>New to class? Sign up below</p>
-        <form method="post" action=".">
-            {%  csrf_token %}
-            {{ form.as_table }}
 
-            <input type="submit" value="Submit">
-        </form>
-    </section>
-{#{% endblock slides %}#}
 
 
