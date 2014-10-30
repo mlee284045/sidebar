@@ -58,13 +58,11 @@
 
         <section class="present" style="display:block;">
             <h2>
-
-
                  <form method="post">
                     {% csrf_token %}
                     {{ form.as_table }}
 
-                    <input type="submit" value=""  class="pull-right"
+                    <input type="submit" value=""  class="pull-right" id="buttonhand"
                            style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
                                    width: 30px; height: 30px; margin-top:15px ">
 
@@ -78,6 +76,35 @@
                         font-size:40px;
                     }
                 </style>
+
+
+                <script>
+                    $( document ).ready(function()
+
+                    {
+                         $('#id_search_text').on('click', function()
+                         {
+                              $('#id_search_text').val('');
+                           });
+
+                         $('#id_search_text').mouseleave( function()
+                         {
+                              $('#id_search_text').val('Search');
+                           });
+
+                         $('#buttonhand').mouseover( function()
+                         {
+                              console.log('stuff');
+                              $('#buttonhand').css('cursor', 'pointer');
+
+                           });
+
+                         $('#buttonhand').mouseleave( function()
+                         {
+                              $('#button').css('pointer', 'cursor');
+                           });
+                    });
+                </script>
 
             </h2>
 
