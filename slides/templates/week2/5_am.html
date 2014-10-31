@@ -6,6 +6,24 @@
 {% endblock %}
 
 {% block slides %}
+
+    <script>
+                $( document ).ready(function()
+
+                    {
+                        $('#sidebar-col-2').hide();
+                        $(document).keydown( function(e) {
+                            if (e.keyCode == 39) {
+                            $('#sidebar-col-2').show();
+
+                            }
+
+                        });
+                    });
+
+</script>
+
+
 <section>
     <h2>What is Django?</h2>
     <p>The last few days, you have been using the Django ORM to build model relationships and better understand the connection between Python classes and database tables. The ORM is one of the most powerful features of Django, but it is only one piece.</p>

@@ -10,6 +10,22 @@
 {% endblock %}
 
 {% block slides %}
+<script>
+                $( document ).ready(function()
+
+                    {
+                        $('#sidebar-col-2').hide();
+                        $(document).keydown( function(e) {
+                            if (e.keyCode == 39) {
+                            $('#sidebar-col-2').show();
+
+                            }
+
+                        });
+                    });
+
+</script>
+
 <section>
     <h2>Laying out our application</h2>
     <p>Our Django app will have this site map. This basic layout can be found in many applications.</p>

@@ -50,45 +50,27 @@
                 <div class="col-7">
                     <a href="#"> Lectures & Materials</a><br>
                           <form method="post" >
-                    {% csrf_token %}
-                    {{ form.as_table }}
-
-
-                    </form>
-
+                            {% csrf_token %}
+                            {{ form.as_table }}
+                         </form>
                 </div>
-
-
-                <div class="col-5" style="margin-top:-15px">
+                <div class="col-5" style="margin-top:0px">
                     <div class="pull-right">
-                    <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a><br>
-
-                    <a href="{% url "search_page" %}">
-                    <input type="button" value="" id="buttonhand"
-                                   style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
-                                           width: 30px; height: 30px; margin-right:40px "></a>
-                    <button type="button" id="slides_button" style="width:60px" >Slides</button>
-                    <button type="button" id="resources_button">Resources</button>
+                            <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a><br><br>
+                            <input type="submit" value="" id="buttonhand" style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
+                                           width: 30px; height: 30px; margin-left: -40px; margin-right:10px; margin-top:-20px">
+                            <button type="button" id="slides_button" style="width:80px ;margin-right:-10px; border-radius:15%" >Slides</button>
+                            <button type="button" id="resources_button" style="width:80px; border-radius:15%">Resources</button>
                     </div>
                     <br>
                     <br>
-
                 </div>
-
-
-
         <section class="present" style="display:block;">
             <h2>
-                 <form method="post" >
-                    {% csrf_token %}
-                    {{ form.as_table }}
-
-
-                    </form>
 
                   <style>
                     #id_search_text{
-                        width:1100px;
+                        width:800px;
                         height:50px;
                         border:none;
                         font-size:40px;
@@ -100,15 +82,16 @@
                     $( document ).ready(function()
 
                     {
-                         $('#id_search_text').mouseenter(function()
-                         {
-                              $('#id_search_text').val('');
-                           });
+                        $('#id_search_text').val('{{ search_text }}');
 
-                         $('#id_search_text').mouseleave( function()
-                         {
-                              $('#id_search_text').val('Search');
-                           });
+                        $('#id_search_text').on('click', function () {
+                            $('#id_search_text').val('');
+                        });
+
+{#                         $('#id_search_text').mouseleave( function()#}
+{#                         {#}
+{#                              $('#id_search_text').val('Search');#}
+{#                           });#}
 
                          $('#buttonhand').mouseover( function()
                          {
@@ -130,7 +113,7 @@
 
             </section>
 
-                <hr style="margin-top:50px; margin-bottom: 10px">
+                <hr style="margin-top:70px; margin-bottom: 10px">
                 </div>
             </div>
                         <div id="from_slides" style="margin-top: 150px; margin-left:180px; margin-right:700px; font-size: 20px;">
@@ -156,18 +139,22 @@
                         <div id="from_resources" style="margin-top: 150px; margin-left:180px; margin-right:700px; font-size: 20px;">
 
                             {% for resource in resource_results %}
+                                <div style="margin-bottom: 15px">
+                                {{ resource.title }}</div>
+
                                 <div>
-
                                 <img src="{{ resource.creator.profile_picture }}" style="width: 70px; height:70px ;border-radius:50%; border:solid 1px ">
-
-
                                 </div>
-                                <div style=" margin-left: 70px">
-                                 {{ resource.creator }}<br>
-                                 {{ resource.date }}<br>
+                                <div style=" margin-top:-50px; margin-left: 90px">
+
+                                 <strong>{{ resource.creator }}</strong><br>
+
                                  {{ resource.content }}<br>
-                                 {{ resource.file }}<br>
+
                                  <a href="{{ resource.slide }}">{{ resource.slide }}</a><br>
+
+                                Posted on: {{ resource.date }}<br>
+
                                 <br>
                                 </div>
                                 <hr style="margin-top:0px; margin-bottom: 30px">
