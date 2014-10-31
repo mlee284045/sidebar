@@ -42,69 +42,139 @@
     <script src="{% static "js/jquery-1.11.1.js" %}"></script>
 </head>
 
-<body class="{% block body_css %}{% endblock body_css %}">
-<div class="reveal">
+<body>
+<div class="reveal" style="overflow-y: scroll; overflow-x: hidden;">
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="col-12">
-        <div class="slides">
+        <div class="slides" style="width:1170px; height:750px; zoom:0.4788;margin-top:40px">
             <div id="runningTitle">
                 <div class="col-7">
-                    <a href="#">{% block running_title %}Lectures & Materials{% endblock %}</a>
+                    <a href="#"> Lectures & Materials</a><br>
+                          <form method="post" >
+                    {% csrf_token %}
+                    {{ form.as_table }}
 
-                        <form method="post">
-                            {% csrf_token %}
-                            {{ form.as_table }}
-                            <input type="submit" value=""
-                                   style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
-                                           width: 30px; height: 30px">
-                        </form>
-                                 <style>
-                                        #id_search_text{
-                                            width:1000px;
-                                            height:50px;
-                                            border:none;
-                                            font-size:40px;
-                                        }
-                                    </style>
+
+                    </form>
+
                 </div>
-                <div class="col-5">
-                    <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
-                    <button type="button" id="slides_button">Slides</button>
+
+
+                <div class="col-5" style="margin-top:-15px">
+                    <div class="pull-right">
+                    <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a><br>
+
+                    <a href="{% url "search_page" %}">
+                    <input type="button" value="" id="buttonhand"
+                                   style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
+                                           width: 30px; height: 30px; margin-right:40px "></a>
+                    <button type="button" id="slides_button" style="width:60px" >Slides</button>
                     <button type="button" id="resources_button">Resources</button>
+                    </div>
+                    <br>
+                    <br>
+
+                </div>
+
+
+
+        <section class="present" style="display:block;">
+            <h2>
+                 <form method="post" >
+                    {% csrf_token %}
+                    {{ form.as_table }}
+
+
+                    </form>
+
+                  <style>
+                    #id_search_text{
+                        width:1100px;
+                        height:50px;
+                        border:none;
+                        font-size:40px;
+                    }
+                </style>
+
+
+                <script>
+                    $( document ).ready(function()
+
+                    {
+                         $('#id_search_text').mouseenter(function()
+                         {
+                              $('#id_search_text').val('');
+                           });
+
+                         $('#id_search_text').mouseleave( function()
+                         {
+                              $('#id_search_text').val('Search');
+                           });
+
+                         $('#buttonhand').mouseover( function()
+                         {
+                              console.log('stuff');
+                              $('#buttonhand').css('cursor', 'pointer');
+
+                           });
+
+                         $('#buttonhand').mouseleave( function()
+                         {
+                              $('#button').css('pointer', 'cursor');
+                           });
+
+                    });
+                </script>
+
+            </h2>
+
+
+            </section>
+
+                <hr style="margin-top:50px; margin-bottom: 10px">
                 </div>
             </div>
-
-                {% block title_slide %}
-                {% endblock %}
-
-                {% block slides %}
-
-                    <section>
-                        <div id="from_slides">
+                        <div id="from_slides" style="margin-top: 150px; margin-left:180px; margin-right:700px; font-size: 20px;">
 
                             {% for slide in slides_results %}
-                                <li>Day: {{ slide.result.pres_title }}</li>
-                                <li>Day Url: <a href="{{ slide.result.url }}">{{ slide.result.url }}</a></li>
-                                <li>Slide: {{ slide.title }}</li>
-                                <li>Content: {{ slide.content }}</li>
+
+                                <a href="{{ slide.result.url }}">
+                                <div>
+
+                                <div style="color:#b5b5b5">{{ slide.result.pres_title }}</div><br>
+
+                                <div style="color:black">{{ slide.title }}</div><br>
+                                {{ slide.content }}<br>
                                 <br>
+                                </div>
+                                </a>
+                                <hr style="margin-top:0px; margin-bottom: 10px">
                             {% endfor %}
+
+
                         </div>
 
-                        <div id="from_resources" >
+                        <div id="from_resources" style="margin-top: 150px; margin-left:180px; margin-right:700px; font-size: 20px;">
 
                             {% for resource in resource_results %}
-                                <li>Created by: {{ resource.creator }}</li>
-                                <li>On: {{ resource.date }}</li>
-                                <li>Your Search: {{ resource.content }}</li>
-                                <li>Your File: {{ resource.file }}</li>
-                                <li>Link: <a href="{{ resource.slide }}">{{ resource.slide }}</a></li>
+                                <div>
+
+                                <img src="{{ resource.creator.profile_picture }}" style="width: 70px; height:70px ;border-radius:50%; border:solid 1px ">
+
+
+                                </div>
+                                <div style=" margin-left: 70px">
+                                 {{ resource.creator }}<br>
+                                 {{ resource.date }}<br>
+                                 {{ resource.content }}<br>
+                                 {{ resource.file }}<br>
+                                 <a href="{{ resource.slide }}">{{ resource.slide }}</a><br>
                                 <br>
+                                </div>
+                                <hr style="margin-top:0px; margin-bottom: 30px">
                             {% endfor %}
 
-                        </div>
-                    </section>
-                {% endblock %}
+
             <div class="footer">
             </div>
 
@@ -149,7 +219,7 @@
         });
 
     </script>
-    <script src="{% static "js/slides.js" %}"></script>
+
 
 </body>
 </html>

@@ -19,7 +19,7 @@ class Resource(models.Model):
     file = models.FileField(upload_to='document', blank=True, null=True)
 
     def __unicode__(self):
-        return unicode("Resource created by {} on {} title {}".format(self.creator, self.date, self.title))
+        return unicode("Resource created by {} on {}".format(self.creator, self.date))
 
     def get_text(self):
         return self.text
