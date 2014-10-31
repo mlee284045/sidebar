@@ -64,10 +64,10 @@ $(document).ready(function() {
                 $(".form-holder").html(res);
                 $("#submitz").on('click', function (e) {
                     $(this).parent().hide();
+                    $('#submitz').hide();
                     slideTitle = getSlideTitle();
                     saveForm(slideTitle);
                     location.reload();
-
                 });
             },
             error: function (e) {
@@ -87,12 +87,14 @@ $(document).ready(function() {
         getForm();
         $('#displayResource').hide();
         $('#form_holder').show();
+        $('#submitz').show();
     });
 
 //    //clicking cancel hides Add Resource
 //    //and shows accordion
     $('#cancel').on('click',function () {
         $(this).parent().hide();
+        $('#submitz').hide();
 ////        location.reload();
         $('#displayResource').show();
 
