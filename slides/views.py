@@ -123,7 +123,7 @@ def edit_account(request):
 def update_account(request):
     user = Person.objects.get(pk=request.user.id)
     if request.method == 'POST':
-        form = EditAccountForm(request.POST)
+        form = EditAccountForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
             return HttpResponse('Saved new password')

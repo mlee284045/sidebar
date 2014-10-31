@@ -21,26 +21,31 @@ def crawl_static_pages(urls):
             main_title = soup.find('h1').get_text(strip=True)
         except AttributeError:
             main_title = 'Untitled'
+
         section = soup.find('section')
+
         while next_section(section):
             if next_section(section) != 'spacing':
                 slide_count += 1
             else:
-                print 'skip section'
+                print 'skipped section'
+                section = next_section(section)
                 continue
             if check_secondary(next_section(section)):
                 sub_slide = 0
                 try:
                     sub_section = section.find('section')
                 except AttributeError:
-                    sub_section = 'spacing'
+                    print 'continued'
+                    continue
                 while sub_section:
-                    print sub_slide, sub_section
                     if sub_section != 'spacing':
                         sub_slide += 1
                     else:
-                        print 'skip subsection'
+                        print 'skipped next subsection'
+                        sub_section = next_section(sub_section)
                         continue
+                    print '='*10, sub_slide, '='*10, slide_count
                     slide_url = get_slide_url(url, slide_count, sub_slide)
                     title = get_slide_title(sub_section)
                     text = get_slide_text(sub_section)
@@ -48,6 +53,8 @@ def crawl_static_pages(urls):
                     create_slide(main_title, title, slide_url, text, content)
                     count += 1
                     sub_section = next_section(sub_section)
+
+
                 section = next_section(section)
             else:
                 slide_url = get_slide_url(url, slide_count)
@@ -78,12 +85,17 @@ def next_section(section):
         next_section = section.next_sibling
     except AttributeError:
         print 'No more sections'
-        next_section = False
+        return False
     try:
+        print 'had a sibling, looking for h2'
         next_section.find('h2')
     except AttributeError:
         print 'Just spacing'
         return 'spacing'
+    # try:
+    #     return next_section = next_section.next_sibling
+    # except AttributeError:
+    #     return False
     return next_section
 
 
