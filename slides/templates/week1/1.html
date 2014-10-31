@@ -10,6 +10,22 @@
 
 {% block slides %}
 
+<script>
+                $( document ).ready(function()
+
+                    {
+                        $('#sidebar-col-2').hide();
+                        $(document).keydown( function(e) {
+                            if (e.keyCode == 39) {
+                            $('#sidebar-col-2').show();
+
+                            }
+
+                        });
+                    });
+
+</script>
+
 <section>
     <h2>Learn web development. Build awesome things.</h2>
     <p>
