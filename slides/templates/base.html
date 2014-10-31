@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{% static "css/jquery-ui.theme.css" %}">
     <link rel="stylesheet" href="{% static "css/jquery-ui.structure.css" %}">
     <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">
+    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
     <link rel="stylesheet" href="{% static "css/sidebar.css" %}">
 
     <link rel="stylesheet/less" type="text/css" media="all" href="{% static "less/style.less" %}" />
@@ -59,60 +60,50 @@
 </head>
 
 <body class="{% block body_css %}{% endblock body_css %}">
-<div class="reveal">
-    <!-- Any section element inside of this container is displayed as a slide -->
-    <div class="col-9">
-        <div class="slides">
-            <div id="runningTitle">
-                <div class="col-7">
-                    <a href="#">{% block running_title %}{% endblock %}</a>
+        <div class="reveal">
+            <!-- Any section element inside of this container is displayed as a slide -->
+                <div class="col-lg-9">
+                    <div class="slides">
+                        <div id="runningTitle">
+                            <div class="col-7">
+                                <a href="#">{% block running_title %}{% endblock %}</a>
+                            </div>
+                            <div class="col-5">
+                                <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
+                            </div>
+                        </div>
+                            {% block title_slide %}
+                                <section class="titleSlide" data-background="#168eae">
+                                    <h1>{% block presentation_title%}{% endblock %}</h1>
+                                    <a id="yetiLogo" href="http://www.yetihq.com/"><img src="{% static "img/yeti-power.png" %}"></a>
+                                </section>
+                            {% endblock %}
+                            {% block slides %}
+                            {% endblock %}
+                        <div class="footer">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-5">
-                    <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
-                </div>
+                <div class="col-lg-3" id="sidebar-col-2" style="z-index: 10000 !important; border-left: 1px solid #EBEBE6">
+                    {% block sidebar %}
+                        <section>
+                        <div id="displayResource">
+                            <div id="side_table_header">
+                                <table id="side_header">
+                                    <tr><td>Resources</td><td><button type="button" id="add_resource">Add +</button></td></tr>
 
-            </div>
-                {% block title_slide %}
-                    <section class="titleSlide" data-background="#168eae">
-                        <h1>{% block presentation_title%}{% endblock %}</h1>
-                        <a id="yetiLogo" href="http://www.yetihq.com/"><img src="{% static "img/yeti-power.png" %}"></a>
-                    </section>
-                {% endblock %}
-                {% block slides %}
-                {% endblock %}
-
-            <div class="footer">
-            </div>
-        </div>
-    </div>
-    <div class="col-3" id="sidebar-col-2" style="z-index: 10000 !important;">
-        {% block sidebar %}
-            <section>
-            <div id="displayResource">
-{#                <h6 id="resourceTitle">Resources</h6>#}
-{#                <button type="button" id="add_resource">Add +</button>#}
-{#                <div id="accordion"></div>#}
-                <div id="side_table_header">
-                    <table id="side_header">
-{#                       <tr><th>Resources </th>#}
-{#                           <th><button type="button" id="add_resource">Add +</button></th>#}
-{#                       </tr>#}
-{#                        <tr><td style="align-content: center; vertical-align: middle">Resources</td><td><button type="button" id="add_resource">Add +</button></td></tr>#}
-                        <tr><td style="border-left: 1px solid #d3d3d3">Resources</td><td><button type="button" id="add_resource">Add +</button></td></tr>
-
-                    </table>
-                </div>
-                <div id="side_table">
-                    <table id="resource_table">
-                    </table>
+                                </table>
+                            </div>
+                            <div id="side_table">
+                                <table id="resource_table">
+                                </table>
+                            </div>
+                    </div>
+                        <div class="form-holder" id="form-holder"></div>
+                        </section>
+                    {% endblock sidebar %}
                 </div>
         </div>
-            <div class="form-holder" id="form-holder"></div>
-            </section>
-        {% endblock sidebar %}
-    </div>
-</div>
-
     <script src="{% static "js/head.min.js" %}"></script>
     <script src="{% static "js/reveal.js" %}"></script>
     <script src="{% static "js/resources.js" %}"></script>
