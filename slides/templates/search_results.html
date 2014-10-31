@@ -52,39 +52,19 @@
                           <form method="post" >
                             {% csrf_token %}
                             {{ form.as_table }}
-
-
                          </form>
-
                 </div>
-
-
                 <div class="col-5" style="margin-top:0px">
-
-
-
-
                     <div class="pull-right">
-                    <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a><br>
-
-
-
-                        <input type="submit" value="" id="buttonhand"
-                                   style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
-                                           width: 30px; height: 30px; margin-left: -40px; margin-top:-20px">
-
-
+                            <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a><br><br>
+                            <input type="submit" value="" id="buttonhand" style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
+                                           width: 30px; height: 30px; margin-left: -40px; margin-right:10px; margin-top:-20px">
                             <button type="button" id="slides_button" style="width:80px ;margin-right:-10px; border-radius:15%" >Slides</button>
                             <button type="button" id="resources_button" style="width:80px; border-radius:15%">Resources</button>
-
                     </div>
                     <br>
                     <br>
-
                 </div>
-
-
-
         <section class="present" style="display:block;">
             <h2>
 
@@ -104,10 +84,9 @@
                     {
                         $('#id_search_text').val('{{ search_text }}');
 
-                         $('#id_search_text').mouseenter(function()
-                         {
-                              $('#id_search_text').val('');
-                           });
+                        $('#id_search_text').on('click', function () {
+                            $('#id_search_text').val('');
+                        });
 
 {#                         $('#id_search_text').mouseleave( function()#}
 {#                         {#}
