@@ -19,7 +19,6 @@ djangorestframework==2.4.3
 ecdsa==0.10
 elasticsearch==1.2.0
 gunicorn==19.1.1
-haystack-static-pages==0.2.1alpha
 mock==1.0.1
 paramiko==1.12.2
 psycopg2==2.5.4

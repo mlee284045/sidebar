@@ -16,6 +16,7 @@ class Resource(models.Model):
     date = models.DateField(default=datetime.date.today())
     text = models.TextField(max_length=200)
     slide = models.URLField(blank=True)
+    title = models.TextField(max_length=100)
     file = models.FileField(upload_to='document', blank=True, null=True)
 
     def __unicode__(self):

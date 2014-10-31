@@ -1,6 +1,3 @@
-/**
- * Created by Alexis on 10/28/14.
- */
 $(document).ready(function() {
 
     $('#slides_button').css('background-color','#707070');

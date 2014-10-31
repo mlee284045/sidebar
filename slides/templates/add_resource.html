@@ -5,12 +5,15 @@
 
     {% csrf_token %}
 
-    <p id="addResourcePageTitle">Add a resource</p>
-    <button type="button" id="cancel">Cancel</button>
-    <textarea id="register-form" class="resource_form">
+    <table id="addresource_table">
+        <tr><td>Add a resource</td><td><button type="button" id="cancel">Cancel</button></td></tr>
+
+    </table>
+{#    <p id="addResourcePageTitle">Add a resource</p>#}
+{#    <button type="button" id="cancel">Cancel</button>#}
+    <textarea id="register-form" class="resource_form" rows="27">
         Text area content
     </textarea>
 {#    <input type="text" id="register-form" placeholder="Text area content" class="resource_form"><br>#}
-    <input type="button" value="Save" id="submitz" class="save_button">
+    <button type="button" value="Save" id="submitz" class="save_button">Save</button>
 </form>
-
