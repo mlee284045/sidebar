@@ -4,42 +4,42 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from rest_framework import serializers, viewsets, routers
 from sidebar import settings
-from slides.models import Resource, Slide
+from slides.models import Slide, Resource, Person
 
-
-class ResourceSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Resource
-        fields = ('creator', 'date', 'text', 'slide', 'file')
-
-
-class ResourceViewSet(viewsets.ModelViewSet):
-    queryset = Resource.objects.all()
-    serializer_class = ResourceSerializer
-
-
-router = routers.DefaultRouter()
-router.register(r'users', ResourceViewSet)
-
-
-# api for slides
 
 class SlideSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Slide
         fields = ('pres_title', 'slide_title', 'url', 'text', 'content')
 
+
 class SlideViewSet(viewsets.ModelViewSet):
     queryset = Slide.objects.all()
-    serializer_class = ResourceSerializer
+    serializer_class = SlideSerializer
 
 router = routers.DefaultRouter()
-router.register(r'users', SlideViewSet)
+router.register(r'slides', SlideViewSet)
 
+
+
+# class ResourceSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Resource
+#         fields = ('creator', 'date', 'text', 'slide')
+#
+#
+# class ResourceViewSet(viewsets.ModelViewSet):
+#     queryset = Resource.objects.all()
+#     serializer_class = ResourceSerializer
+#
+# router = routers.DefaultRouter()
+# router.register(r'resources', ResourceViewSet)
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r'^data/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', 'slides.views.slides_home', name='slides_home'),
     url("^index/$", 'slides.views.index', name="index"),
     url("^search_page/$", 'slides.views.search_page', name="search_page"),
@@ -97,9 +97,6 @@ urlpatterns = patterns('',
     url("^week3/3_pm/$", TemplateView.as_view(template_name="week3/3_pm.html"), name="week3_day3_pm"),
     url("^week3/lab/$", TemplateView.as_view(template_name="week3/lab.html"), name="week3_lab"),
 
-
-    url(r'^api-login/', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 )
 
 if settings.DEBUG:

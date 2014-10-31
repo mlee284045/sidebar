@@ -55,5 +55,3 @@ $(document).ready(function(){
         update_photo($('#profile_pic_upload').val());
     });
 });
-
-

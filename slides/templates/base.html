@@ -104,6 +104,35 @@
                     {% endblock sidebar %}
                 </div>
         </div>
+    </div>
+    <div class="col-3" id="sidebar-col-2" style="z-index: 10000 !important;">
+        {% block sidebar %}
+            <section>
+            <div id="displayResource">
+{#                <h6 id="resourceTitle">Resources</h6>#}
+{#                <button type="button" id="add_resource">Add +</button>#}
+{#                <div id="accordion"></div>#}
+                <div id="side_table_header">
+                    <table id="side_header">
+{#                       <tr><th>Resources </th>#}
+{#                           <th><button type="button" id="add_resource">Add +</button></th>#}
+{#                       </tr>#}
+{#                        <tr><td style="align-content: center; vertical-align: middle">Resources</td><td><button type="button" id="add_resource">Add +</button></td></tr>#}
+                        <tr><td style="border-left: 1px solid #d3d3d3">Resources</td><td><button type="button" id="add_resource">Add +</button></td></tr>
+
+                    </table>
+                </div>
+                <div id="side_table">
+                    <table>
+                    </table>
+                </div>
+        </div>
+            <div class="form-holder" id="form-holder"></div>
+            </section>
+        {% endblock sidebar %}
+    </div>
+</div>
+
     <script src="{% static "js/head.min.js" %}"></script>
     <script src="{% static "js/reveal.js" %}"></script>
     <script src="{% static "js/resources.js" %}"></script>

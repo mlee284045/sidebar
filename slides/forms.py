@@ -62,6 +62,19 @@ class ResourceForm(forms.Form):
     file = forms.FileField
 #     # slide = forms.URLField(label="slide")
 
+class EditAccountForm(UserCreationForm):
+    username = None
+    real_name = forms.CharField(label='Real Name', max_length=200)
+    email = forms.EmailField(required=True)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password'}))
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password Again'}))
 
+    class Meta:
+        model = Person
+        fields = ("real_name", "email", "password1", "password2")
+
+
+class UploadPhotoForm(forms.Form):
+    photo = forms.ImageField()
 
 

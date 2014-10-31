@@ -47,12 +47,12 @@
 <div class="reveal">
     <!-- Any section element inside of this container is displayed as a slide -->
 
-        <div class="slides" style="width:1170px; height:750px; zoom:0.4788;">
+        <div class="slides" style="width:1170px; height:750px; zoom:0.4788; margin-top:69px">
             <div id="runningTitle">
                 <div class="col-7">
                     <a href="#"> Lectures & Materials</a>
                 </div>
-                <div class="col-5">
+                <div class="col-5" style="margin-top:-40px">
                     <a href="/" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
                 </div>
             </div>
@@ -61,6 +61,8 @@
                 <h2>All weeks
                 <a href="{% url "search_page" %}" id="SearchImg"><img class="pull-right" src="{% static 'img/search.png' %}" /></a>
                 </h2>
+
+                <hr>
 
                 <div class="col-6">
                             <dl><a href="{% url 'week1' %}">Week 1</a></dl>
@@ -81,9 +83,6 @@
                         </div>
 
                 </section>
-{#                {% endblock %}#}
-            <div class="footer">
-            </div>
 
         </div>
     </div>

@@ -48,7 +48,8 @@
 <div class="reveal">
 
     <!-- Any section element inside of this container is displayed as a slide -->
-    <div class="slides" style="width:1170px; height:750px; zoom:0.4788;">
+    <div class="slides" style="width:1170px; height:750px; zoom:0.4788;margin-top:40px">
+
         <div id="runningTitle">
             <div class="col-7"><a href="#"> Lectures & Materials</a></div>
             <div class="col-5">
@@ -58,13 +59,18 @@
 
         <section class="present" style="display:block;">
             <h2>
-                 <form method="post">
-                     {% csrf_token %}
-                     {{ form.as_table }}
-                     <input type="submit" value=""  class="pull-right"
-                            style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
-                                    width: 30px; height: 30px; margin-top:15px ">
-                 </form>
+                 <form method="post" >
+                    {% csrf_token %}
+                    {{ form.as_table }}
+
+                                                <div class="pull-right">
+                                    <input type="button" value="" id="buttonhand"
+                                   style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
+                                           width: 30px; height: 30px ">
+{#                                    <button type="button" id="slides_button" >Slides</button>#}
+{#                                    <button type="button" id="resources_button">Resources</button>#}
+                            </div>
+                    </form>
 
                   <style>
                     #id_search_text{
@@ -75,13 +81,50 @@
                     }
                 </style>
 
+
+
             </h2>
+
+            <hr style="margin-top:-30px; margin-bottom: 100px">
+
+                       <div id="from_slides"> </div>
+
+                        <div id="from_resources" > </div>
+
+
+                            <script>
+                    $( document ).ready(function() {
+
+                        var text = $('#id_search_text').val();
+
+
+                        $('#id_search_text').on('click', function () {
+                            $('#id_search_text').val('');
+                        });
+
+                        $('#id_search_text').mouseleave(function () {
+                            $('#id_search_text').val('Search');
+                        });
+
+                        $('#buttonhand').mouseover(function () {
+
+                            $('#buttonhand').css('cursor', 'pointer');
+
+                        });
+                        $('#buttonhand').mouseleave(function () {
+                            $('#button').css('pointer', 'cursor');
+                        });
+                    })
+
+
+
+                </script>
 
 </section>
 <div class="footer">
 </div>
 
-
+<script src="{% static "js/search_results.js" %}"></script>
 <script src="{% static "js/head.min.js" %}"></script>
 <script src="{% static "js/reveal.js" %}"></script>
 
@@ -118,8 +161,8 @@
 
 </script>
 
-<script src="{% static "js/slides.js" %}"></script>
+
 </div>
-    </div>
+</div>
 </body>
 </html>
