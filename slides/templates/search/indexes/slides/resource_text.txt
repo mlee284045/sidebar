@@ -1,0 +1,6 @@
+{{ object.creator }}
+{{ object.date }}
+{{ object.text }}
+{{ object.slide }}
+{{ object.file }}
+{{ object.title }}

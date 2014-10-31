@@ -6,6 +6,32 @@
 {% endblock %}
 
 {% block slides %}
+
+<script>
+                $( document ).ready(function()
+
+                    {
+                        $('#sidebar-col-2').hide();
+                        $(document).keydown( function(e) {
+                            if (e.keyCode == 39) {
+                                $('#sidebar-col-2').show();
+
+                            }
+                        });
+
+
+                        $(document).keydown( function(e) {
+                            if (e.keyCode == 37 && window.location.pathname == 'http://127.0.0.1:8000/week2/2_am/#/') {
+                            $('#sidebar-col-2').hide();
+
+                            }
+
+                        });
+                    });
+
+</script>
+
+
 <section>
     <h2>Database Landscape</h2>
     <p>There are multiple ways to store data in modern development. For the purpose of this bootcamp we'll be focusing on PostgreSQL and relational databases.</p>

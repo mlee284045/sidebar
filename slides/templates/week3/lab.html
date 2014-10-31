@@ -10,6 +10,24 @@
 {% endblock %}
 
 {% block slides %}
+
+    <script>
+                $( document ).ready(function()
+
+                    {
+                        $('#sidebar-col-2').hide();
+                        $(document).keydown( function(e) {
+                            if (e.keyCode == 39) {
+                            $('#sidebar-col-2').show();
+
+                            }
+
+                        });
+                    });
+
+</script>
+
+
 <section>
     <h2>Building a real Django project</h2>
     <p>Before sending you off to work on your projects, we want you to practice pulling all the pieces together into a functioning Django project. You should work on this lab for homework and in class tomorrow.</p>
