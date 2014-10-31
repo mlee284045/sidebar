@@ -6,6 +6,24 @@
 {% endblock %}
 
 {% block slides %}
+
+    <script>
+                $( document ).ready(function()
+
+                    {
+                        $('#sidebar-col-2').hide();
+                        $(document).keydown( function(e) {
+                            if (e.keyCode == 39) {
+                            $('#sidebar-col-2').show();
+
+                            }
+
+                        });
+                    });
+
+</script>
+
+
 <section>
     <h2>Changing DB tables with migrations</h2>
     <p>Working on your homework, it was very likely that you made a mistake. You ran <code>makemigrations</code>, and afterward realized you wanted to change something about the way you defined your model. If you make changes in your models file but don't update your DB, your DB won't reflect the changes.</p>
