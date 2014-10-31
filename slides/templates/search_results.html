@@ -160,14 +160,11 @@
                         <div id="from_resources" style="margin-top: 150px; margin-left:180px; margin-right:700px; font-size: 20px;">
 
                             {% for resource in resource_results %}
-
+                                <div style="margin-bottom: 15px">
+                                {{ resource.title }}</div>
 
                                 <div>
-
-
                                 <img src="{{ resource.creator.profile_picture }}" style="width: 70px; height:70px ;border-radius:50%; border:solid 1px ">
-
-
                                 </div>
                                 <div style=" margin-top:-50px; margin-left: 90px">
 
@@ -176,7 +173,7 @@
                                  {{ resource.content }}<br>
 
                                  <a href="{{ resource.slide }}">{{ resource.slide }}</a><br>
-                                {{ resource.file }}<br>
+
                                 Posted on: {{ resource.date }}<br>
 
                                 <br>

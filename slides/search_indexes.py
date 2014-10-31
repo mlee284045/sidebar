@@ -11,6 +11,7 @@ class ResourceIndex(indexes.SearchIndex, indexes.Indexable):
     date = indexes.CharField(model_attr='date')
     slide = indexes.CharField(model_attr='slide')
     content = indexes.CharField(model_attr='text')
+    title = indexes.CharField(model_attr='title')
 
     def get_model(self):
         return Resource

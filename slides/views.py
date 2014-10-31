@@ -61,6 +61,7 @@ def search_page(request):
                     resource_results.append({
                         'date': result.date,
                         'slide': result.slide,
+                        'title': result.title,
                         'file': result.file,
                         'creator': person,
                         'content': result.content

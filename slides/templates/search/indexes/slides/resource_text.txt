@@ -3,3 +3,4 @@
 {{ object.text }}
 {{ object.slide }}
 {{ object.file }}
+{{ object.title }}
