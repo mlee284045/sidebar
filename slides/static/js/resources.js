@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 
     function getPresTitle(){
@@ -14,23 +13,32 @@ $(document).ready(function() {
 
 
     var slide_url;
-
-    $.ajax({
-        url: '/get_slide_info/',
-        type: 'POST',
-        dataType: 'json',
-        data: pres_title,
-        success: function (data) {
-
-            console.log(data);
-            for (var i=0; i<data.length; i++){
-                $("#side_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].slide_title + '</a></td></tr>' );
-            }
-        },
-        error: function (e) {
-            console.log(e);
-        }
-    });
+//
+//    $.ajax({
+//        url: '/get_slide_info/',
+//        type: 'POST',
+//        dataType: 'json',
+//        data: pres_title,
+//        success: function (data) {
+//            getResource(data);
+//        },
+//        error: function (e) {
+//            console.log(e);
+//        }
+//    });
+//
+//    function getResource(slide_data){
+//        $.ajax({
+//            url: '/sidebar/',
+//            type: 'GET',
+//            success: function(resource_data) {
+//
+//                for(var i=0; i<slide_data.length;i++){
+//                        $("#resource_table").append('<tr><td><a href="' +  slide_data[i].url + '">' + slide_data[i].slide_title + '</a></td></tr>');
+//                }
+//            }
+//        });
+//     }
 
     function saveForm(slide_title) {
         $.ajax({
@@ -63,10 +71,10 @@ $(document).ready(function() {
                 $(".form-holder").html(res);
                 $("#submitz").on('click', function (e) {
                     $(this).parent().hide();
+                    $('#submitz').hide();
                     slideTitle = getSlideTitle();
                     saveForm(slideTitle);
                     location.reload();
-
                 });
             },
             error: function (e) {
@@ -74,8 +82,6 @@ $(document).ready(function() {
             }
         });
     }
-
-
 
     //Add Resource form hide as default
     $('#form_holder').hide();
@@ -86,13 +92,14 @@ $(document).ready(function() {
         getForm();
         $('#displayResource').hide();
         $('#form_holder').show();
+        $('#submitz').show();
     });
 
 //    //clicking cancel hides Add Resource
-//    //and shows accordion
+//    //and shows sidebar
     $('#cancel').on('click',function () {
         $(this).parent().hide();
-////        location.reload();
+        $('#submitz').hide();
         $('#displayResource').show();
 
 ////        $('#displayResource').load(document.URL);
@@ -102,54 +109,47 @@ $(document).ready(function() {
 
 });
 
+function loadSidebar(){
+        $.ajax({
+        url: '/sidebar/',
+        type: 'GET',
+        success: function (data) {
 
-//function loadAccordion(){
-//        $.ajax({
-//        url: '/sidebar/',
-//        type: 'GET',
-//        success: function (data) {
-//            for (var i=0; i<data.length; i++){
-//                $("#side_table").append('<tr><td>' + data[i].title + '</td><td>' + data[i].url + '</td></tr>');
-//                $("#side_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].title + '</a></td></tr>');
+//            set the default active accordion header
+            var currentSlide = 0;
 
-//                        <td valign="bottom"><div class="button"><a href="#link text</a></div></td>
-//                $("#side_table").append('<td><a href="' + data[i].url + '">' + data[i].title +'</a></td>');
-
-//            }
-            //set the default active accordion header
-//            var currentSlide = 0;
-//
-//            //loop the object and extract data for the accordion
-//            for (var i = 0; i < data.length; i++) {
-//                if (window.location == data[i].slide) {
-//                    currentSlide = i;
-//                }
-////                $("#accordion").append('<p><a href="' + data[i].slide + '">' + data[i].title + '</a></p><div>' + data[i].creator + '<br>' + data[i].text + '<br>' + data[i].date + '</div>');
+            //loop the object and extract data for the accordion
+            for (var j = 0; j < data.length; j++) {
+                if (window.location == data[j].slide) {
+                    currentSlide = j;
+                }
 //                $("#accordion").append('<p><a href="' + data[i].slide + '">' + data[i].title + '</a></p><div>' + data[i].creator + '<br>' + data[i].text + '<br>' + data[i].date + '</div>');
-//
-//            }
+                $("#side_table").append('<p><a href="' + data[j].slide + '">' + data[j].title + '</a></p><div>' + data[j].text + '<br>' + data[j].date + '</div>');
 
-            //set <p> tag in accordion as link
-//            $("#accordion").accordion({header: 'p'},{ active: currentSlide }, { heightStyle: "content" });
-//            $("#accordion").accordion({header: 'p'},{ active: currentSlide }, { heightStyle: "content" });
-//
-//            $("#accordion p a").click(function () {
-//                window.location = $(this).attr('href');
-//                return true;
-//            });
+            }
 
-            // Hover states on the static widgets
-//            $("#dialog-link, #icons li").hover(
-//                function () {
-//                    $(this).addClass("ui-state-hover");
-//                },
-//                function () {
-//                    $(this).removeClass("ui-state-hover");
-//                }
-//            );
-//        }
-//    });
-//}
+//            set <p> tag in accordion as link
+            $("#side_table").accordion({header: 'p'},{ active: currentSlide }, { heightStyle: "content" });
+            $("#side_table").accordion({header: 'p'},{ active: currentSlide }, { heightStyle: "content" });
+
+            $("#side_table p a").click(function () {
+                window.location = $(this).attr('href');
+                return true;
+            });
+
+//            Hover states on the static widgets
+            $("#dialog-link, #icons li").hover(
+                function () {
+                    $(this).addClass("ui-state-hover");
+                },
+                function () {
+                    $(this).removeClass("ui-state-hover");
+                }
+            );
+        }
+    });
+}
+    loadSidebar();
 
 function getSlideTitle(){
 

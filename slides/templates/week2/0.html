@@ -48,20 +48,25 @@
 <div class="reveal">
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="col-12">
-        <div class="slides">
+        <div class="slides" style="margin-top:40px">
             <div id="runningTitle">
                 <div class="col-7">
                     <a href="#">Lectures & Materials</a>
 
                 </div>
-                <div class="col-5">
+                <div class="col-5" style="margin-top:-15px">
                     <a href="{% url "slides_home" %}" id="rocketULogo"><img class="pull-right" src="{% static "img/rocketu-logo-dark.png" %}"></a>
 
                 </div>
             </div>
 
             <section>
-                <h2>Week 2</h2>
+                <h2>Week 2
+
+
+                <hr style="margin-bottom: -20px">
+
+                </h2>
                 <dl><a href="{% url "week2_day1_am" %}">File Manipulation</a></dl>
                 <dl><a href="{% url "week2_day1_pm" %}">Regex & CSV</a></dl>
                 <dl><a href="{% url "week2_day2_am" %}">Intro to Databases: Tables and Queries</a></dl>

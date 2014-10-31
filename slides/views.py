@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
-from slides.forms import EmailUserCreationForm, SearchForm, ResourceForm, SearchResults, PasswordForm
+from slides.forms import EmailUserCreationForm, SearchForm, ResourceForm, SearchResults, PasswordForm, EditAccountForm
 from haystack.query import SearchQuerySet
 from slides.models import Resource, Person, Slide
 from bs4 import BeautifulSoup
@@ -17,7 +17,7 @@ def slides_home(request):
             username = request.POST['username']
             password = request.POST['password1']
             user = form.save()
-            user.profile_picture = '/static/img/pikachu.jpg'
+            user.profile_picture = '/static/img/default-profile-photo.png'
             user.save()
             user = authenticate(username=username, password=password)
             if user is not None:
@@ -36,20 +36,15 @@ def index(request):
 
 def search_page(request):
     if request.method == 'POST':
-        print"yes"
         form = SearchForm(request.POST)
         if form.is_valid():
-            print "yes222222"
             search_text = form.cleaned_data['search_text']  # strip out value from search form
             search_results = SearchQuerySet().filter(content=search_text)  # process woosh query using search+text
-            print search_results
-            print search_results[0].id
             slides_results = []     # empty list for slide results
             resource_results = []   # empty list for resource results
             for result in search_results:   # loop over results
 
                 if re.search(r"slides.slide", result.id):  # if its a static page
-                    print '='*10, result, '='*10
                     slides_results.append({
                         'result': result,
                         'title': result.slide_title,
@@ -80,69 +75,80 @@ def search_page(request):
 
 
 def search_results(request):
-    if request.method == 'POST':
-        form = SearchResults(request.POST)
-        if form.is_valid():
-            search_text = form.cleaned_data['search_text']  # strip out value from search form
-            search_results = SearchQuerySet().filter(content=search_text)  # process whoosh query using search+text
-            slides_results = []     # empty list for slide results
-            resource_results = []   # empty list for resource results
-            for result in search_results:   # loop over results
-                if re.search(r"slides.slide", result.id):  # if its a static page
-                    soup = BeautifulSoup(result.content)
-                    slide_title = soup.find('h2').get_text().strip()  # grab slide title
-                    slide_content = soup.find_all(text=re.compile(search_text))
-                    slides_results.append({'result': result, 'title': slide_title, 'content': slide_content})
-
-                elif re.search(r"slides.resource", result.id):  # if its a resource
-                    #print result.creator.first_name
-                    #first_name = re.search(r" ", result.creator)  # grab first name
-                    #print first_name
-                    #last_name = re.search(r" ", result.creator)  # grab last name
-                    #print last_name
-                    #person = Person.objects.filter(first_name__Miguel) # find all the people
-                    resource_results.append({'result': result})  # append resource result to results list
-
-            data = {'slides_results': slides_results, 'resource_results': resource_results,'form': form }
-            return render(request, "search_results.html",  data)
-
-    else:
-        form = SearchResults()
+    # if request.method == 'POST':
+    #     form = SearchResults(request.POST)
+    #     if form.is_valid():
+    #         search_text = form.cleaned_data['search_text']  # strip out value from search form
+    #         search_results = SearchQuerySet().filter(content=search_text)  # process whoosh query using search+text
+    #         slides_results = []     # empty list for slide results
+    #         resource_results = []   # empty list for resource results
+    #         for result in search_results:   # loop over results
+    #             if re.search(r"slides.slide", result.id):  # if its a static page
+    #                 soup = BeautifulSoup(result.content)
+    #                 slide_title = soup.find('h2').get_text().strip()  # grab slide title
+    #                 slide_content = soup.find_all(text=re.compile(search_text))
+    #                 slides_results.append({'result': result, 'title': slide_title, 'content': slide_content})
+    #
+    #             elif re.search(r"slides.resource", result.id):  # if its a resource
+    #                 #print result.creator.first_name
+    #                 #first_name = re.search(r" ", result.creator)  # grab first name
+    #                 #print first_name
+    #                 #last_name = re.search(r" ", result.creator)  # grab last name
+    #                 #print last_name
+    #                 #person = Person.objects.filter(first_name__Miguel) # find all the people
+    #                 resource_results.append({'result': result})  # append resource result to results list
+    #
+    #         data = {'slides_results': slides_results, 'resource_results': resource_results,'form': form }
+    #         return render(request, "search_results.html",  data)
+    #
+    # else:
+    form = SearchResults()
     data = {'form': form}
     return render(request, 'search_results.html', data)
 
 
-
 def edit_account(request):
-    if request.method == 'POST':
-        form = PasswordForm(request.POST)
-        data = {'form': form}
-        return render(request, "search_results.html", data)
-    else:
-        form = PasswordForm()
+    user = Person.objects.get(pk=request.user.id)
+    form = EditAccountForm(instance=user)
     data = {'form': form, 'image': request.user.profile_picture}
 
     return render(request, 'edit_account.html', data)
 
-# @csrf_exempt
-# def sidebar(request):
-#
-#     collection = []
-#
-#     everyone = Person.objects.all()
-#
-#     for i in range(len(everyone)):
-#         tmp_people_obj = everyone[i]
-#         for j in tmp_people_obj.resources.all():
-#             collection.append({
-#                 'creator': str(j.creator),
-#                 'date': str(j.date),
-#                 'slide': j.slide,
-#                 'text': j.text,
-#                 'title': j.title,
-#             })
-#
-#     return HttpResponse(json.dumps(collection),content_type='application.json')
+@csrf_exempt
+def update_account(request):
+    user = Person.objects.get(pk=request.user.id)
+    if request.method == 'POST':
+        form = EditAccountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('Saved new password')
+        else:
+            name = request.POST['real_name']
+            user.real_name = name
+            user.save()
+        return HttpResponse('Saved real name')
+    else:
+        return HttpResponse('No new information')
+
+@csrf_exempt
+def sidebar(request):
+
+    collection = []
+
+    everyone = Person.objects.all()
+
+    for i in range(len(everyone)):
+        tmp_people_obj = everyone[i]
+        for j in tmp_people_obj.resources.all():
+            collection.append({
+                'creator': str(j.creator),
+                'date': str(j.date),
+                'slide': j.slide,
+                'text': j.text,
+                'title': j.title,
+            })
+
+    return HttpResponse(json.dumps(collection),content_type='application.json')
 
 @csrf_exempt
 def get_resource_info(request):

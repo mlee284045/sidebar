@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from rest_framework import serializers, viewsets, routers
 from sidebar import settings
-from slides.models import Slide
+from slides.models import Slide, Resource, Person
 
 
 class SlideSerializer(serializers.HyperlinkedModelSerializer):
@@ -22,13 +22,18 @@ router.register(r'slides', SlideViewSet)
 
 
 
-
-
-
-
-
-
-
+# class ResourceSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Resource
+#         fields = ('creator', 'date', 'text', 'slide')
+#
+#
+# class ResourceViewSet(viewsets.ModelViewSet):
+#     queryset = Resource.objects.all()
+#     serializer_class = ResourceSerializer
+#
+# router = routers.DefaultRouter()
+# router.register(r'resources', ResourceViewSet)
 
 
 
@@ -36,7 +41,7 @@ router.register(r'slides', SlideViewSet)
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^api-login/', include(router.urls)),
+    url(r'^data/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url(r'^$', 'slides.views.slides_home', name='slides_home'),
@@ -44,12 +49,13 @@ urlpatterns = patterns('',
     url("^search_page/$", 'slides.views.search_page', name="search_page"),
     url("^search_results/$", 'slides.views.search_results', name="search_results"),
     url("^edit_account/$", 'slides.views.edit_account', name="edit_account"),
+    url("^update_account/$", 'slides.views.update_account', name="update_account"),
     url("^add_resource/$", 'slides.views.add_resource', name="add_resource"),
     url("^save_resource/$", 'slides.views.save_resource', name="save_resource"),
     # url("^get_slide_info/Welcome!/$", 'slides.views.get_slide_info', name="get_slide_info"),
     url("^get_slide_info/$", 'slides.views.get_slide_info', name="get_slide_info"),
     url("^get_resource_info/$", 'slides.views.get_resource_info', name="get_resource_info"),
-    # url("^sidebar/$", 'slides.views.sidebar', name="sidebar"),
+    url("^sidebar/$", 'slides.views.sidebar', name="sidebar"),
 
 
     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),
