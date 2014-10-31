@@ -66,7 +66,8 @@ def search_page(request):
                         'content': result.content
                     })  # append resource result to results list
                     form = SearchForm()
-            data = {'slides_results': slides_results, 'resource_results': resource_results,'form':form}
+            data = {'slides_results': slides_results, 'resource_results': resource_results,'form':form,
+                    'search_text':search_text}
             return render(request, "search_results.html",  data)
     else:
         form = SearchForm()
