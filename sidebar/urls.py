@@ -53,7 +53,7 @@ urlpatterns = patterns('',
     # url("^get_slide_info/Welcome!/$", 'slides.views.get_slide_info', name="get_slide_info"),
     url("^get_slide_info/$", 'slides.views.get_slide_info', name="get_slide_info"),
     url("^get_resource_info/$", 'slides.views.get_resource_info', name="get_resource_info"),
-    # url("^sidebar/$", 'slides.views.sidebar', name="sidebar"),
+    url("^sidebar/$", 'slides.views.sidebar', name="sidebar"),
 
 
     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),

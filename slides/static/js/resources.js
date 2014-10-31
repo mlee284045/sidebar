@@ -21,16 +21,58 @@ $(document).ready(function() {
         dataType: 'json',
         data: pres_title,
         success: function (data) {
+            getResource(data);
 
-            console.log(data);
-            for (var i=0; i<data.length; i++) {
-                $("#side_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].slide_title + '</a></td></tr>'
-                    + '<tr><td><span class="resource"' + data[i].creator + '</span></td></tr>');
-            }
+//            console.log(data);
+//            for (var i=0; i<data.length; i++) {
+////                $("#side_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].slide_title + '</a></td></tr>'
+////                    + '<tr><td><span class="resource"' + data[i].creator + '</span></td></tr>');
+//                $("#resource_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].slide_title + '</a></td></tr>'
+//                    + '<tr><td><span class="resource"' + data[i].creator + '</span></td></tr>');
+//            }
         },
         error: function (e) {
             console.log(e);
         }
+    });
+
+    function getResource(slide_data){
+        $.ajax({
+            url: '/sidebar/',
+            type: 'GET',
+            success: function(resource_data) {
+
+                for(var i=0; i<slide_data.length;i++){
+                        $("#resource_table").append('<tr><td><a href="' +  slide_data[i].url + '">' + slide_data[i].slide_title + '</a></td></tr>');
+//                    + '<tr><td><span class="resource"' + data[i].creator + '</span></td></tr>');
+//                    $("#resource_table").append('<p><span id="r_head"><a href="' + data[i].slide + '"></span>' + data[i].slide + '</a></p><span id="r_body"><div>' + data[i].creator + '<br>' + data[i].text + '<br>' + data[i].date + '</div></span>');
+                }
+
+                var find = $( 'td:has(a)', '#resource_table' );
+                console.log(find)
+
+                for (var j=0;j<find.length;j++){
+//                    console.log('child ', find[j].childNodes[0].href);
+                }
+                for (var k=0;k<resource_data.length;k++){
+                    console.log('res   ', resource_data[k].slide);
+                }
+//                for (var j=0;j<resource_data.length;j++){
+//                    for( var k=0;k<find.length;k++){
+//                        if(resource_data[j].slide == find[k].childNodes[0].href){
+//                            console.log(resource_data[j].slide, find[k].childNodes[0].href)
+//                        }
+//                    }
+//                }
+
+//                    $("#resource_table").append('<p><span id="r_head"><a href="' + data[i].slide + '"></span>' + data[i].slide + '</a></p><span id="r_body"><div>' + data[i].creator + '<br>' + data[i].text + '<br>' + data[i].date + '</div></span>');
+            }
+        });
+     }
+
+    $('#r_head').click(function(){
+
+        $(this).nextUntil('#r_body').slideToggle(1000);
     });
 
     function saveForm(slide_title) {
@@ -91,7 +133,7 @@ $(document).ready(function() {
     });
 
 //    //clicking cancel hides Add Resource
-//    //and shows accordion
+//    //and shows sidebar
     $('#cancel').on('click',function () {
         $(this).parent().hide();
         $('#submitz').hide();
@@ -105,21 +147,24 @@ $(document).ready(function() {
 
 });
 
-
-//function loadAccordion(){
+//
+//function loadSidebar(){
 //        $.ajax({
 //        url: '/sidebar/',
 //        type: 'GET',
 //        success: function (data) {
+//            console.log(data);
+
+
 //            for (var i=0; i<data.length; i++){
 //                $("#side_table").append('<tr><td>' + data[i].title + '</td><td>' + data[i].url + '</td></tr>');
 //                $("#side_table").append('<tr><td><a href="' + data[i].url + '">' + data[i].title + '</a></td></tr>');
-
+//
 //                        <td valign="bottom"><div class="button"><a href="#link text</a></div></td>
 //                $("#side_table").append('<td><a href="' + data[i].url + '">' + data[i].title +'</a></td>');
 
 //            }
-            //set the default active accordion header
+//            set the default active accordion header
 //            var currentSlide = 0;
 //
 //            //loop the object and extract data for the accordion
@@ -132,7 +177,7 @@ $(document).ready(function() {
 //
 //            }
 
-            //set <p> tag in accordion as link
+////            set <p> tag in accordion as link
 //            $("#accordion").accordion({header: 'p'},{ active: currentSlide }, { heightStyle: "content" });
 //            $("#accordion").accordion({header: 'p'},{ active: currentSlide }, { heightStyle: "content" });
 //
@@ -140,8 +185,8 @@ $(document).ready(function() {
 //                window.location = $(this).attr('href');
 //                return true;
 //            });
-
-            // Hover states on the static widgets
+//
+////            Hover states on the static widgets
 //            $("#dialog-link, #icons li").hover(
 //                function () {
 //                    $(this).addClass("ui-state-hover");
@@ -150,7 +195,7 @@ $(document).ready(function() {
 //                    $(this).removeClass("ui-state-hover");
 //                }
 //            );
-//        }
+////        }
 //    });
 //}
 
