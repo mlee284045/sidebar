@@ -84,8 +84,8 @@ class UtilTestCase(TestCase):
     def test_get_slide_url(self):
         primary_slide = get_slide_url(self.url, 3)
         secondary_slide = get_slide_url(self.url, 3, 1)
-        self.assertEqual(primary_slide, "{}{}/".format(self.url, 3))
-        self.assertEqual(secondary_slide, "{}{}/{}".format(self.url, 3, 1))
+        self.assertEqual(primary_slide, "{}#/{}/".format(self.url, 3))
+        self.assertEqual(secondary_slide, "{}#/{}/{}".format(self.url, 3, 1))
 
     def test_get_slide_text(self):
         text = get_slide_text(self.next)

@@ -64,9 +64,10 @@ def get_page_soup(url):
 def next_section(section):
     try:
         next_section = section.next_sibling.next_sibling
+        next_section.find('h2')
     except AttributeError:
         print 'No more sections'
-        next_section = False
+        return False
     return next_section
 
 
@@ -116,6 +117,7 @@ def create_slide(pres_title, slide_title, url, text, content):
         content=content
     )
     if created:
+        print '{} was created in the index'.format(slide.slide_title)
         pass
     else:
         print '{} already exists in the index, updating...'.format(slide.slide_title)
