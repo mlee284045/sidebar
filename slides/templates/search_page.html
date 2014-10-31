@@ -63,12 +63,11 @@
                     {% csrf_token %}
                     {{ form.as_table }}
 
-                                                <div class="pull-right">
-                                    <input type="button" value="" id="buttonhand"
+                                <div class="pull-right">
+                                    <input type="submit" value="" id="buttonhand"
                                    style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
                                            width: 30px; height: 30px ">
-{#                                    <button type="button" id="slides_button" >Slides</button>#}
-{#                                    <button type="button" id="resources_button">Resources</button>#}
+
                             </div>
                     </form>
 
@@ -93,7 +92,7 @@
 
 
                             <script>
-                    $( document ).ready(function() {
+                       $( document ).ready(function() {
 
                         var text = $('#id_search_text').val();
 
@@ -102,9 +101,9 @@
                             $('#id_search_text').val('');
                         });
 
-                        $('#id_search_text').mouseleave(function () {
-                            $('#id_search_text').val('Search');
-                        });
+{#                        $('#id_search_text').mouseleave(function () {#}
+{#                            $('#id_search_text').val('Search');#}
+{#                        });#}
 
                         $('#buttonhand').mouseover(function () {
 

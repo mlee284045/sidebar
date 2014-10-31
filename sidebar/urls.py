@@ -37,7 +37,6 @@ router.register(r'slides', SlideViewSet)
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
-
     url(r'^data/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', 'slides.views.slides_home', name='slides_home'),

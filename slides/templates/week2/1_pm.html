@@ -6,6 +6,31 @@
 {% endblock %}
 
 {% block slides %}
+<script>
+                $( document ).ready(function()
+
+                    {
+                        $('#sidebar-col-2').hide();
+                        $(document).keydown( function(e) {
+                            if (e.keyCode == 39) {
+                                $('#sidebar-col-2').show();
+
+                            }
+                        });
+
+
+                        $(document).keydown( function(e) {
+                            if (e.keyCode == 37 && window.location.pathname == 'http://127.0.0.1:8000/week2/1_pm/#/') {
+                            $('#sidebar-col-2').hide();
+
+                            }
+
+                        });
+                    });
+
+</script>
+
+
 <section>
     <section>
         <h2>Regular Expressions</h2>

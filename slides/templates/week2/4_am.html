@@ -6,6 +6,24 @@
 {% endblock %}
 
 {% block slides %}
+
+    <script>
+                $( document ).ready(function()
+
+                    {
+                        $('#sidebar-col-2').hide();
+                        $(document).keydown( function(e) {
+                            if (e.keyCode == 39) {
+                            $('#sidebar-col-2').show();
+
+                            }
+
+                        });
+                    });
+
+</script>
+
+
 <section>
     <h2>Django admin site</h2>
     <p>One of Django's more powerful features is that it comes with a built-in option for an automatic admin interface. This admin gives you a visual output of your database models, allowing you to more easily see relationships and to create new records.</p>

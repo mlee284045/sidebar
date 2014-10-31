@@ -61,11 +61,14 @@ def search_page(request):
                     resource_results.append({
                         'date': result.date,
                         'slide': result.slide,
+                        'title': result.title,
                         'file': result.file,
                         'creator': person,
                         'content': result.content
                     })  # append resource result to results list
-            data = {'slides_results': slides_results, 'resource_results': resource_results}
+                    form = SearchForm()
+            data = {'slides_results': slides_results, 'resource_results': resource_results,'form':form,
+                    'search_text':search_text}
             return render(request, "search_results.html",  data)
     else:
         form = SearchForm()
@@ -102,7 +105,7 @@ def search_results(request):
     #         return render(request, "search_results.html",  data)
     #
     # else:
-    form = SearchResults()
+    form = SearchForm()
     data = {'form': form}
     return render(request, 'search_results.html', data)
 

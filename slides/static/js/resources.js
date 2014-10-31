@@ -122,7 +122,7 @@ function loadSidebar(){
 
 //            set <p> tag in accordion as link
             $("#side_table").accordion({header: 'p'},{ active: currentSlide }, { heightStyle: "content" });
-            $("#side_table").accordion({header: 'p'},{ active: currentSlide }, { heightStyle: "content" });
+          
 
             $("#side_table p a").click(function () {
                 window.location = $(this).attr('href');
