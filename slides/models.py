@@ -6,6 +6,7 @@ from django.db import models
 
 class Person(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile', blank=True, null=True)
+    real_name = models.CharField(max_length=100, blank=True, null=True)
 
     def __unicode__(self):
         return unicode("{} {}".format(self.first_name, self.last_name))
@@ -19,7 +20,7 @@ class Resource(models.Model):
     file = models.FileField(upload_to='document', blank=True, null=True)
 
     def __unicode__(self):
-        return unicode("Resource created by {} on {} title {}".format(self.creator, self.date, self.title))
+        return unicode("Resource created by {} on {}".format(self.creator, self.date))
 
     def get_text(self):
         return self.text

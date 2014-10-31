@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
-from slides.forms import EmailUserCreationForm, SearchForm, ResourceForm, SearchResults, PasswordForm
+from slides.forms import EmailUserCreationForm, SearchForm, ResourceForm, SearchResults, EditAccountForm
 from haystack.query import SearchQuerySet
 from slides.models import Resource, Person, Slide
 from bs4 import BeautifulSoup
@@ -17,7 +17,7 @@ def slides_home(request):
             username = request.POST['username']
             password = request.POST['password1']
             user = form.save()
-            user.profile_picture = '/static/img/pikachu.jpg'
+            user.profile_picture = '/static/img/default-profile-photo.png'
             user.save()
             user = authenticate(username=username, password=password)
             if user is not None:
@@ -76,7 +76,7 @@ def search_page(request):
         form = SearchForm()
     data = {'form': form}
 
-    return render(request, 'search_page.html', data)
+    return render(request, 'search_results.html', data)
 
 
 def search_results(request):
@@ -103,8 +103,8 @@ def search_results(request):
                     #person = Person.objects.filter(first_name__Miguel) # find all the people
                     resource_results.append({'result': result})  # append resource result to results list
 
-            data = {'slides_results': slides_results, 'resource_results': resource_results,'form': form }
-            return render(request, "search_results.html",  data)
+            data = {'slides_results': slides_results, 'resource_results': resource_results, 'form': form }
+            return HttpResponse(json.dumps(data), content_type='application.json')
 
     else:
         form = SearchResults()
@@ -112,17 +112,30 @@ def search_results(request):
     return render(request, 'search_results.html', data)
 
 
-
 def edit_account(request):
-    if request.method == 'POST':
-        form = PasswordForm(request.POST)
-        data = {'form': form}
-        return render(request, "search_results.html", data)
-    else:
-        form = PasswordForm()
+    user = Person.objects.get(pk=request.user.id)
+    form = EditAccountForm(instance=user)
     data = {'form': form, 'image': request.user.profile_picture}
 
     return render(request, 'edit_account.html', data)
+
+@csrf_exempt
+def update_account(request):
+    user = Person.objects.get(pk=request.user.id)
+    if request.method == 'POST':
+        form = EditAccountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('Saved new password')
+        else:
+            name = request.POST['real_name']
+            user.real_name = name
+            user.save()
+        return HttpResponse('Saved real name')
+    else:
+        return HttpResponse('No new information')
+
+
 
 # @csrf_exempt
 # def sidebar(request):
@@ -163,13 +176,12 @@ def get_resource_info(request):
                 'title': resource.title,
             })
 
-    return HttpResponse(json.dumps(collection),content_type='application.json')
+    return HttpResponse(json.dumps(collection), content_type='application.json')
 
 @csrf_exempt
 def get_slide_info(request):
 
     collection = []
-
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -177,21 +189,21 @@ def get_slide_info(request):
 
         for slide in all_slides:
 
-                slide_resources = Resource.objects.filter(slide=slide.url)
+            slide_resources = Resource.objects.filter(slide=slide.url)
 
-                temp_slide = {'pres_title': slide.pres_title, 'slide_title': slide.slide_title,'url': slide.url,'text': slide.text, 'resource':[]}
+            temp_slide = {'pres_title': slide.pres_title, 'slide_title': slide.slide_title,'url': slide.url,'text': slide.text, 'resource':[]}
 
 
-                for slide_resource in slide_resources:
-                    temp_slide.resource.append({
-                        'resource_creator': slide_resource.creator,
-                        'resource_date': slide_resource.date,
-                        'resource_text': slide_resource.text,
-                        'resource_title': slide_resource.title,
+            for slide_resource in slide_resources:
+                temp_slide.resource.append({
+                    'resource_creator': slide_resource.creator,
+                    'resource_date': slide_resource.date,
+                    'resource_text': slide_resource.text,
+                    'resource_title': slide_resource.title,
                     })
-                collection.append(temp_slide)
+            collection.append(temp_slide)
 
-    return HttpResponse(json.dumps(collection),content_type='application.json')
+    return HttpResponse(json.dumps(collection), content_type='application.json')
 
 @csrf_exempt
 def add_resource(request):

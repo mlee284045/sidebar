@@ -58,17 +58,13 @@
 
         <section class="present" style="display:block;">
             <h2>
-
-
                  <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_table }}
-
-                    <input type="submit" value=""  class="pull-right"
-                           style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
-                                   width: 30px; height: 30px; margin-top:15px ">
-
-                    </form>
+                     {% csrf_token %}
+                     {{ form.as_table }}
+                     <input type="submit" value=""  class="pull-right"
+                            style="background-color: white; background-image:url({% static 'img/search.png' %});  border: none;
+                                    width: 30px; height: 30px; margin-top:15px ">
+                 </form>
 
                   <style>
                     #id_search_text{

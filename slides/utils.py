@@ -23,12 +23,24 @@ def crawl_static_pages(urls):
             main_title = 'Untitled'
         section = soup.find('section')
         while next_section(section):
-            slide_count += 1
+            if next_section(section) != 'spacing':
+                slide_count += 1
+            else:
+                print 'skip section'
+                continue
             if check_secondary(next_section(section)):
                 sub_slide = 0
-                sub_section = section.find('section')
+                try:
+                    sub_section = section.find('section')
+                except AttributeError:
+                    sub_section = 'spacing'
                 while sub_section:
-                    sub_slide += 1
+                    print sub_slide, sub_section
+                    if sub_section != 'spacing':
+                        sub_slide += 1
+                    else:
+                        print 'skip subsection'
+                        continue
                     slide_url = get_slide_url(url, slide_count, sub_slide)
                     title = get_slide_title(sub_section)
                     text = get_slide_text(sub_section)
@@ -63,10 +75,15 @@ def get_page_soup(url):
 
 def next_section(section):
     try:
-        next_section = section.next_sibling.next_sibling
+        next_section = section.next_sibling
     except AttributeError:
         print 'No more sections'
         next_section = False
+    try:
+        next_section.find('h2')
+    except AttributeError:
+        print 'Just spacing'
+        return 'spacing'
     return next_section
 
 
@@ -116,6 +133,7 @@ def create_slide(pres_title, slide_title, url, text, content):
         content=content
     )
     if created:
+        print '{} was created in the index'.format(slide.slide_title)
         pass
     else:
         print '{} already exists in the index, updating...'.format(slide.slide_title)

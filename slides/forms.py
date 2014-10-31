@@ -5,11 +5,11 @@ from models import Person
 
 class EmailUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    profile_picture = forms.ImageField(required=False)
+    # profile_picture = forms.ImageField(required=False)
 
     class Meta:
         model = Person
-        fields = ("first_name", "last_name", "username", "email", "profile_picture", "password1", "password2")
+        fields = ("first_name", "last_name", "username", "email", "password1", "password2")
 
     def clean_username(self):
 
@@ -23,6 +23,20 @@ class EmailUserCreationForm(UserCreationForm):
             code='duplicate_username',
         )
 
+class EditAccountForm(UserCreationForm):
+    username = None
+    real_name = forms.CharField(label='Real Name', max_length=200)
+    email = forms.EmailField(required=True)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password'}))
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password Again'}))
+
+    class Meta:
+        model = Person
+        fields = ("real_name", "email", "password1", "password2")
+
+
+class UploadPhotoForm(forms.Form):
+    photo = forms.ImageField()
 
 
 class SearchForm(forms.Form):
@@ -30,9 +44,6 @@ class SearchForm(forms.Form):
 
 class SearchResults(forms.Form):
     search_text = forms.CharField(label='', initial='Search', max_length=200)
-
-class PasswordForm(forms.Form):
-    search_text = forms.CharField(label='', initial='************', max_length=200)
 
 
 class ResourceForm(forms.Form):
