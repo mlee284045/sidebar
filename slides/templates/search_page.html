@@ -93,59 +93,31 @@
 
 
                             <script>
-                    $( document ).ready(function()
+                    $( document ).ready(function() {
 
-                    {
-
-{#                        var text = $('#id_search_text').val();#}
+                        var text = $('#id_search_text').val();
 
 
-                         $('#id_search_text').on('click', function()
-                         {
-                              $('#id_search_text').val('');
-                           });
+                        $('#id_search_text').on('click', function () {
+                            $('#id_search_text').val('');
+                        });
 
-{#                         $('#id_search_text').mouseleave( function()#}
-{#                         {#}
-{#                              $('#id_search_text').val('Search');#}
-{#                           });#}
+                        $('#id_search_text').mouseleave(function () {
+                            $('#id_search_text').val('Search');
+                        });
 
-                         $('#buttonhand').mouseover( function()
-                         {
+                        $('#buttonhand').mouseover(function () {
 
-                              $('#buttonhand').css('cursor', 'pointer');
+                            $('#buttonhand').css('cursor', 'pointer');
 
-                           });
-                         $('#buttonhand').mouseleave( function()
-                         {
-                              $('#button').css('pointer', 'cursor');
-                           });
+                        });
+                        $('#buttonhand').mouseleave(function () {
+                            $('#button').css('pointer', 'cursor');
+                        });
+                    })
 
-                        $('#buttonhand').on('click', function()
+              
 
-{#                         {console.log($('#id_search_text').val());#}
-{#                                    var data = {#}
-{#                                            'text': $("#id_search_text").val()#}
-{#                                    };#}
-{#                                     $.ajax({#}
-{#                                        url: '/search_results/',#}
-{#                                        type: 'POST',#}
-{#                                        dataType: 'json',#}
-{#                                        data: JSON.stringify(data),#}
-{#                                        success: function (res) {#}
-{#                                            console.log('RESULLLLLTS');#}
-{#                                            console.log(res);#}
-{#                                            $("#from_slides").append(res);#}
-{#                                            for (var i=0;i<res.length;i++){#}
-{#                                                $('#from_slides').append('<p>' + res[i] + '</p>');#}
-{#                                            }#}
-{#                                        },#}
-{#                                        error: function (error) {#}
-{#                                            console.log(error)#}
-{#                                        }#}
-{#                                    });#}
-{#                           });#}
-{#                    });#}
                 </script>
 
 </section>
