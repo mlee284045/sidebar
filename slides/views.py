@@ -139,6 +139,7 @@ def sidebar(request):
                 'date': str(j.date),
                 'slide': j.slide,
                 'text': j.text,
+                'title': j.title,
             })
 
     return HttpResponse(json.dumps(collection),content_type='application.json')

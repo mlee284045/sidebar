@@ -14,37 +14,32 @@ $(document).ready(function() {
 
 
     var slide_url;
-
-    $.ajax({
-        url: '/get_slide_info/',
-        type: 'POST',
-        dataType: 'json',
-        data: pres_title,
-        success: function (data) {
-            getResource(data);
-        },
-        error: function (e) {
-            console.log(e);
-        }
-    });
-
-    function getResource(slide_data){
-        $.ajax({
-            url: '/sidebar/',
-            type: 'GET',
-            success: function(resource_data) {
-
-                for(var i=0; i<slide_data.length;i++){
-                        $("#resource_table").append('<tr><td><a href="' +  slide_data[i].url + '">' + slide_data[i].slide_title + '</a></td></tr>');
-                }
-            }
-        });
-     }
-
-    $('#r_head').click(function(){
-
-        $(this).nextUntil('#r_body').slideToggle(1000);
-    });
+//
+//    $.ajax({
+//        url: '/get_slide_info/',
+//        type: 'POST',
+//        dataType: 'json',
+//        data: pres_title,
+//        success: function (data) {
+//            getResource(data);
+//        },
+//        error: function (e) {
+//            console.log(e);
+//        }
+//    });
+//
+//    function getResource(slide_data){
+//        $.ajax({
+//            url: '/sidebar/',
+//            type: 'GET',
+//            success: function(resource_data) {
+//
+//                for(var i=0; i<slide_data.length;i++){
+//                        $("#resource_table").append('<tr><td><a href="' +  slide_data[i].url + '">' + slide_data[i].slide_title + '</a></td></tr>');
+//                }
+//            }
+//        });
+//     }
 
     function saveForm(slide_title) {
         $.ajax({
@@ -114,6 +109,48 @@ $(document).ready(function() {
 
 
 });
+
+function loadSidebar(){
+        $.ajax({
+        url: '/sidebar/',
+        type: 'GET',
+        success: function (data) {
+
+//            set the default active accordion header
+            var currentSlide = 0;
+
+            //loop the object and extract data for the accordion
+            for (var j = 0; j < data.length; j++) {
+                if (window.location == data[j].slide) {
+                    currentSlide = j;
+                }
+//                $("#accordion").append('<p><a href="' + data[i].slide + '">' + data[i].title + '</a></p><div>' + data[i].creator + '<br>' + data[i].text + '<br>' + data[i].date + '</div>');
+                $("#side_table").append('<p><a href="' + data[j].slide + '">' + data[j].title + '</a></p><div>' + data[j].text + '<br>' + data[j].date + '</div>');
+
+            }
+
+//            set <p> tag in accordion as link
+            $("#side_table").accordion({header: 'p'},{ active: currentSlide }, { heightStyle: "content" });
+            $("#side_table").accordion({header: 'p'},{ active: currentSlide }, { heightStyle: "content" });
+
+            $("#side_table p a").click(function () {
+                window.location = $(this).attr('href');
+                return true;
+            });
+
+//            Hover states on the static widgets
+            $("#dialog-link, #icons li").hover(
+                function () {
+                    $(this).addClass("ui-state-hover");
+                },
+                function () {
+                    $(this).removeClass("ui-state-hover");
+                }
+            );
+        }
+    });
+}
+    loadSidebar();
 
 function getSlideTitle(){
 
