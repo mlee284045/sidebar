@@ -1,3 +1,4 @@
+# you mentioned in demo but you should be using requests library not urllib2
 import urllib2
 from django.conf import settings
 from django.contrib.sites.models import Site
@@ -6,7 +7,7 @@ from django.core.urlresolvers import reverse
 from bs4 import BeautifulSoup
 from slides.models import Slide
 
-
+# Nice job abstracting these functions out into units
 def crawl_static_pages(urls):
     """ Function crawls static pages of each url that is given as a list parameter
         In order to use it in the shell, import django.conf.settings and call the
@@ -24,6 +25,8 @@ def crawl_static_pages(urls):
         section = soup.find('section')
         while next_section(section):
             slide_count += 1
+            # This if/else is not very DRY, should be able to abstract the else and while sub_section's code blocks
+            # into another function or something with shared logic
             if check_secondary(next_section(section)):
                 sub_slide = 0
                 sub_section = section.find('section')
@@ -78,7 +81,7 @@ def get_slide_title(section):
         title = ""
     return title
 
-
+# This function can return True, False, or a section?
 def check_secondary(section):
     if section:
         return section
@@ -115,6 +118,7 @@ def create_slide(pres_title, slide_title, url, text, content):
         text=text,
         content=content
     )
+    # could just say `if not created:`
     if created:
         pass
     else:
