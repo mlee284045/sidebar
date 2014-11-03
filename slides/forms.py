@@ -24,13 +24,14 @@ class EmailUserCreationForm(UserCreationForm):
         )
 
 
-
+# SearchForm and SearchResults look like duplicates
 class SearchForm(forms.Form):
     search_text = forms.CharField(label='', initial='Search', max_length=200)
 
 class SearchResults(forms.Form):
     search_text = forms.CharField(label='', initial='Search', max_length=200)
 
+# Should this field be called search_text?
 class PasswordForm(forms.Form):
     search_text = forms.CharField(label='', initial='************', max_length=200)
 
