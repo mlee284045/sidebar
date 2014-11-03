@@ -117,6 +117,7 @@ def edit_account(request):
 
     return render(request, 'edit_account.html', data)
 
+# don't use @csrf_exempt!
 @csrf_exempt
 def update_account(request):
     user = Person.objects.get(pk=request.user.id)
@@ -125,7 +126,7 @@ def update_account(request):
         if form.is_valid():
             form.save()
             return HttpResponse('Saved new password')
-        else:
+        else:  # not sure why this else is here, if the form isn't valid we're updating our name?
             name = request.POST['real_name']
             user.real_name = name
             user.save()
@@ -140,6 +141,7 @@ def sidebar(request):
 
     everyone = Person.objects.all()
 
+    # not sure why we're doing range(len()) here? we can't just loop over each person? `for person in everyone:`
     for i in range(len(everyone)):
         tmp_people_obj = everyone[i]
         for j in tmp_people_obj.resources.all():
@@ -188,6 +190,7 @@ def get_slide_info(request):
 
                 slide_resources = Resource.objects.filter(slide=slide.url)
 
+                # long line, should be returned and indented
                 temp_slide = {'pres_title': slide.pres_title, 'slide_title': slide.slide_title,'url': slide.url,'text': slide.text, 'resource':[]}
 
 
