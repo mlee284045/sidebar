@@ -12,7 +12,7 @@ beautifulsoup4==4.3.2
 boto==2.34.0
 coverage==3.7.1
 django-boto==0.3.8
-django-debug-toolbar==1.2.1
+django-debug-toolbar==1.11.1
 django-filter==0.8
 django-haystack==2.3.1
 django-storages==1.1.8
