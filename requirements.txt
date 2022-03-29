@@ -21,7 +21,7 @@ ecdsa==0.10
 elasticsearch==1.2.0
 gunicorn==19.1.1
 mock==1.0.1
-paramiko==1.12.2
+paramiko==2.10.1
 psycopg2==2.5.4
 pycrypto==2.6.1
 requests==2.2.1
