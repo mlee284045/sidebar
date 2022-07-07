@@ -24,7 +24,7 @@ mock==1.0.1
 paramiko==1.12.2
 psycopg2==2.5.4
 pycrypto==2.6.1
-requests==2.2.1
+requests==2.20.0
 selenium==2.44.0
 simplejson==3.3.3
 sqlparse==0.1.13
